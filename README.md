@@ -1,2 +1,2 @@
 # bane
-ncurses based terminal GUI library
+[ncurses](https://www.gnu.org/software/ncurses/) based terminal GUI library
