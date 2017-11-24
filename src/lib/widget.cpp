@@ -1,10 +1,12 @@
 #include "widget.h"
 #include "simple_layout_mgr.h"
 
-bane::Widget::Widget() : layoutMgr_{new SimpleLayoutMgr}{}
+bane::Widget::Widget() : layoutMgr_{new SimpleLayoutMgr} {}
 
 int bane::Widget::x() const noexcept { return x_; }
+
 int bane::Widget::y() const noexcept { return y_; }
+
 void bane::Widget::resize(int width, int height) {
   width_ = width;
   height_ = height;
