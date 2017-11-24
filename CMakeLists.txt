@@ -12,8 +12,6 @@ find_package (Boost 1.58 COMPONENTS system program_options REQUIRED)
 
 file(GLOB_RECURSE proj_lib_sources src/lib/*.cpp)
 
-MESSAGE(STATUS "HIER:" ${proj_lib_sources})
-
 set(PROJECT_NAME_LIB ${PROJECT_NAME}_lib)
 add_library(${PROJECT_NAME}_lib OBJECT ${proj_lib_sources} 
 )
