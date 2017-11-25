@@ -7,6 +7,10 @@ int bane::Widget::x() const noexcept { return x_; }
 
 int bane::Widget::y() const noexcept { return y_; }
 
+int bane::Widget::width() const noexcept { return width_; }
+
+int bane::Widget::height() const noexcept { return height_; }
+
 void bane::Widget::resize(int width, int height) {
   width_ = width;
   height_ = height;

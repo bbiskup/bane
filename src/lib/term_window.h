@@ -14,6 +14,7 @@ public:
   ~TermWindow();
 
   void updateSize();
+  void updateClickMap(Widget& w);
   void waitForKey() const;
 
 private:

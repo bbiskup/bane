@@ -14,6 +14,8 @@ public:
   virtual ~Widget() = default;
   int x() const noexcept;
   int y() const noexcept;
+  int width() const noexcept;
+  int height() const noexcept;
   void resize(int width, int height);
   void move(int x, int y);
   void render();
