@@ -20,9 +20,13 @@ void bane::TermWindow::updateClickMap(Widget& widget) {
 
   for (int x{0}; x < w; ++x) {
     for (int y{0}; y < h; ++y) {
-        clickMap->at(static_cast<unsigned long>(y * w + x)) = widgetAddr;
+      clickMap->at(clickMapIndex(x, y)) = widgetAddr;
     }
   }
+}
+
+bane::Widget* bane::TermWindow::widgetAt(int x, int y) const {
+  return clickMap_->at(clickMapIndex(x, y));
 }
 
 void bane::TermWindow::updateSize() {

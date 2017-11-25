@@ -15,9 +15,14 @@ public:
 
   void updateSize();
   void updateClickMap(Widget& w);
+  Widget* widgetAt(int x, int y) const;
   void waitForKey() const;
 
 private:
+  inline unsigned long clickMapIndex(int x, int y) const {
+    return static_cast<unsigned long>(y * width_ + x);
+  }
+
   int width_;
   int height_;
   /// Maintain a mapping of screen position to Widget instance
