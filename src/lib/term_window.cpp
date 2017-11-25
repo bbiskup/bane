@@ -1,5 +1,5 @@
-#include <ncurses.h>
 #include "term_window.h"
+#include <ncurses.h>
 
 bane::TermWindow::TermWindow() {
   initscr();
@@ -9,7 +9,10 @@ bane::TermWindow::TermWindow() {
 
 bane::TermWindow::~TermWindow() { endwin(); }
 
-void bane::TermWindow::waitForKey() const{
-    getch();
+void bane::TermWindow::updateSize() {
+  getmaxyx(stdscr, height_, width_);
+  clickMap_.reset(new std::vector<Widget*>{static_cast<unsigned long>(width_ * height_)});
+  // TODO repaint all widgets
 }
 
+void bane::TermWindow::waitForKey() const { getch(); }

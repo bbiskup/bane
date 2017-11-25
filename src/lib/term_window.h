@@ -13,9 +13,12 @@ public:
   TermWindow();
   ~TermWindow();
 
+  void updateSize();
   void waitForKey() const;
 
 private:
+  int width_;
+  int height_;
   /// Maintain a mapping of screen position to Widget instance
   /// to delegate mouse clicks
   /// position on screen (x, y) corresponds to
