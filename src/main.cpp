@@ -1,12 +1,20 @@
 #include "label.h"
 #include "term_window.h"
+#include "pane.h"
+#include "h_box_layout_mgr.h"
 
 int main() {
   bane::TermWindow termWin;
 
-  bane::Label label{"my text"};
-  label.resize(10, 20);
-  label.render();
+  bane::Pane pane{};
+  pane.setLayoutMgr<bane::HBoxLayoutMgr>();
+  pane.addChild<bane::Label>("my_text");
+  pane.addChild<bane::Label>("my_other_text");
+  //bane::Label label{"my text"};
+  //label.resize(10, 20);
+  //label.render();
+  pane.resize(40,50);
+  pane.render();
 
   /*  while (true) {
       int c = getch();

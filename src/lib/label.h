@@ -8,6 +8,10 @@ namespace bane {
 class Label : public Widget {
 public:
   Label(std::string label);
+
+  int preferredWidth() const noexcept override;
+  int preferredHeight() const noexcept override;
+
   void doRender() override;
 
 private:

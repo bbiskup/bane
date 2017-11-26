@@ -16,6 +16,11 @@ void bane::Widget::resize(int width, int height) {
   height_ = height;
   createWindow();
 }
+
+void bane::Widget::resizeToPreferred() {
+  resize(preferredWidth(), preferredHeight());
+}
+
 void bane::Widget::move(int x, int y) {
   x_ = x;
   y_ = y;

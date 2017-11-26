@@ -10,6 +10,7 @@ namespace bane {
 /// - expect max 1 child
 /// - move child to top left of parent
 class SimpleLayoutMgr : public LayoutMgr {
+public:
   void layout(const Widget& parent,
               boost::ptr_vector<Widget>& widgets) override;
 };
