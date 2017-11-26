@@ -1,7 +1,14 @@
 #include "widget.h"
 #include "simple_layout_mgr.h"
+#include <iostream>
 
 bane::Widget::Widget() : layoutMgr_{new SimpleLayoutMgr} {}
+
+bane::Widget::~Widget() {
+  if (window_) {
+    delwin(window_);
+  }
+}
 
 int bane::Widget::x() const noexcept { return x_; }
 
@@ -24,22 +31,32 @@ void bane::Widget::resizeToPreferred() {
 void bane::Widget::move(int x, int y) {
   x_ = x;
   y_ = y;
+  createWindow();
 }
 
 void bane::Widget::render() {
   layoutMgr_->layout(*this, children_);
+  doRender();
+  touchwin(window_); // TODO avoid touch if possible
+  wrefresh(window_);
   for (auto& child : children_) {
     child.render();
   }
-  doRender();
-  wrefresh(window_);
 }
 
+/// A new ncurses window is created everytime the widget gets resized
 void bane::Widget::createWindow() {
   if (width_ == 0 || height_ == 0) {
   }
   if (window_) {
     delwin(window_);
   }
-  window_ = newwin(height_, width_, y_, x_);
+  // std::cout << "Widget::createWindow" << height_ << " " << width_ <<
+  // std::endl;
+  WINDOW* parentWin = parent_ ? parent_->window_ : stdscr;
+  window_ = derwin(parentWin, height_, width_, y_, x_);
+
+  init_pair(1, COLOR_BLUE, COLOR_WHITE);
+  wbkgd(window_, COLOR_PAIR(1));
+  //wrefresh(window_);
 }

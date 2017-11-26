@@ -4,6 +4,8 @@
 bane::TermWindow::TermWindow() {
   initscr();
   noecho();
+  curs_set(0);   // no blinking cursor
+  start_color(); // must come before creating windows
   refresh();
 }
 

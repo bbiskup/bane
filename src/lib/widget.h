@@ -16,7 +16,7 @@ public:
   };
 
   Widget();
-  virtual ~Widget() = default;
+  virtual ~Widget();
   int x() const noexcept;
   int y() const noexcept;
   int width() const noexcept;
@@ -34,7 +34,9 @@ public:
   }
 
   template <typename WidgetT, typename... Args> void addChild(Args&&... args) {
-    children_.push_back(new WidgetT(args...));
+    Widget* newWidget = new WidgetT{args...};
+    newWidget->parent_ = this;
+    children_.push_back(newWidget);
   }
 
 protected:
@@ -44,6 +46,7 @@ protected:
 private:
   void createWindow();
 
+  Widget* parent_{};
   int x_{};
   int y_{};
   int width_{};
