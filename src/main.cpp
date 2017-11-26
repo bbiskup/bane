@@ -13,7 +13,7 @@ int main() {
   //bane::Label label{"my text"};
   //label.resize(10, 20);
   //label.render();
-  pane.resize(40,50);
+  pane.resize(30,20);
   pane.render();
 
   /*  while (true) {

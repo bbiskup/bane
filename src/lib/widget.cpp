@@ -44,6 +44,10 @@ void bane::Widget::render() {
   }
 }
 
+WINDOW* bane::Widget::parentWindow(){
+  return  parent_ ? parent_->window_ : stdscr;
+}
+
 /// A new ncurses window is created everytime the widget gets resized
 void bane::Widget::createWindow() {
   if (width_ == 0 || height_ == 0) {
@@ -53,8 +57,7 @@ void bane::Widget::createWindow() {
   }
   // std::cout << "Widget::createWindow" << height_ << " " << width_ <<
   // std::endl;
-  WINDOW* parentWin = parent_ ? parent_->window_ : stdscr;
-  window_ = derwin(parentWin, height_, width_, y_, x_);
+  window_ = derwin(parentWindow(), height_, width_, y_, x_);
 
   init_pair(1, COLOR_BLUE, COLOR_WHITE);
   wbkgd(window_, COLOR_PAIR(1));

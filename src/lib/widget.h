@@ -42,6 +42,7 @@ public:
 protected:
   WINDOW* window_{};
   virtual void doRender() {}
+  WINDOW* parentWindow();
 
 private:
   void createWindow();
