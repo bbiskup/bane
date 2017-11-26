@@ -1,8 +1,8 @@
 #include "label.h"
-#include "screen.h"
+#include "term_window.h"
 
 int main() {
-  bane::Screen screen;
+  bane::TermWindow termWin;
 
   bane::Label label{"my text"};
   label.resize(10, 20);
@@ -24,6 +24,6 @@ int main() {
         break;
       };
     }*/
-  screen.waitForKey();
+  termWin.waitForKey();
   return 0;
 }
