@@ -4,11 +4,13 @@ cmake_minimum_required(VERSION 3.5.1)
 
 
 set(CMAKE_CXX_COMPILER "clang++")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -O0 -g -Wall -Werror -Weverything -Wno-c++98-compat-pedantic -Wno-disabled-macro-expansion -Wno-padded -Wno-weak-vtables -pedantic-errors -Wno-global-constructors -Wno-exit-time-destructors  -isystem .. -I ../src/lib")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -O0 -g -Wall -Werror -Weverything -Wno-c++98-compat-pedantic -Wno-disabled-macro-expansion -Wno-padded -Wno-weak-vtables -pedantic-errors -Wno-global-constructors -Wno-exit-time-destructors  -isystem .. -I ../src/lib -DBOOST_LOG_DYN_LINK")
 set(CMAKE_EXE_LINKER_FLAGS "-fuse-ld=gold ")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=gold")
 
-find_package (Boost 1.58 COMPONENTS system program_options signals REQUIRED)
+#find_package (Boost 1.58 COMPONENTS system program_options signals log REQUIRED)
+find_package (Boost 1.58 COMPONENTS system program_options signals  REQUIRED)
+#find_package(Threads)
 
 file(GLOB_RECURSE proj_lib_sources src/lib/*.cpp)
 
@@ -25,6 +27,10 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}  
     -lboost_system
     -lboost_program_options
+    -lboost_log
+    -lboost_log_setup
+    -lboost_thread
     -lncurses
+    -lpthread
 )
 

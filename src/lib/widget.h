@@ -50,6 +50,10 @@ public:
 
   boost::signals2::connection doOnClick(const OnClickSlotType& slot);
 
+  void click(int x, int y){
+      onClick_(x, y);
+  }
+
 protected:
   WINDOW* window_{};
   virtual void doRender() {}
