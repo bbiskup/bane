@@ -15,6 +15,11 @@ void bane::App::run() {
   while (true) {
     int c = getch();
 
+    if (c == -1) {
+      // no result for non-blocking read
+      continue;
+    }
+
     if (c == KEY_MOUSE) {
       getmouse(&mort);
 

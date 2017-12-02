@@ -3,10 +3,16 @@
 #include <ncurses.h>
 #include <stdexcept>
 
+namespace{
+    // Timeout for non-blocking read
+    constexpr const int nCursesTimeOut{100};
+}
+
 bane::TermWindow::TermWindow() {
   initscr();
   clear();
   noecho();
+  timeout(nCursesTimeOut);
   curs_set(0);   // no blinking cursor
   start_color(); // must come before creating windows
 
