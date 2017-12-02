@@ -11,9 +11,6 @@ namespace bane {
 
 class Widget {
 public:
-  using OnClick = boost::signals2::signal<void(int x, int y)>;
-  using OnClickSlotType = OnClick::slot_type;
-
   enum WidgetSize : int {
     /// use available space
     expand = -1,
@@ -43,6 +40,12 @@ public:
     children_.push_back(newWidget);
   }
 
+  // Signals & slots
+  using OnClick = boost::signals2::signal<void(int x, int y)>;
+  using OnClickSlotType = OnClick::slot_type;
+
+  boost::signals2::connection doOnClick(const OnClickSlotType& slot);
+
 protected:
   WINDOW* window_{};
   virtual void doRender() {}
@@ -58,6 +61,8 @@ private:
   int height_{};
   std::unique_ptr<LayoutMgr> layoutMgr_;
   boost::ptr_vector<Widget> children_;
+
+  OnClick onClick_;
 };
 
 } // namespace bane

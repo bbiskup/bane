@@ -44,8 +44,13 @@ void bane::Widget::render() {
   }
 }
 
-WINDOW* bane::Widget::parentWindow(){
-  return  parent_ ? parent_->window_ : stdscr;
+boost::signals2::connection
+bane::Widget::doOnClick(const OnClickSlotType& slot) {
+    return onClick_.connect(slot);
+}
+
+WINDOW* bane::Widget::parentWindow() {
+  return parent_ ? parent_->window_ : stdscr;
 }
 
 /// A new ncurses window is created everytime the widget gets resized
@@ -61,5 +66,5 @@ void bane::Widget::createWindow() {
 
   init_pair(1, COLOR_BLUE, COLOR_WHITE);
   wbkgd(window_, COLOR_PAIR(1));
-  //wrefresh(window_);
+  // wrefresh(window_);
 }
