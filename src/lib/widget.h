@@ -34,10 +34,14 @@ public:
     layoutMgr_.reset(new LayoutMgrT);
   }
 
-  template <typename WidgetT, typename... Args> void addChild(Args&&... args) {
+  /// Add a child widget. Arguments will be forwarded to the constructor
+  /// of the concrete Widget subclass.
+  /// \return non-owning pointer to newly created widget
+  template <typename WidgetT, typename... Args> WidgetT* addChild(Args&&... args) {
     Widget* newWidget = new WidgetT{args...};
     newWidget->parent_ = this;
     children_.push_back(newWidget);
+    return static_cast<WidgetT*>(newWidget);
   }
 
   // Signals & slots
