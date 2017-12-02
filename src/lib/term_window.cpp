@@ -5,6 +5,7 @@
 
 bane::TermWindow::TermWindow() {
   initscr();
+  clear();
   noecho();
   curs_set(0);   // no blinking cursor
   start_color(); // must come before creating windows
@@ -22,6 +23,7 @@ void bane::TermWindow::setUpMouse() {
   }
 
   mousemask(ALL_MOUSE_EVENTS, nullptr);
+  keypad(stdscr, TRUE);
   BOOST_LOG_TRIVIAL(trace) << "Mouse set up";
 }
 

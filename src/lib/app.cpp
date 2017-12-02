@@ -20,8 +20,10 @@ void bane::App::run() {
 
       switch (mort.bstate) {
       case BUTTON1_CLICKED:
+        BOOST_LOG_TRIVIAL(trace) << "Received click";
         break;
       case BUTTON1_DOUBLE_CLICKED:
+        BOOST_LOG_TRIVIAL(trace) << "Received double click";
         break;
       default:
         BOOST_LOG_TRIVIAL(trace) << "Unknown mouse action " << c;
