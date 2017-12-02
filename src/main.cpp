@@ -5,8 +5,13 @@
 #include "logging.h"
 #include "pane.h"
 
+#include <future>
+#include <chrono>
 #include <boost/log/trivial.hpp>
 #include <iostream>
+#include <thread>
+
+using namespace std::chrono_literals;
 
 int main() {
   bane::initLogging();
@@ -27,6 +32,12 @@ int main() {
   // label.render();
   pane.resize(30, 20);
   pane.render();
+
+
+  std::async(std::launch::async, [&app]() {
+    std::this_thread::sleep_for(1s);
+    app.postEvent<bane::DummyEvent>();
+  });
 
   app.run();
 

@@ -2,9 +2,10 @@
 #define APP_H
 
 //#include "event_queue.h"
-#include "term_window.h"
 #include "event.h"
-#include <boost/lockfree/queue.hpp>
+#include "term_window.h"
+#include <mutex>
+#include <queue>
 #include <string>
 
 namespace bane {
@@ -20,11 +21,17 @@ public:
 
   [[noreturn]] void run();
 
+  template <typename EventT, typename... Args>
+  void postEvent(Args&&... args) {
+      std::lock_guard<std::mutex> lock(queueMutex_);
+      queue_.push(std::unique_ptr<Event>(new EventT(args...)));
+  }
+
 private:
   std::string name_;
   TermWindow termWindow_{};
-//  EventQueue eventQueue_;
-  //boost::lockfree::queue<std::unique_ptr<Event*>> queue_;
+  std::queue<std::unique_ptr<Event>> queue_;
+  std::mutex queueMutex_;
 };
 } // namespace bane
 

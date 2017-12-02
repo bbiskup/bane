@@ -1,6 +1,7 @@
 #include "app.h"
 
 #include <boost/log/trivial.hpp>
+#include <mutex>
 #include <ncurses.h>
 
 bane::App::App(std::string name) : name_{std::move(name)} {}
@@ -14,11 +15,7 @@ void bane::App::run() {
   MEVENT mort;
   while (true) {
     int c = getch();
-
-    if (c == -1) {
-      // no result for non-blocking read
-      continue;
-    }
+    // non-blocking read returns -1
 
     if (c == KEY_MOUSE) {
       getmouse(&mort);
@@ -36,7 +33,7 @@ void bane::App::run() {
         BOOST_LOG_TRIVIAL(trace) << "Unknown mouse action " << c;
         break;
       };
-    } else {
+    } else if (c != -1) {
 
       switch (c) {
         /*case KEY_RESIZE:
@@ -48,6 +45,16 @@ void bane::App::run() {
       default:
         BOOST_LOG_TRIVIAL(trace) << "Unknown key " << c;
         break;
+      }
+    }
+
+    // Check for application events
+    std::unique_lock<std::mutex> lock{queueMutex_, std::try_to_lock};
+    if (lock.owns_lock()) {
+      if (queue_.size()) {
+        std::unique_ptr<Event> event = std::move(queue_.front());
+        queue_.pop();
+        BOOST_LOG_TRIVIAL(trace) << "Got application event";
       }
     }
   }
