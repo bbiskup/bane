@@ -18,6 +18,8 @@ void bane::App::run() {
     if (c == KEY_MOUSE) {
       getmouse(&mort);
 
+      BOOST_LOG_TRIVIAL(trace)
+          << "Mouse coordinates: (" << mort.x << ", " << mort.x << ")";
       switch (mort.bstate) {
       case BUTTON1_CLICKED:
         BOOST_LOG_TRIVIAL(trace) << "Received click";
