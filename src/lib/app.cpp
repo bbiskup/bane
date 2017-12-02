@@ -1,4 +1,5 @@
 #include "app.h"
+#include "event.h"
 
 #include <boost/log/trivial.hpp>
 #include <mutex>
@@ -36,12 +37,15 @@ void bane::App::run() {
     } else if (c != -1) {
 
       switch (c) {
-        /*case KEY_RESIZE:
+        case KEY_RESIZE:
+            /*
           // This requires ncurses to be configured with --enable-sigwinch
           clear();
           addstr("resize!");
           refresh();
           break;*/
+        postEvent<ResizeEvent>();
+        break;
       default:
         BOOST_LOG_TRIVIAL(trace) << "Unknown key " << c;
         break;
@@ -53,6 +57,7 @@ void bane::App::run() {
     if (lock.owns_lock()) {
       if (queue_.size()) {
         std::unique_ptr<Event> event = std::move(queue_.front());
+        event->handle();
         queue_.pop();
         BOOST_LOG_TRIVIAL(trace) << "Got application event";
       }
