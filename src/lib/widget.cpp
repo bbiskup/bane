@@ -44,10 +44,14 @@ void bane::Widget::render() {
   }
 }
 
+/// Handle click event
 boost::signals2::connection
 bane::Widget::doOnClick(const OnClickSlotType& slot) {
-    return onClick_.connect(slot);
+  return onClick_.connect(slot);
 }
+
+/// dispatach click event
+void bane::Widget::click(int x, int y) { onClick_(x, y); }
 
 WINDOW* bane::Widget::parentWindow() {
   return parent_ ? parent_->window_ : stdscr;
