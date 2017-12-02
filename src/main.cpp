@@ -4,12 +4,14 @@
 #include "logging.h"
 #include "pane.h"
 #include "term_window.h"
+#include "app.h"
 
 #include <boost/log/trivial.hpp>
 #include <iostream>
 
 int main() {
   bane::initLogging();
+  bane::App app{"test-app"};
   bane::TermWindow termWin;
 
   bane::Pane pane{};
@@ -28,6 +30,8 @@ int main() {
   pane.resize(30, 20);
   pane.render();
 
+  app.run();
+
   /*  while (true) {
       int c = getch();
       switch (c) {
@@ -45,6 +49,5 @@ int main() {
       };
     }*/
   termWin.waitForKey();
-  BOOST_LOG_TRIVIAL(trace) << "Terminating";
   return 0;
 }
