@@ -3,6 +3,7 @@
 
 #include "layout_mgr.h"
 #include <boost/ptr_container/ptr_vector.hpp>
+#include <boost/signals2.hpp>
 #include <memory>
 #include <ncurses.h>
 
@@ -10,6 +11,9 @@ namespace bane {
 
 class Widget {
 public:
+  using OnClick = boost::signals2::signal<void(int x, int y)>;
+  using OnClickSlotType = OnClick::slot_type;
+
   enum WidgetSize : int {
     /// use available space
     expand = -1,
