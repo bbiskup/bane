@@ -37,7 +37,8 @@ public:
   /// Add a child widget. Arguments will be forwarded to the constructor
   /// of the concrete Widget subclass.
   /// \return non-owning pointer to newly created widget
-  template <typename WidgetT, typename... Args> WidgetT* addChild(Args&&... args) {
+  template <typename WidgetT, typename... Args>
+  WidgetT* addChild(Args&&... args) {
     Widget* newWidget = new WidgetT{args...};
     newWidget->parent_ = this;
     children_.push_back(newWidget);
@@ -61,8 +62,14 @@ private:
   void createWindow();
 
   Widget* parent_{};
+
+  // horizontal position of
+  // top left corner, in screen coordinates
   int x_{};
+
+  // vertical position of top left corner, in screen coordinates
   int y_{};
+
   int width_{};
   int height_{};
   std::unique_ptr<LayoutMgr> layoutMgr_;

@@ -28,6 +28,7 @@ void bane::Widget::resizeToPreferred() {
   resize(preferredWidth(), preferredHeight());
 }
 
+/// Move widget to new position on screen
 void bane::Widget::move(int x, int y) {
   x_ = x;
   y_ = y;
@@ -50,14 +51,14 @@ bane::Widget::doOnClick(const OnClickSlotType& slot) {
   return onClick_.connect(slot);
 }
 
-/// dispatach click event
+/// Dispatch click event
 void bane::Widget::click(int x, int y) { onClick_(x, y); }
 
 WINDOW* bane::Widget::parentWindow() {
   return parent_ ? parent_->window_ : stdscr;
 }
 
-/// A new ncurses window is created everytime the widget gets resized
+/// A new ncurses window is created every time the widget gets resized
 void bane::Widget::createWindow() {
   if (width_ == 0 || height_ == 0) {
   }
