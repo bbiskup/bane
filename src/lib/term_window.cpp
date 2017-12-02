@@ -1,15 +1,29 @@
 #include "term_window.h"
+#include <boost/log/trivial.hpp>
 #include <ncurses.h>
+#include <stdexcept>
 
 bane::TermWindow::TermWindow() {
   initscr();
   noecho();
   curs_set(0);   // no blinking cursor
   start_color(); // must come before creating windows
+
+  setUpMouse();
+
   refresh();
 }
 
 bane::TermWindow::~TermWindow() { endwin(); }
+
+void bane::TermWindow::setUpMouse() {
+  if (NCURSES_MOUSE_VERSION <= 0) {
+    throw std::runtime_error{"No mouse available"};
+  }
+
+  mousemask(ALL_MOUSE_EVENTS, nullptr);
+  BOOST_LOG_TRIVIAL(trace) << "Mouse set up";
+}
 
 /// Indicate area occupied by Widget
 void bane::TermWindow::updateClickMap(Widget& widget) {

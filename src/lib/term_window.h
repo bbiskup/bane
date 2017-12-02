@@ -19,6 +19,7 @@ public:
   void waitForKey() const;
 
 private:
+  void setUpMouse();
   inline unsigned long clickMapIndex(int x, int y) const {
     return static_cast<unsigned long>(y * width_ + x);
   }

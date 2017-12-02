@@ -1,6 +1,7 @@
 #ifndef APP_H
 #define APP_H
 
+#include "term_window.h"
 #include <string>
 
 namespace bane{
@@ -14,10 +15,11 @@ namespace bane{
             App& operator=(const App&) = delete;
             App& operator=(App&&) = delete;
 
-            void run();
+            [[noreturn]] void run();
           
         private:
             std::string name_;
+            TermWindow termWindow_{};
     };
 }
 

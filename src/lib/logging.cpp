@@ -10,13 +10,12 @@
 
 namespace logging = boost::log;
 
-namespace{
-    std::string appName{"bane"};
+namespace {
+std::string appName{"bane"};
 }
 
 inline logging::trivial::severity_level log_level_from_env() {
-  const char* level_name_{
-      getenv((appName + "_LOG_LEVEL").c_str())};
+  const char* level_name_{getenv((appName + "_LOG_LEVEL").c_str())};
   if (level_name_ == nullptr) {
     return logging::trivial::trace;
   }
@@ -41,7 +40,8 @@ inline logging::trivial::severity_level log_level_from_env() {
   return result;
 }
 void bane::initLogging() {
-  logging::add_file_log(appName + ".log");
+  auto sink = logging::add_file_log(appName + ".log");
+  sink->locked_backend()->auto_flush(true);
   logging::trivial::severity_level log_level = log_level_from_env();
   logging::core::get()->set_filter(logging::trivial::severity >= log_level);
 }
