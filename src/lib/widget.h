@@ -9,6 +9,13 @@
 
 namespace bane {
 
+  /// A character position
+  /// (on screen or within window)
+  struct CharPoint{
+      int x;
+      int y;
+  };
+
 class Widget {
 public:
   enum WidgetSize : int {
@@ -30,6 +37,7 @@ public:
   void move(int x, int y);
   void render();
   Widget* root(){return root_ ? root_ : this;}
+  CharPoint origin() const;
 
   template <class LayoutMgrT> void setLayoutMgr() {
     layoutMgr_.reset(new LayoutMgrT);
@@ -57,9 +65,8 @@ public:
 
 protected:
   Widget* root_{};
-  WINDOW* window_{};
   virtual void doRender() {}
-  WINDOW* parentWindow();
+  void paintBackground();
 
 private:
   void createWindow();

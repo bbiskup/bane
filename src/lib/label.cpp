@@ -13,5 +13,6 @@ int bane::Label::preferredHeight() const noexcept { return 1; }
 
 void bane::Label::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "Label::doRender" << y() << " " << x();
-  mvwaddstr(window_, 0, 0, label_.c_str());
+  CharPoint orig{origin()};
+  mvaddstr(orig.y, orig.x, label_.c_str());
 }
