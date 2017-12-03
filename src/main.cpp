@@ -16,7 +16,6 @@ int main() {
   bane::initLogging();
   bane::App app{"test-app"};
 
-  // app.rootPane.setLayoutMgr<bane::HBoxLayoutMgr>();
   bane::Pane* pane{app.rootPane.addChild<bane::Pane>()};
   pane->resize(20, 30);
   pane->setLayoutMgr<bane::HBoxLayoutMgr>();
@@ -24,7 +23,6 @@ int main() {
   
   bane::Label* label2 = pane->addChild<bane::Label>("my_other_text");
   label2->doOnClick([](int x, int y) {
-    // std::cout << "Handling click: " << x << ", " << y << std::endl;
     BOOST_LOG_TRIVIAL(trace) << "Handling click: " << x << ", " << y;
   });
 
@@ -33,12 +31,10 @@ int main() {
   // label.resize(10, 20);
   // label.render();
 
-
   std::async(std::launch::async, [&app]() {
     std::this_thread::sleep_for(1s);
     app.postEvent<bane::DummyEvent>();
   });
-
 
   // termWin.waitForKey();
   //  return 0;

@@ -27,7 +27,7 @@ public:
     queue_.push(std::unique_ptr<Event>(new EventT(args...)));
   }
 
-  void render(){rootPane.render();}
+  void render();
 
   Pane rootPane{};
 

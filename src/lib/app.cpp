@@ -14,6 +14,8 @@ bane::App::~App() {
   BOOST_LOG_TRIVIAL(trace) << "Terminating application " << name_;
 }
 
+void bane::App::render() { rootPane.render(); }
+
 /// Run application - start processing events, until explicit termination
 void bane::App::run() {
   render();
