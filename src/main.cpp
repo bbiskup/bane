@@ -1,12 +1,12 @@
 
 #include "app.h"
+#include "h_box_layout_mgr.h"
 #include "label.h"
 #include "logging.h"
-#include "h_box_layout_mgr.h"
 
-#include <future>
-#include <chrono>
 #include <boost/log/trivial.hpp>
+#include <chrono>
+#include <future>
 #include <iostream>
 #include <thread>
 
@@ -16,11 +16,12 @@ int main() {
   bane::initLogging();
   bane::App app{"test-app"};
 
-  //app.rootPane.setLayoutMgr<bane::HBoxLayoutMgr>();
-  bane::Pane * pane {app.rootPane.addChild<bane::Pane>()};
+  // app.rootPane.setLayoutMgr<bane::HBoxLayoutMgr>();
+  bane::Pane* pane{app.rootPane.addChild<bane::Pane>()};
   pane->resize(20, 30);
   pane->setLayoutMgr<bane::HBoxLayoutMgr>();
   pane->addChild<bane::Label>("my_text");
+  
   bane::Label* label2 = pane->addChild<bane::Label>("my_other_text");
   label2->doOnClick([](int x, int y) {
     // std::cout << "Handling click: " << x << ", " << y << std::endl;
@@ -38,8 +39,8 @@ int main() {
     app.postEvent<bane::DummyEvent>();
   });
 
-  app.run();
 
   // termWin.waitForKey();
   //  return 0;
+  app.run();
 }

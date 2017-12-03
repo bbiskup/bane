@@ -8,6 +8,7 @@ namespace bane {
 /// Lay out widgets in a horizontal row
 class HBoxLayoutMgr : public LayoutMgr {
 public:
+  ~HBoxLayoutMgr() override = default;
   void layout(const Widget& parent,
               boost::ptr_vector<Widget>& widgets) override;
 };

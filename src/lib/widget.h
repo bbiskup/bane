@@ -29,7 +29,7 @@ public:
   void resizeToPreferred();
   void move(int x, int y);
   void render();
-  Widget* root(){return root_;}
+  Widget* root(){return root_ ? root_ : this;}
 
   template <class LayoutMgrT> void setLayoutMgr() {
     layoutMgr_.reset(new LayoutMgrT);

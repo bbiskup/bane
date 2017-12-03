@@ -68,6 +68,7 @@ WINDOW* bane::Widget::parentWindow() {
 
 /// A new ncurses window is created every time the widget gets resized
 void bane::Widget::createWindow() {
+  BOOST_LOG_TRIVIAL(trace) << "HIER";
   if (width_ == 0 || height_ == 0) {
   }
   if (window_) {

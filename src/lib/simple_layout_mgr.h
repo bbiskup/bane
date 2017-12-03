@@ -11,6 +11,7 @@ namespace bane {
 /// - move child to top left of parent
 class SimpleLayoutMgr : public LayoutMgr {
 public:
+  ~SimpleLayoutMgr() override = default;
   void layout(const Widget& parent,
               boost::ptr_vector<Widget>& widgets) override;
 };
