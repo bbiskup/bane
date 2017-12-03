@@ -3,6 +3,7 @@
 
 //#include "event_queue.h"
 #include "event.h"
+#include "pane.h"
 #include "term_window.h"
 #include <mutex>
 #include <queue>
@@ -21,11 +22,14 @@ public:
 
   [[noreturn]] void run();
 
-  template <typename EventT, typename... Args>
-  void postEvent(Args&&... args) {
-      std::lock_guard<std::mutex> lock(queueMutex_);
-      queue_.push(std::unique_ptr<Event>(new EventT(args...)));
+  template <typename EventT, typename... Args> void postEvent(Args&&... args) {
+    std::lock_guard<std::mutex> lock(queueMutex_);
+    queue_.push(std::unique_ptr<Event>(new EventT(args...)));
   }
+
+  void render(){rootPane.render();}
+
+  Pane rootPane{};
 
 private:
   std::string name_;

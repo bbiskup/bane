@@ -1,10 +1,14 @@
 #include "widget.h"
 #include "simple_layout_mgr.h"
+
+#include <boost/log/trivial.hpp>
 #include <iostream>
 
-bane::Widget::Widget() : layoutMgr_{new SimpleLayoutMgr} {}
+bane::Widget::Widget(Widget* root)
+    : root_{root}, layoutMgr_{new SimpleLayoutMgr} {}
 
 bane::Widget::~Widget() {
+  BOOST_LOG_TRIVIAL(trace) << "Widget::~Widget";
   if (window_) {
     delwin(window_);
   }
@@ -25,7 +29,10 @@ void bane::Widget::resize(int width, int height) {
 }
 
 void bane::Widget::resizeToPreferred() {
-  resize(preferredWidth(), preferredHeight());
+  const int w{preferredWidth()};
+  const int h{preferredHeight()};
+  BOOST_LOG_TRIVIAL(trace) << "Widget::resizeToPreferred " << w << ", " << h;
+  resize(w, h);
 }
 
 /// Move widget to new position on screen
@@ -36,6 +43,7 @@ void bane::Widget::move(int x, int y) {
 }
 
 void bane::Widget::render() {
+  BOOST_LOG_TRIVIAL(trace) << "render";
   layoutMgr_->layout(*this, children_);
   doRender();
   touchwin(window_); // TODO avoid touch if possible
@@ -65,8 +73,8 @@ void bane::Widget::createWindow() {
   if (window_) {
     delwin(window_);
   }
-  // std::cout << "Widget::createWindow" << height_ << " " << width_ <<
-  // std::endl;
+  BOOST_LOG_TRIVIAL(trace) << "Widget::createWindow " << height_ << " "
+                           << width_;
   window_ = derwin(parentWindow(), height_, width_, y_, x_);
 
   init_pair(1, COLOR_BLUE, COLOR_WHITE);

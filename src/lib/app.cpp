@@ -1,11 +1,14 @@
 #include "app.h"
 #include "event.h"
+#include "widget.h"
 
 #include <boost/log/trivial.hpp>
 #include <mutex>
 #include <ncurses.h>
 
-bane::App::App(std::string name) : name_{std::move(name)} {}
+bane::App::App(std::string name) : name_{std::move(name)} {
+  rootPane.resize(termWindow_.width(), termWindow_.height());
+}
 
 bane::App::~App() {
   BOOST_LOG_TRIVIAL(trace) << "Terminating application " << name_;
@@ -13,6 +16,7 @@ bane::App::~App() {
 
 /// Run application - start processing events, until explicit termination
 void bane::App::run() {
+  render();
   MEVENT mort;
   while (true) {
     int c = getch();
@@ -37,13 +41,13 @@ void bane::App::run() {
     } else if (c != -1) {
 
       switch (c) {
-        case KEY_RESIZE:
-            /*
-          // This requires ncurses to be configured with --enable-sigwinch
-          clear();
-          addstr("resize!");
-          refresh();
-          break;*/
+      case KEY_RESIZE:
+        /*
+      // This requires ncurses to be configured with --enable-sigwinch
+      clear();
+      addstr("resize!");
+      refresh();
+      break;*/
         postEvent<ResizeEvent>();
         break;
       default:
@@ -57,7 +61,7 @@ void bane::App::run() {
     if (lock.owns_lock()) {
       if (queue_.size()) {
         std::unique_ptr<Event> event = std::move(queue_.front());
-        event->handle();
+        event->handle(&rootPane);
         queue_.pop();
         BOOST_LOG_TRIVIAL(trace) << "Got application event";
       }

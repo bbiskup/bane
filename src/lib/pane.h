@@ -8,6 +8,7 @@ namespace bane {
 /// A Simple empty pane.
 /// Its sole purpose is to host one or more chilren.
 class Pane : public Widget {
+  using Widget::Widget;
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;
 };

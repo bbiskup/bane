@@ -17,6 +17,8 @@ public:
   void updateClickMap(Widget& w);
   Widget* widgetAt(int x, int y) const;
   void waitForKey() const;
+  int width() const{return width_;}
+  int height() const{return height_;}
 
 private:
   void setUpMouse();

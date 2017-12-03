@@ -16,7 +16,7 @@ public:
     expand = -1,
   };
 
-  Widget();
+  Widget(Widget* root = nullptr);
   virtual ~Widget();
   int x() const noexcept;
   int y() const noexcept;
@@ -29,6 +29,7 @@ public:
   void resizeToPreferred();
   void move(int x, int y);
   void render();
+  Widget* root(){return root_;}
 
   template <class LayoutMgrT> void setLayoutMgr() {
     layoutMgr_.reset(new LayoutMgrT);
@@ -39,9 +40,10 @@ public:
   /// \return non-owning pointer to newly created widget
   template <typename WidgetT, typename... Args>
   WidgetT* addChild(Args&&... args) {
-    Widget* newWidget = new WidgetT{args...};
+    Widget* newWidget = new WidgetT{root_, args...};
     newWidget->parent_ = this;
     children_.push_back(newWidget);
+    render();
     return static_cast<WidgetT*>(newWidget);
   }
 
@@ -54,6 +56,7 @@ public:
   void click(int x, int y);
 
 protected:
+  Widget* root_{};
   WINDOW* window_{};
   virtual void doRender() {}
   WINDOW* parentWindow();

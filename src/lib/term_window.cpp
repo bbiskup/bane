@@ -3,10 +3,10 @@
 #include <ncurses.h>
 #include <stdexcept>
 
-namespace{
-    // Timeout for non-blocking read
-    constexpr const int nCursesTimeOut{100};
-}
+namespace {
+// Timeout for non-blocking read
+constexpr const int nCursesTimeOut{100};
+} // namespace
 
 bane::TermWindow::TermWindow() {
   initscr();
@@ -17,7 +17,7 @@ bane::TermWindow::TermWindow() {
   start_color(); // must come before creating windows
 
   setUpMouse();
-
+  updateSize();
   refresh();
 }
 
