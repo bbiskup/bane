@@ -67,6 +67,7 @@ void bane::Widget::paintBackground() {
   for (int y{orig.y}; y < orig.y + height_; ++y) {
     mvaddstr(y, x_, rowStr.c_str());
   }
+  refresh();
 }
 
 /// Handle click event

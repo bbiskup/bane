@@ -9,6 +9,7 @@
 bane::App::App(std::string name) : name_{std::move(name)} {
   rootPane.setTermWindow(termWindow_);
   rootPane.resize(termWindow_.width(), termWindow_.height());
+  rootPane.render();
 }
 
 bane::App::~App() {
@@ -19,6 +20,7 @@ void bane::App::render() { rootPane.render(); }
 
 /// Run application - start processing events, until explicit termination
 void bane::App::run() {
+  BOOST_LOG_TRIVIAL(trace) << "App::run";
   render();
   MEVENT mort;
   while (true) {
