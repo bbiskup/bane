@@ -60,6 +60,7 @@ void bane::Widget::setTermWindow(TermWindow& termWindow){
 
 /// Draw background color
 void bane::Widget::paintBackground() {
+    BOOST_LOG_TRIVIAL(trace) << "paintBackground " << width_ << ", " << height_;
   CharPoint orig{origin()};
   attrset(COLOR_PAIR(1));
   std::string rowStr(static_cast<unsigned long>(width_), ' ');

@@ -34,6 +34,7 @@ void bane::App::run() {
       switch (mort.bstate) {
       case BUTTON1_CLICKED:
         BOOST_LOG_TRIVIAL(trace) << "Received click";
+        // TODO access GUI layer in GUI thread only
         widget = termWindow_.widgetAt(mort.x, mort.y);
         if (widget) {
           BOOST_LOG_TRIVIAL(trace) << "Widget: " << widget;
@@ -56,6 +57,8 @@ void bane::App::run() {
       addstr("resize!");
       refresh();
       break;*/
+        // TODO access GUI layer in GUI thread only
+        termWindow_.updateSize();
         postEvent<ResizeEvent>();
         break;
       default:

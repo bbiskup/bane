@@ -38,7 +38,14 @@ void bane::TermWindow::setUpMouse() {
 void bane::TermWindow::updateClickMap(Widget& widget) {
   int w{widget.width()};
   int h{widget.height()};
+  BOOST_LOG_TRIVIAL(trace) << "updateClickMap " << w << ", " << h;
   Widget* widgetAddr{&widget};
+
+  // Tolerate out-of-screen updates
+  // (A widget may be partially outside the viewport)
+  if (w >= width_ || h >= height_) {
+    return;
+  }
 
   // direct handle for loop
   std::vector<Widget*>* clickMap{clickMap_.get()};
@@ -56,6 +63,7 @@ bane::Widget* bane::TermWindow::widgetAt(int x, int y) const {
 
 void bane::TermWindow::updateSize() {
   getmaxyx(stdscr, height_, width_);
+  BOOST_LOG_TRIVIAL(trace) << "updateSize " << width_ << ", " << height_;
   clickMap_.reset(
       new std::vector<Widget*>{static_cast<unsigned long>(width_ * height_)});
   // TODO repaint all widgets
