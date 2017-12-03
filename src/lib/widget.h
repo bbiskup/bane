@@ -16,6 +16,8 @@ namespace bane {
       int y;
   };
 
+  class TermWindow;
+
 class Widget {
 public:
   enum WidgetSize : int {
@@ -38,6 +40,7 @@ public:
   void render();
   Widget* root(){return root_ ? root_ : this;}
   CharPoint origin() const;
+  void setTermWindow(TermWindow& termWindow);
 
   template <class LayoutMgrT> void setLayoutMgr() {
     layoutMgr_.reset(new LayoutMgrT);
@@ -50,6 +53,7 @@ public:
   WidgetT* addChild(Args&&... args) {
     Widget* newWidget = new WidgetT{root_, args...};
     newWidget->parent_ = this;
+    newWidget->termWindow_ = termWindow_;
     children_.push_back(newWidget);
     render();
     return static_cast<WidgetT*>(newWidget);
@@ -65,6 +69,7 @@ public:
 
 protected:
   Widget* root_{};
+  TermWindow* termWindow_{};
   virtual void doRender() {}
   void paintBackground();
 

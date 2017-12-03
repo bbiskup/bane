@@ -28,6 +28,11 @@ public:
   void handle(Widget* widget) override;
 };
 
+/*class MouseEvent() {
+public:
+  void handle(Widget * widget) override;
+};*/
+
 } // namespace bane
 
 #endif /* EVENT_H */

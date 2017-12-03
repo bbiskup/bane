@@ -1,5 +1,6 @@
 #include "widget.h"
 #include "simple_layout_mgr.h"
+#include "term_window.h"
 
 #include <boost/log/trivial.hpp>
 #include <iostream>
@@ -37,6 +38,7 @@ void bane::Widget::move(int x, int y) {
 void bane::Widget::render() {
   BOOST_LOG_TRIVIAL(trace) << "render";
   layoutMgr_->layout(*this, children_);
+  termWindow_->updateClickMap(*this);
   paintBackground();
   doRender();
   for (auto& child : children_) {
@@ -50,6 +52,10 @@ bane::CharPoint bane::Widget::origin() const {
   } else {
     return { x_,  y_};
   }
+}
+
+void bane::Widget::setTermWindow(TermWindow& termWindow){
+    termWindow_ = &termWindow;
 }
 
 /// Draw background color

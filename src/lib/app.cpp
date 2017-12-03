@@ -7,6 +7,7 @@
 #include <ncurses.h>
 
 bane::App::App(std::string name) : name_{std::move(name)} {
+  rootPane.setTermWindow(termWindow_);
   rootPane.resize(termWindow_.width(), termWindow_.height());
 }
 
@@ -29,9 +30,14 @@ void bane::App::run() {
 
       BOOST_LOG_TRIVIAL(trace)
           << "Mouse coordinates: (" << mort.x << ", " << mort.y << ")";
+      Widget* widget{};
       switch (mort.bstate) {
       case BUTTON1_CLICKED:
         BOOST_LOG_TRIVIAL(trace) << "Received click";
+        widget = termWindow_.widgetAt(mort.x, mort.y);
+        if (widget) {
+          BOOST_LOG_TRIVIAL(trace) << "Widget: " << widget;
+        }
         break;
       case BUTTON1_DOUBLE_CLICKED:
         BOOST_LOG_TRIVIAL(trace) << "Received double click";
