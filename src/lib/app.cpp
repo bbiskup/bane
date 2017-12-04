@@ -1,5 +1,6 @@
 #include "app.h"
 #include "event.h"
+#include "event_handler.h"
 #include "widget.h"
 
 #include <boost/log/trivial.hpp>
@@ -8,7 +9,7 @@
 
 bane::App::App(std::string name) : name_{std::move(name)} {
   rootPane.setTermWindow(termWindow_);
-  rootPane.resize(termWindow_.width(), termWindow_.height());
+  handleResize();
   rootPane.render();
 }
 
@@ -17,9 +18,14 @@ bane::App::~App() {
 }
 
 void bane::App::render() { rootPane.render(); }
+void bane::App::handleResize() {
+  termWindow_.updateSize();
+  rootPane.resize(termWindow_.width(), termWindow_.height());
+}
 
 /// Run application - start processing events, until explicit termination
 void bane::App::run() {
+  EventHandler(*this);
   BOOST_LOG_TRIVIAL(trace) << "App::run";
   render();
   MEVENT mort;
@@ -53,8 +59,6 @@ void bane::App::run() {
 
       switch (c) {
       case KEY_RESIZE:
-        // TODO access GUI layer in GUI thread only
-        termWindow_.updateSize();
         postEvent<ResizeEvent>();
         break;
       default:

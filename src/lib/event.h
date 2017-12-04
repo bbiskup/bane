@@ -3,12 +3,15 @@
 
 #include "widget.h"
 
+#include <string>
+
 namespace bane {
 
 /// base class for application events
 class Event {
 public:
   virtual ~Event() {}
+  std::string name() const;
   virtual void handle(Widget* widget) = 0;
 };
 

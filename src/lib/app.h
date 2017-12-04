@@ -27,12 +27,13 @@ public:
   }
 
   void render();
+  void handleResize();
 
   Pane rootPane{};
 
 private:
+  TermWindow termWindow_;
   std::string name_;
-  TermWindow termWindow_{};
   std::queue<std::unique_ptr<Event>> queue_;
   std::mutex queueMutex_;
 };
