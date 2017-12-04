@@ -22,7 +22,7 @@ public:
 class DummyEvent : public Event {
 public:
   DummyEvent() {}
-  ~DummyEvent() override {}
+  ~DummyEvent() override = default;
   void handle(Widget* widget) override;
 };
 
@@ -30,7 +30,7 @@ public:
 class ResizeEvent : public Event {
 public:
   ResizeEvent() {}
-  ~ResizeEvent() override {}
+  ~ResizeEvent() override = default;
   void handle(Widget* widget) override;
 };
 
