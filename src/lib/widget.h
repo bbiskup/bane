@@ -25,7 +25,7 @@ public:
     expand = -1,
   };
 
-  Widget(Widget* root = nullptr);
+  explicit Widget(Widget* root = nullptr);
   virtual ~Widget();
   int x() const noexcept;
   int y() const noexcept;

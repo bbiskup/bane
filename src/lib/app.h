@@ -13,7 +13,7 @@ namespace bane {
 /// Application
 class App {
 public:
-  App(std::string name);
+  explicit App(std::string name);
   ~App();
   App(const App&) = delete;
   App(App&&) = delete;

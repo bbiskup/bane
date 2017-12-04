@@ -1,10 +1,8 @@
+#include "logging.h"
 
 #include <boost/log/core.hpp>
 #include <boost/log/expressions.hpp>
 #include <boost/log/trivial.hpp>
-
-#include "logging.h"
-
 #include <boost/log/utility/setup/file.hpp>
 #include <cstdlib>
 
