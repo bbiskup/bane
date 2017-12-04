@@ -53,12 +53,6 @@ void bane::App::run() {
 
       switch (c) {
       case KEY_RESIZE:
-        /*
-      // This requires ncurses to be configured with --enable-sigwinch
-      clear();
-      addstr("resize!");
-      refresh();
-      break;*/
         // TODO access GUI layer in GUI thread only
         termWindow_.updateSize();
         postEvent<ResizeEvent>();
