@@ -11,6 +11,8 @@ class ResizeEvent;
 
 /// Handler for application event.
 /// Uses double dispatch.
+///
+/// Handler functions must be invoked in the GUI thread.
 class EventHandler {
 public:
   explicit EventHandler(App& app);

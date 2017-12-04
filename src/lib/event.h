@@ -7,6 +7,9 @@
 
 namespace bane {
 
+/// Events may be created in any thread, bust
+/// must be handled in the GUI thread
+
 /// base class for application events
 class Event {
 public:
