@@ -31,10 +31,10 @@ int main() {
   // label.resize(10, 20);
   // label.render();
 
-  /*std::future<void> job = std::async(std::launch::async, [&app]() {
+  std::future<void> job = std::async(std::launch::async, [&app]() {
     std::this_thread::sleep_for(1s);
     app.postEvent<bane::DummyEvent>();
-  });*/
+  });
 
   // termWin.waitForKey();
   //  return 0;

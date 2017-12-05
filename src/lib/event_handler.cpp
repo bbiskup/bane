@@ -11,8 +11,11 @@ void bane::EventHandler::handle(const ResizeEvent&) {
   app_.handleResize();
 }
 
+void bane::EventHandler::handle(const DummyEvent& e) {
+  BOOST_LOG_TRIVIAL(trace) << "Handling Dummy-event" + e.name();
+}
+
 /// Catch-all
 void bane::EventHandler::handle(const Event& e) {
-  // throw std::runtime_error{"Unsupported event type " + e.name()};
   BOOST_LOG_TRIVIAL(trace) << "Unsupported event type " + e.name();
 }

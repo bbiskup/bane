@@ -17,6 +17,7 @@ class EventHandler {
 public:
   explicit EventHandler(App& app);
   void handle(const ResizeEvent& e);
+  void handle(const DummyEvent& e);
   void handle(const Event& e);
 
 private:

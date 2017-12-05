@@ -77,7 +77,7 @@ void bane::App::run() {
       if (queue_.size()) {
         std::unique_ptr<Event> event = std::move(queue_.front());
         BOOST_LOG_TRIVIAL(trace) << "Got application event " << event->name();
-        eventHandler.handle(*event);
+        event->accept(eventHandler);
         queue_.pop();
       }
     }
