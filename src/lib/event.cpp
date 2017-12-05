@@ -16,3 +16,10 @@ void bane::DummyEvent::accept(EventHandler& handler) const{
 void bane::ResizeEvent::accept(EventHandler& handler) const{
     handler.handle(*this);
 }
+
+bane::MouseEvent::MouseEvent(int x_, int y_, mouse::Button button_, mouse::ClickType clickType_): x{x_}, y{y_}, button{button_}, clickType{clickType_}{}
+
+
+void bane::MouseEvent::accept(EventHandler& handler) const{
+    handler.handle(*this);
+}

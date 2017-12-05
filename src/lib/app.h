@@ -29,6 +29,8 @@ public:
   void render();
   void handleResize();
 
+  TermWindow& termWindow() { return termWindow_; }
+
   Pane rootPane{};
 
 private:

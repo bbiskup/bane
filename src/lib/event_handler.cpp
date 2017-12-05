@@ -1,8 +1,10 @@
 #include "event_handler.h"
 #include "event.h"
+#include "widget.h"
 
 #include <boost/log/trivial.hpp>
 #include <stdexcept>
+#include <unordered_map>
 
 bane::EventHandler::EventHandler(App& app) : app_{app} {}
 
@@ -12,7 +14,22 @@ void bane::EventHandler::handle(const ResizeEvent&) {
 }
 
 void bane::EventHandler::handle(const DummyEvent& e) {
-  BOOST_LOG_TRIVIAL(trace) << "Handling Dummy-event" + e.name();
+  BOOST_LOG_TRIVIAL(trace) << "Handling Dummy-event " + e.name();
+}
+
+void bane::EventHandler::handle(const MouseEvent& e) {
+  static std::unordered_map<bane::mouse::ClickType, std::string, bane::EnumClassHash> clickTypeStrs{
+      {bane::mouse::ClickType::single, "single"},
+      {bane::mouse::ClickType::double_, "double"}};
+  BOOST_LOG_TRIVIAL(trace) << "Handling mouse event " << e.name() << " "
+                           << clickTypeStrs[e.clickType];
+
+  Widget* widget = app_.termWindow().widgetAt(e.x, e.y);
+  if (widget) {
+    BOOST_LOG_TRIVIAL(trace) << "Widget: " << widget;
+  } else {
+    BOOST_LOG_TRIVIAL(trace) << "No widget at position " << e.x << ", " << e.y;
+  }
 }
 
 /// Catch-all

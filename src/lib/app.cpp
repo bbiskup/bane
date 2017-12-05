@@ -42,18 +42,12 @@ void bane::App::run() {
 
       BOOST_LOG_TRIVIAL(trace)
           << "Mouse coordinates: (" << mort.x << ", " << mort.y << ")";
-      Widget* widget{};
       switch (mort.bstate) {
       case BUTTON1_CLICKED:
-        BOOST_LOG_TRIVIAL(trace) << "Received click";
-        // TODO access GUI layer in GUI thread only
-        widget = termWindow_.widgetAt(mort.x, mort.y);
-        if (widget) {
-          BOOST_LOG_TRIVIAL(trace) << "Widget: " << widget;
-        }
+        postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left, bane::mouse::ClickType::single);
         break;
       case BUTTON1_DOUBLE_CLICKED:
-        BOOST_LOG_TRIVIAL(trace) << "Received double click";
+        postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left, bane::mouse::ClickType::double_);
         break;
       default:
         BOOST_LOG_TRIVIAL(trace) << "Unknown mouse action " << c;
