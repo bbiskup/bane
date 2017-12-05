@@ -10,7 +10,7 @@ class ResizeEvent;
 
 
 /// Handler for application event.
-/// Uses double dispatch.
+/// Uses double dispatch (visitor pattern)
 ///
 /// Handler functions must be invoked in the GUI thread.
 class EventHandler {
