@@ -17,7 +17,7 @@ class EventHandler {
 public:
   explicit EventHandler(App& app);
   void handle(const ResizeEvent& e);
-  [[noreturn]] void handle(const Event& e);
+  void handle(const Event& e);
 
 private:
   App& app_;

@@ -19,13 +19,17 @@ bane::App::~App() {
 
 void bane::App::render() { rootPane.render(); }
 void bane::App::handleResize() {
+  BOOST_LOG_TRIVIAL(trace) << "App::handleResize";
   termWindow_.updateSize();
   rootPane.resize(termWindow_.width(), termWindow_.height());
+  clear();
+  refresh();
+  rootPane.render();
 }
 
 /// Run application - start processing events, until explicit termination
 void bane::App::run() {
-  EventHandler(*this);
+  EventHandler eventHandler(*this);
   BOOST_LOG_TRIVIAL(trace) << "App::run";
   render();
   MEVENT mort;
@@ -72,9 +76,9 @@ void bane::App::run() {
     if (lock.owns_lock()) {
       if (queue_.size()) {
         std::unique_ptr<Event> event = std::move(queue_.front());
-        event->handle(&rootPane);
+        BOOST_LOG_TRIVIAL(trace) << "Got application event " << event->name();
+        eventHandler.handle(*event);
         queue_.pop();
-        BOOST_LOG_TRIVIAL(trace) << "Got application event";
       }
     }
   }
