@@ -3,7 +3,6 @@
 #include "term_window.h"
 
 #include <boost/log/trivial.hpp>
-#include <iostream>
 
 bane::Widget::Widget(Widget* root)
     : root_{root}, layoutMgr_{new SimpleLayoutMgr} {}

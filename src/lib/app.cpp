@@ -41,10 +41,12 @@ void bane::App::run() {
       getmouse(&mort);
       switch (mort.bstate) {
       case BUTTON1_CLICKED:
-        postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left, bane::mouse::ClickType::single);
+        postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
+                              bane::mouse::ClickType::single);
         break;
       case BUTTON1_DOUBLE_CLICKED:
-        postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left, bane::mouse::ClickType::double_);
+        postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
+                              bane::mouse::ClickType::double_);
         break;
       default:
         BOOST_LOG_TRIVIAL(trace) << "Unknown mouse action " << c;

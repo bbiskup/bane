@@ -1,11 +1,11 @@
 #include "view.h"
 
-template <typename Data>
-bane::View<Data>::View(Model<Data>&& model) : model_{std::move(model)} {}
+template <typename ModelT>
+bane::View<ModelT>::View(std::shared_ptr<ModelT> model) : model_{model} {}
 
-template <typename Data> bane::View<Data>::~View() {}
+template <typename ModelT> bane::View<ModelT>::~View() {}
 
-template <typename Data>
-void bane::View<Data>::setModel(const Model<Data>& model) {
+template <typename ModelT>
+void bane::View<ModelT>::setModel(const ModelT& model) {
   model_ = model;
 }

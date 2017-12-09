@@ -1,18 +1,25 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
+#include "mvc/model.h"
+#include "mvc/view.h"
+#include <memory>
+
 namespace bane {
 
 /// MVC controller base class
-template <typename Data> class Controller {
+template <typename ModelT> class Controller {
 public:
-  Controller(const Model<Data>& model, const View<Data>& data);
-  View(const View&) = delete;
-  View(View&&) = delete;
-  View& operator=(const View&) = delete;
-  View& operator=(View&&) = delete;
+  Controller(std::shared_ptr<ModelT> model,
+             std::shared_ptr<View<ModelT>> view);
+  Controller(const Controller&) = delete;
+  Controller(Controller&&) = delete;
+  Controller& operator=(const Controller&) = delete;
+  Controller& operator=(Controller&&) = delete;
 
 private:
+  std::shared_ptr<ModelT> model_;
+  std::shared_ptr<View<ModelT>> view_;
 };
 
 } // namespace bane

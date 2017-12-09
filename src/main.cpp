@@ -2,6 +2,7 @@
 #include "app.h"
 #include "h_box_layout_mgr.h"
 #include "label.h"
+#include "button/button.h"
 #include "logging.h"
 
 #include <boost/log/trivial.hpp>
@@ -35,6 +36,8 @@ int main() {
     std::this_thread::sleep_for(1s);
     app.postEvent<bane::DummyEvent>();
   });
+
+  bane::Button btn;
 
   // termWin.waitForKey();
   //  return 0;

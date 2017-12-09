@@ -8,21 +8,21 @@
 namespace bane {
 
 /// MVC view base class
-template<typename Data>
+template<typename ModelT>
 class View {
 public:
-  explicit View(Model<Data>&& model);
+  explicit View(std::shared_ptr<ModelT> model);
   View(const View&) = delete;
   View(View&&) = delete;
   View& operator=(const View&) = delete;
   View& operator=(View&&) = delete;
   virtual ~View();
 
-  void setModel(const Model<Data>& model);
+  void setModel(const ModelT& model);
   virtual void render() = 0;
 
 private:
-  std::unique_ptr<Model<Data>> model_;
+  std::shared_ptr<ModelT> model_;
 };
 
 } // namespace bane
