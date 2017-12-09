@@ -7,5 +7,5 @@ bane::Controller<ModelT>::Controller(std::shared_ptr<ModelT> model,
 
 template <typename ModelT>
 const ModelT& bane::Controller<ModelT>::model() const {
-  return *(model_->get());
+  return *model_;
 }

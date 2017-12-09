@@ -25,4 +25,6 @@ private:
 
 } // namespace bane
 
+#include "controller.hpp"
+
 #endif /* CONTROLLER_H */

@@ -37,7 +37,7 @@ int main() {
     app.postEvent<bane::DummyEvent>();
   });
 
-  bane::Button btn;
+  pane->addChild<bane::Button>("my_button");
 
   // termWin.waitForKey();
   //  return 0;
