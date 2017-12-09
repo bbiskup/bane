@@ -3,18 +3,26 @@
 
 #include "model.h"
 
+#include <memory>
+
 namespace bane {
 
 /// MVC view base class
 template<typename Data>
 class View {
 public:
-  explicit View(const Model<Data>& model);
+  explicit View(Model<Data>&& model);
+  View(const View&) = delete;
+  View(View&&) = delete;
+  View& operator=(const View&) = delete;
+  View& operator=(View&&) = delete;
+  virtual ~View();
+
   void setModel(const Model<Data>& model);
   virtual void render() = 0;
 
 private:
-  Model<Data> model_;
+  std::unique_ptr<Model<Data>> model_;
 };
 
 } // namespace bane

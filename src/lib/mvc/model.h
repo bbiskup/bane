@@ -9,6 +9,11 @@ namespace bane {
 template<typename Data>
 class Model {
 public:
+  Model(const Model&) = delete;
+  Model(Model&&) = delete;
+  Model& operator=(const Model&) = delete;
+  Model& operator=(Model&&) = delete;
+
   using OnChange = boost::signals2::signal<void(const Data&)>;
   using OnChangeSlotType = typename OnChange::slot_type;
 

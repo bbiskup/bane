@@ -5,11 +5,14 @@ namespace bane {
 
 /// MVC controller base class
 template <typename Data> class Controller {
-    public:
+public:
   Controller(const Model<Data>& model, const View<Data>& data);
+  View(const View&) = delete;
+  View(View&&) = delete;
+  View& operator=(const View&) = delete;
+  View& operator=(View&&) = delete;
 
-    private:
-
+private:
 };
 
 } // namespace bane
