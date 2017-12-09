@@ -12,10 +12,20 @@
 namespace bane {
 class Button : public Widget {
 public:
-  Button();
+  Button(Widget* root, std::string label);
+
+  int preferredWidth() const noexcept override;
+  int preferredHeight() const noexcept override;
+
+  void doRender() override;
 
 private:
   class ButtonModel : public Model {
+  public:
+    ButtonModel(std::string label);
+    const std::string& label() const { return label_; }
+
+  private:
     std::string label_;
   };
 

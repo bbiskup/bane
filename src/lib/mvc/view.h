@@ -27,4 +27,6 @@ private:
 
 } // namespace bane
 
+#include "view.hpp"
+
 #endif /* VIEW_H */

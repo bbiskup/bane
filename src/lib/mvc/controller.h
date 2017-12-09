@@ -16,6 +16,7 @@ public:
   Controller(Controller&&) = delete;
   Controller& operator=(const Controller&) = delete;
   Controller& operator=(Controller&&) = delete;
+  const ModelT& model() const;
 
 private:
   std::shared_ptr<ModelT> model_;
