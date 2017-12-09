@@ -11,6 +11,7 @@ class View {
 public:
   explicit View(const Model<Data>& model);
   void setModel(const Model<Data>& model);
+  virtual void render() = 0;
 
 private:
   Model<Data> model_;
