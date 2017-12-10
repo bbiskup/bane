@@ -1,6 +1,7 @@
 
 #include "app.h"
 #include "button/button.h"
+#include "h_box_layout_mgr.h"
 #include "v_box_layout_mgr.h"
 #include "label.h"
 #include "logging.h"
@@ -38,6 +39,13 @@ int main() {
   });
 
   pane->addChild<bane::Button>("my_button");
+
+  bane::Pane* paneH{pane->addChild<bane::Pane>()};
+  paneH->resize(50, 1);
+  paneH->setLayoutMgr<bane::HBoxLayoutMgr>();
+  paneH->addChild<bane::Button>("another_button");
+  paneH->addChild<bane::Button>("yet_another_button");
+
 
   // termWin.waitForKey();
   //  return 0;
