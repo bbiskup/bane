@@ -1,7 +1,7 @@
 
 #include "app.h"
 #include "button/button.h"
-#include "h_box_layout_mgr.h"
+#include "v_box_layout_mgr.h"
 #include "label.h"
 #include "logging.h"
 
@@ -19,7 +19,7 @@ int main() {
 
   bane::Pane* pane{app.rootPane.addChild<bane::Pane>()};
   pane->resize(20, 30);
-  pane->setLayoutMgr<bane::HBoxLayoutMgr>();
+  pane->setLayoutMgr<bane::VBoxLayoutMgr>();
   pane->addChild<bane::Label>("my_label_1");
 
   bane::Label* label2 = pane->addChild<bane::Label>("my_label_2");
