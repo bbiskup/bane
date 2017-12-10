@@ -71,6 +71,10 @@ void bane::Widget::setTermWindow(TermWindow& termWindow) {
 
 /// Draw background color
 void bane::Widget::paintBackground() {
+  if (width_ <= 0 || height_ <= 0) {
+    // before size adjustment?
+    return;
+  }
   BOOST_LOG_TRIVIAL(trace) << "paintBackground " << width_ << ", " << height_;
   CharPoint orig{origin()};
   attrset(COLOR_PAIR(1));
