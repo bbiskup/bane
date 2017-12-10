@@ -12,11 +12,14 @@ int widgetNum{0};
 } // namespace
 
 bane::Widget::Widget(Widget* root)
-    : root_{root}, id_{makeWidgetId()}, layoutMgr_{new SimpleLayoutMgr} {}
+    : root_{root}, instanceNum_{widgetNum++}, layoutMgr_{new SimpleLayoutMgr} {}
 
 bane::Widget::~Widget() { BOOST_LOG_TRIVIAL(trace) << "Widget::~Widget"; }
 
-const std::string& bane::Widget::id() const { return id_; }
+std::string bane::Widget::id() const {
+  return boost::core::demangle(typeid(*this).name()) + "_" +
+         std::to_string(instanceNum_);
+}
 
 int bane::Widget::x() const noexcept { return x_; }
 
@@ -86,14 +89,6 @@ bane::Widget::doOnClick(const OnClickSlotType& slot) {
 
 /// Dispatch click event
 void bane::Widget::click(int x, int y) { onClick_(x, y); }
-
-/// Create a unique Widget identifier.
-std::string bane::Widget::makeWidgetId() const {
-    std::string result{std::string{boost::core::demangle(typeid(*this).name())} + "_" +
-         std::to_string(widgetNum)};
-    ++widgetNum;
-    return result;
-}
 
 std::ostream& bane::operator<<(std::ostream& strm, const Widget& w) {
   return strm << w.id();

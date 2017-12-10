@@ -4,8 +4,8 @@
 #include "layout_mgr.h"
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <boost/signals2.hpp>
-#include <memory>
 #include <iostream>
+#include <memory>
 #include <ncurses.h>
 
 namespace bane {
@@ -29,9 +29,9 @@ public:
   explicit Widget(Widget* root = nullptr);
   virtual ~Widget();
 
-  const std::string& id() const ;
+  std::string id() const;
 
-      int x() const noexcept;
+  int x() const noexcept;
   int y() const noexcept;
   int width() const noexcept;
   int height() const noexcept;
@@ -81,10 +81,9 @@ protected:
 
 private:
   void createWindow();
-  std::string makeWidgetId() const;
 
   Widget* parent_{};
-  const std::string id_;
+  const int instanceNum_;
 
   // horizontal position of
   // top left corner, in screen coordinates
