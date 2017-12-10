@@ -17,6 +17,7 @@ struct CharPoint {
   int y;
 };
 
+class App;
 class TermWindow;
 
 class Widget {
@@ -44,6 +45,7 @@ public:
   void render();
   Widget* root() { return root_ ? root_ : this; }
   CharPoint origin() const;
+  void setApp(const App& app);
   void setTermWindow(TermWindow& termWindow);
 
   template <class LayoutMgrT> void setLayoutMgr() {
@@ -57,6 +59,7 @@ public:
   WidgetT* addChild(Args&&... args) {
     Widget* newWidget = new WidgetT{root_, args...};
     newWidget->parent_ = this;
+    newWidget->app_ = app_;
     newWidget->termWindow_ = termWindow_;
     children_.push_back(newWidget);
     render();
@@ -75,6 +78,7 @@ public:
 
 protected:
   Widget* root_{};
+  const App* app_{};
   TermWindow* termWindow_{};
   virtual void doRender() {}
   void paintBackground();

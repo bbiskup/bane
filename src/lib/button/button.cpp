@@ -1,4 +1,5 @@
 #include "button.h"
+#include "app.h"
 #include <boost/log/trivial.hpp>
 
 bane::Button::Button(Widget* root, std::string label) : Widget{root} {
@@ -16,6 +17,7 @@ int bane::Button::preferredHeight() const noexcept { return 1; }
 void bane::Button::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "Button::doRender" << y() << " " << x();
   CharPoint orig{origin()};
+  attrset(app_->theme().active().nCursesColorPair());
   mvaddstr(orig.y, orig.x, controller_->model().label().c_str());
 }
 

@@ -1,6 +1,7 @@
 #include "widget.h"
 #include "simple_layout_mgr.h"
 #include "term_window.h"
+#include "app.h"
 
 #include <boost/core/demangle.hpp>
 #include <boost/log/trivial.hpp>
@@ -67,6 +68,10 @@ bane::CharPoint bane::Widget::origin() const {
 
 void bane::Widget::setTermWindow(TermWindow& termWindow) {
   termWindow_ = &termWindow;
+}
+
+void bane::Widget::setApp(const App& app){ 
+  app_ = &app;
 }
 
 /// Draw background color

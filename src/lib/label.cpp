@@ -1,4 +1,5 @@
 #include "label.h"
+#include "app.h"
 #include <boost/log/trivial.hpp>
 #include <iostream>
 #include <ncurses.h>
@@ -14,5 +15,6 @@ int bane::Label::preferredHeight() const noexcept { return 1; }
 void bane::Label::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "Label::doRender" << y() << " " << x();
   CharPoint orig{origin()};
+  attrset(app_->theme().normal().nCursesColorPair());
   mvaddstr(orig.y, orig.x, label_.c_str());
 }

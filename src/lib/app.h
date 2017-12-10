@@ -31,7 +31,7 @@ public:
   void handleResize();
 
   TermWindow& termWindow() { return termWindow_; }
-  const Theme& theme() const;
+  const Theme& theme() const{return *theme_;}
 
   Pane rootPane{};
 

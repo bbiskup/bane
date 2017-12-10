@@ -14,8 +14,7 @@ bane::TermWindow::TermWindow() {
   noecho();
   timeout(nCursesTimeOut);
   curs_set(0);   // no blinking cursor
-  start_color(); // must come before creating windows
-  init_pair(1, COLOR_BLUE, COLOR_WHITE);
+  //init_pair(1, COLOR_BLUE, COLOR_WHITE);
 
   setUpMouse();
   updateSize();

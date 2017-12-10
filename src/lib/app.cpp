@@ -9,6 +9,7 @@
 
 bane::App::App(std::string name, std::unique_ptr<Theme> theme)
     : name_{std::move(name)}, theme_{std::move(theme)} {
+  rootPane.setApp(*this);
   rootPane.setTermWindow(termWindow_);
   handleResize();
   rootPane.render();
