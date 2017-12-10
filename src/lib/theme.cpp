@@ -1,7 +1,6 @@
 #include "theme.h"
 
 #include <algorithm>
-#include <boost/log/trivial.hpp>
 #include <ncurses.h>
 #include <stdexcept>
 #include <utility>
@@ -26,8 +25,6 @@ bane::ColorPair::ColorPair(short nCursesForeground, short nCursesBackground)
     init_pair(nCursesColorIndex_, nCursesForeground, nCursesBackground);
     nCursesColors.emplace_back(nCursesForeground, nCursesBackground);
     nCursesColorPair_ = COLOR_PAIR(nCursesColorIndex_);
-    BOOST_LOG_TRIVIAL(trace)
-        << "Color pair: " << nCursesColorIndex_ << ", " << nCursesColorPair_;
   } else {
     throw std::runtime_error{"Non-unique color definition"};
   }
