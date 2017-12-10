@@ -8,6 +8,7 @@ bane::Button::Button(Widget* root, std::string label) : Widget{root} {
 }
 
 int bane::Button::preferredWidth() const noexcept {
+  BOOST_LOG_TRIVIAL(trace) << "Button::preferredWidth " << controller_->model().label().size();
   return static_cast<int>(controller_->model().label().size());
 }
 int bane::Button::preferredHeight() const noexcept { return 1; }
