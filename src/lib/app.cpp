@@ -7,7 +7,8 @@
 #include <mutex>
 #include <ncurses.h>
 
-bane::App::App(std::string name) : name_{std::move(name)} {
+bane::App::App(std::string name, std::unique_ptr<Theme> theme)
+    : name_{std::move(name)}, theme_{std::move(theme)} {
   rootPane.setTermWindow(termWindow_);
   handleResize();
   rootPane.render();

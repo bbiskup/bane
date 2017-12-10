@@ -2,6 +2,7 @@
 #define APP_H
 
 #include "event.h"
+#include "theme.h"
 #include "pane.h"
 #include "term_window.h"
 #include <mutex>
@@ -12,7 +13,7 @@ namespace bane {
 /// Application
 class App {
 public:
-  explicit App(std::string name);
+  explicit App(std::string name, std::unique_ptr<Theme> theme);
   ~App();
   App(const App&) = delete;
   App(App&&) = delete;
@@ -30,12 +31,14 @@ public:
   void handleResize();
 
   TermWindow& termWindow() { return termWindow_; }
+  const Theme& theme() const;
 
   Pane rootPane{};
 
 private:
   TermWindow termWindow_;
   std::string name_;
+  std::unique_ptr<Theme> theme_;
   std::queue<std::unique_ptr<Event>> queue_;
   std::mutex queueMutex_;
 };
