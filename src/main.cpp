@@ -1,8 +1,8 @@
 
 #include "app.h"
+#include "button/button.h"
 #include "h_box_layout_mgr.h"
 #include "label.h"
-#include "button/button.h"
 #include "logging.h"
 
 #include <boost/log/trivial.hpp>
@@ -20,9 +20,9 @@ int main() {
   bane::Pane* pane{app.rootPane.addChild<bane::Pane>()};
   pane->resize(20, 30);
   pane->setLayoutMgr<bane::HBoxLayoutMgr>();
-  pane->addChild<bane::Label>("my_text");
+  pane->addChild<bane::Label>("my_label_1");
 
-  bane::Label* label2 = pane->addChild<bane::Label>("my_other_text");
+  bane::Label* label2 = pane->addChild<bane::Label>("my_label_2");
   label2->doOnClick([](int x, int y) {
     BOOST_LOG_TRIVIAL(trace) << "Handling click: " << x << ", " << y;
   });

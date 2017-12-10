@@ -38,6 +38,8 @@ void bane::TermWindow::setUpMouse() {
 void bane::TermWindow::updateClickMap(Widget& widget) {
   int w{widget.width()};
   int h{widget.height()};
+  int xOrigin{widget.x()};
+  int yOrigin{widget.y()};
   BOOST_LOG_TRIVIAL(trace) << "updateClickMap " << w << ", " << h;
   Widget* widgetAddr{&widget};
 
@@ -51,8 +53,8 @@ void bane::TermWindow::updateClickMap(Widget& widget) {
   std::vector<Widget*>* clickMap{clickMap_.get()};
 
   for (int x{0}; x < w; ++x) {
-    for (int y{0}; y < h; ++y) {
-      clickMap->at(clickMapIndex(x, y)) = widgetAddr;
+    for (int y{}; y < h; ++y) {
+      clickMap->at(clickMapIndex(xOrigin + x, yOrigin + y)) = widgetAddr;
     }
   }
 }
