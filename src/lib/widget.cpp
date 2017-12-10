@@ -2,12 +2,21 @@
 #include "simple_layout_mgr.h"
 #include "term_window.h"
 
+#include <boost/core/demangle.hpp>
 #include <boost/log/trivial.hpp>
 
+namespace {
+/// auto-incremented counter
+int widgetNum{0};
+
+} // namespace
+
 bane::Widget::Widget(Widget* root)
-    : root_{root}, layoutMgr_{new SimpleLayoutMgr} {}
+    : root_{root}, id_{makeWidgetId()}, layoutMgr_{new SimpleLayoutMgr} {}
 
 bane::Widget::~Widget() { BOOST_LOG_TRIVIAL(trace) << "Widget::~Widget"; }
+
+const std::string& bane::Widget::id() const { return id_; }
 
 int bane::Widget::x() const noexcept { return x_; }
 
@@ -49,17 +58,17 @@ bane::CharPoint bane::Widget::origin() const {
   if (parent_) {
     return {parent_->origin().x + x_, parent_->origin().y + y_};
   } else {
-    return { x_,  y_};
+    return {x_, y_};
   }
 }
 
-void bane::Widget::setTermWindow(TermWindow& termWindow){
-    termWindow_ = &termWindow;
+void bane::Widget::setTermWindow(TermWindow& termWindow) {
+  termWindow_ = &termWindow;
 }
 
 /// Draw background color
 void bane::Widget::paintBackground() {
-    BOOST_LOG_TRIVIAL(trace) << "paintBackground " << width_ << ", " << height_;
+  BOOST_LOG_TRIVIAL(trace) << "paintBackground " << width_ << ", " << height_;
   CharPoint orig{origin()};
   attrset(COLOR_PAIR(1));
   std::string rowStr(static_cast<unsigned long>(width_), ' ');
@@ -77,3 +86,15 @@ bane::Widget::doOnClick(const OnClickSlotType& slot) {
 
 /// Dispatch click event
 void bane::Widget::click(int x, int y) { onClick_(x, y); }
+
+/// Create a unique Widget identifier.
+std::string bane::Widget::makeWidgetId() const {
+    std::string result{std::string{boost::core::demangle(typeid(*this).name())} + "_" +
+         std::to_string(widgetNum)};
+    ++widgetNum;
+    return result;
+}
+
+std::ostream& bane::operator<<(std::ostream& strm, const Widget& w) {
+  return strm << w.id();
+}

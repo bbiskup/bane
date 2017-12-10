@@ -26,7 +26,7 @@ void bane::EventHandler::handle(const MouseEvent& e) {
 
   Widget* widget = app_.termWindow().widgetAt(e.x, e.y);
   if (widget) {
-    BOOST_LOG_TRIVIAL(trace) << "Widget: " << widget;
+    BOOST_LOG_TRIVIAL(trace) << "Widget: " << *widget;
   } else {
     BOOST_LOG_TRIVIAL(trace) << "No widget at position " << e.x << ", " << e.y;
   }

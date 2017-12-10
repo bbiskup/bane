@@ -5,18 +5,19 @@
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <boost/signals2.hpp>
 #include <memory>
+#include <iostream>
 #include <ncurses.h>
 
 namespace bane {
 
-  /// A character position
-  /// (on screen or within window)
-  struct CharPoint{
-      int x;
-      int y;
-  };
+/// A character position
+/// (on screen or within window)
+struct CharPoint {
+  int x;
+  int y;
+};
 
-  class TermWindow;
+class TermWindow;
 
 class Widget {
 public:
@@ -27,7 +28,10 @@ public:
 
   explicit Widget(Widget* root = nullptr);
   virtual ~Widget();
-  int x() const noexcept;
+
+  const std::string& id() const ;
+
+      int x() const noexcept;
   int y() const noexcept;
   int width() const noexcept;
   int height() const noexcept;
@@ -38,7 +42,7 @@ public:
   void resizeToPreferred();
   void move(int x, int y);
   void render();
-  Widget* root(){return root_ ? root_ : this;}
+  Widget* root() { return root_ ? root_ : this; }
   CharPoint origin() const;
   void setTermWindow(TermWindow& termWindow);
 
@@ -67,6 +71,8 @@ public:
 
   void click(int x, int y);
 
+  friend std::ostream& operator<<(std::ostream& strm, const Widget& w);
+
 protected:
   Widget* root_{};
   TermWindow* termWindow_{};
@@ -75,8 +81,10 @@ protected:
 
 private:
   void createWindow();
+  std::string makeWidgetId() const;
 
   Widget* parent_{};
+  const std::string id_;
 
   // horizontal position of
   // top left corner, in screen coordinates
