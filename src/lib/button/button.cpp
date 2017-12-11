@@ -2,15 +2,12 @@
 #include "app.h"
 #include <boost/log/trivial.hpp>
 
-bane::Button::Button(Widget* root, std::string label) : Widget{root} {
-  std::shared_ptr<ButtonModel> model = std::make_shared<ButtonModel>(label);
-  std::shared_ptr<View<ButtonModel>> view = std::make_shared<ButtonView>(model);
-  controller_ = std::make_shared<ButtonController>(model, view);
+bane::Button::Button(Widget* root, std::string label) : Widget{root}, label_{std::move(label)} {
 }
 
 int bane::Button::preferredWidth() const noexcept {
-  BOOST_LOG_TRIVIAL(trace) << "Button::preferredWidth " << controller_->model().label().size();
-  return static_cast<int>(controller_->model().label().size());
+  BOOST_LOG_TRIVIAL(trace) << "Button::preferredWidth " << label_.size();
+  return static_cast<int>(label_.size());
 }
 int bane::Button::preferredHeight() const noexcept { return 1; }
 
@@ -18,12 +15,6 @@ void bane::Button::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "Button::doRender" << y() << " " << x();
   CharPoint orig{origin()};
   attrset(app_->theme().active().nCursesColorPair());
-  mvaddstr(orig.y, orig.x, controller_->model().label().c_str());
+  mvaddstr(orig.y, orig.x, label_.c_str());
 }
 
-bane::Button::ButtonModel::ButtonModel(std::string label)
-    : label_{std::move(label)} {}
-
-void bane::Button::ButtonView::render() {
-  BOOST_LOG_TRIVIAL(trace) << "Button::ButtonView::render";
-}

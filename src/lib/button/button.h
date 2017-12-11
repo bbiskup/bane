@@ -1,11 +1,9 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "mvc/controller.h"
-#include "mvc/model.h"
-#include "mvc/view.h"
 #include "widget.h"
 
+#include <boost/signals2.hpp>
 #include <memory>
 #include <string>
 
@@ -19,28 +17,17 @@ public:
 
   void doRender() override;
 
+  // Signals & slots
+  using OnMouseRelease = boost::signals2::signal<void()>;
+  using OnMouseReleaseSlotType = OnMouseRelease::slot_type;
+
+  boost::signals2::connection
+  doOnMouseRelease(const OnMouseReleaseSlotType& slot);
+
+  void releaseMouse(int x, int y);
+
 private:
-  class ButtonModel : public Model {
-  public:
-    ButtonModel(std::string label);
-    const std::string& label() const { return label_; }
-
-  private:
-    std::string label_;
-  };
-
-  class ButtonView : public View<ButtonModel> {
-  public:
-    using View::View;
-    ~ButtonView() override {}
-    void render() override;
-  };
-
-  class ButtonController : public Controller<ButtonModel> {
-    using Controller<ButtonModel>::Controller;
-  };
-
-  std::shared_ptr<ButtonController> controller_;
+  std::string label_;
 };
 } // namespace bane
 
