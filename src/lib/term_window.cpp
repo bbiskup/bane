@@ -5,7 +5,7 @@
 
 namespace {
 // Timeout for non-blocking read
-constexpr const int nCursesTimeOut{100};
+constexpr const int nCursesTimeOut{10};
 } // namespace
 
 bane::TermWindow::TermWindow() {
