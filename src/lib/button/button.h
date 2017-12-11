@@ -3,7 +3,6 @@
 
 #include "widget.h"
 
-#include <boost/signals2.hpp>
 #include <memory>
 #include <string>
 
@@ -17,17 +16,11 @@ public:
 
   void doRender() override;
 
-  // Signals & slots
-  using OnMouseRelease = boost::signals2::signal<void()>;
-  using OnMouseReleaseSlotType = OnMouseRelease::slot_type;
 
-  boost::signals2::connection
-  doOnMouseRelease(const OnMouseReleaseSlotType& slot);
-
-  void releaseMouse(int x, int y);
 
 private:
   std::string label_;
+  bool isPressed_{false};
 };
 } // namespace bane
 

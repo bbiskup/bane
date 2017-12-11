@@ -99,6 +99,15 @@ bane::Widget::doOnClick(const OnClickSlotType& slot) {
 /// Dispatch click event
 void bane::Widget::click(int x, int y) { onClick_(x, y); }
 
+/// Handle mouse release event
+boost::signals2::connection
+bane::Widget::doOnMouseRelease(const OnMouseReleaseSlotType& slot) {
+  return onMouseRelease_.connect(slot);
+}
+
+/// Dispatch mouse release event
+void bane::Widget::releaseMouse() { onMouseRelease_(); }
+
 std::ostream& bane::operator<<(std::ostream& strm, const Widget& w) {
   return strm << w.id();
 }

@@ -41,7 +41,7 @@ public:
 namespace mouse {
 enum class Button { left, middle, right };
 
-enum class ClickType { single, double_ };
+enum class ClickType { single, double_, release };
 } // namespace mouse
 
 /// allow enum class map keys

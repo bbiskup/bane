@@ -71,8 +71,14 @@ public:
   using OnClickSlotType = OnClick::slot_type;
 
   boost::signals2::connection doOnClick(const OnClickSlotType& slot);
-
   void click(int x, int y);
+
+  using OnMouseRelease = boost::signals2::signal<void()>;
+  using OnMouseReleaseSlotType = OnMouseRelease::slot_type;
+
+  boost::signals2::connection
+  doOnMouseRelease(const OnMouseReleaseSlotType& slot);
+  void releaseMouse();
 
   friend std::ostream& operator<<(std::ostream& strm, const Widget& w);
 
@@ -102,6 +108,7 @@ private:
   boost::ptr_vector<Widget> children_;
 
   OnClick onClick_;
+  OnMouseRelease onMouseRelease_;
 };
 
 } // namespace bane

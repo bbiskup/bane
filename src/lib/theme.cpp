@@ -36,8 +36,11 @@ const bane::ColorPair bane::color::white_on_blue{COLOR_WHITE, COLOR_BLUE};
 const bane::ColorPair bane::color::yellow_on_green{COLOR_YELLOW, COLOR_GREEN};
 const bane::ColorPair bane::color::yellow_on_red{COLOR_YELLOW, COLOR_RED};
 const bane::ColorPair bane::color::red_on_blue{COLOR_RED, COLOR_BLUE};
+const bane::ColorPair bane::color::cyan_on_blue{COLOR_CYAN, COLOR_BLUE};
 
 bane::ColorPair bane::SimpleTheme::normal() const {
   return color::white_on_blue;
 }
 bane::ColorPair bane::SimpleTheme::active() const { return color::red_on_blue; }
+
+bane::ColorPair bane::SimpleTheme::engaged() const { return color::cyan_on_blue; }

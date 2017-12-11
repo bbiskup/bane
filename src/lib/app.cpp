@@ -50,6 +50,10 @@ void bane::App::run() {
         postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
                               bane::mouse::ClickType::double_);
         break;
+      case BUTTON1_RELEASED:
+        postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
+                              bane::mouse::ClickType::release);
+        break;
       default:
         BOOST_LOG_TRIVIAL(trace) << "Unknown mouse action " << c;
         break;
