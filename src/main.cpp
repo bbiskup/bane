@@ -1,6 +1,7 @@
 
 #include "app.h"
 #include "button/button.h"
+#include "checkbox.h"
 #include "h_box_layout_mgr.h"
 #include "label.h"
 #include "logging.h"
@@ -47,6 +48,8 @@ int main() {
   paneH->setLayoutMgr<bane::HBoxLayoutMgr>();
   paneH->addChild<bane::Button>("another_button");
   paneH->addChild<bane::Button>("yet_another_button");
+
+  pane->addChild<bane::CheckBox>("my_checkbox");
 
   // termWin.waitForKey();
   //  return 0;
