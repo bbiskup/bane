@@ -40,6 +40,7 @@ public:
   virtual int preferredHeight() const noexcept = 0;
 
   int maxPreferredChildWidth() const noexcept;
+  int maxPreferredChildHeight() const noexcept;
 
   void resize(int width, int height);
   void resizeToPreferred();
@@ -51,7 +52,7 @@ public:
   void setTermWindow(TermWindow& termWindow);
 
   template <class LayoutMgrT> void setLayoutMgr() {
-    layoutMgr_.reset(new LayoutMgrT);
+    layoutMgr_.reset(new LayoutMgrT{*this});
   }
 
   /// Add a child widget. Arguments will be forwarded to the constructor
@@ -83,7 +84,11 @@ public:
   doOnMouseRelease(const OnMouseReleaseSlotType& slot);
   void releaseMouse();
 
+  boost::ptr_vector<Widget>& children() { return children_; }
+  size_t numChildren() const noexcept;
+
   friend std::ostream& operator<<(std::ostream& strm, const Widget& w);
+  friend class LayoutMgr;
 
 protected:
   Widget* root_{};
@@ -92,7 +97,6 @@ protected:
   virtual void doRender() {}
   void paintBackground();
   virtual void checkChild(const Widget&) const {}
-  size_t numChildren() const noexcept;
 
 private:
   void createWindow();

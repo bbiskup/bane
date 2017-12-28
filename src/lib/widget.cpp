@@ -7,16 +7,21 @@
 #include <boost/log/trivial.hpp>
 
 #include <algorithm>
+#include <functional>
 #include <iterator>
 
 namespace {
 /// auto-incremented counter
 int widgetNum{0};
 
+int maxPreferredDim(const boost::ptr_vector<bane::Widget>& widgets,
+                    std::function<int(const bane::Widget&)> dimGetter);
+
 } // namespace
 
 bane::Widget::Widget(Widget* root)
-    : root_{root}, instanceNum_{widgetNum++}, layoutMgr_{new SimpleLayoutMgr} {}
+    : root_{root}, instanceNum_{widgetNum++}, layoutMgr_{
+                                                  new SimpleLayoutMgr{*this}} {}
 
 bane::Widget::~Widget() { BOOST_LOG_TRIVIAL(trace) << "Widget::~Widget"; }
 
@@ -35,14 +40,14 @@ int bane::Widget::height() const noexcept { return height_; }
 
 /// return largest preferred width of any child
 int bane::Widget::maxPreferredChildWidth() const noexcept {
-  if (children_.empty()) {
-    return 0;
-  }
+  return maxPreferredDim(children_,
+                         [](const Widget& w) { return w.preferredWidth(); });
+}
 
-  std::vector<int> widths;
-  std::transform(children_.begin(), children_.end(), std::back_inserter(widths),
-                 [](const Widget& widget) { return widget.preferredWidth(); });
-  return *std::max_element(widths.begin(), widths.end());
+/// return largest preferred width of any child
+int bane::Widget::maxPreferredChildHeight() const noexcept {
+  return maxPreferredDim(children_,
+                         [](const Widget& w) { return w.preferredHeight(); });
 }
 
 void bane::Widget::resize(int width, int height) {
@@ -64,7 +69,7 @@ void bane::Widget::move(int x, int y) {
 }
 void bane::Widget::render() {
   BOOST_LOG_TRIVIAL(trace) << "render";
-  layoutMgr_->layout(*this, children_);
+  layoutMgr_->layout();
   termWindow_->updateClickMap(*this);
   paintBackground();
   doRender();
@@ -127,3 +132,18 @@ void bane::Widget::releaseMouse() { onMouseRelease_(); }
 std::ostream& bane::operator<<(std::ostream& strm, const Widget& w) {
   return strm << w.id();
 }
+
+namespace {
+int maxPreferredDim(const boost::ptr_vector<bane::Widget>& widgets,
+                    std::function<int(const bane::Widget&)> dimGetter) {
+  if (widgets.empty()) {
+    return 0;
+  }
+
+  std::vector<int> widths;
+  std::transform(
+      widgets.begin(), widgets.end(), std::back_inserter(widths),
+      [&dimGetter](const bane::Widget& widget) { return dimGetter(widget); });
+  return *std::max_element(widths.begin(), widths.end());
+}
+} // namespace

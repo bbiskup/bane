@@ -8,9 +8,11 @@ namespace bane {
 /// Lay out widgets in a horizontal row
 class HBoxLayoutMgr : public LayoutMgr {
 public:
+  using LayoutMgr::LayoutMgr;
   ~HBoxLayoutMgr() override = default;
-  void layout(const Widget& parent,
-              boost::ptr_vector<Widget>& widgets) override;
+  void layout() override;
+  int preferredWidth() const noexcept override;
+  int preferredHeight() const noexcept override;
 };
 
 } // namespace bane

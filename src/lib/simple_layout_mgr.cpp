@@ -1,15 +1,27 @@
 #include "simple_layout_mgr.h"
 #include "widget.h"
+
+#include <numeric>
 #include <stdexcept>
 
-void bane::SimpleLayoutMgr::layout(
-    const Widget& parent, boost::ptr_vector<Widget>& widgets)  {
-  if (widgets.size() == 0) {
+void bane::SimpleLayoutMgr::layout() {
+  if (parent_.children().size() == 0) {
     return;
-  } else if (widgets.size() > 1) {
+  } else if (parent_.children().size() > 1) {
     throw std::runtime_error{"Expecting exactly 1 child"};
   } else {
-    Widget& w = widgets[0];
-    w.move(parent.x(), parent.y());
+    Widget& w = parent_.children()[0];
+    w.move(parent_.x(), parent_.y());
   }
+}
+
+int bane::SimpleLayoutMgr::preferredWidth() const noexcept {
+  return std::accumulate(parent_.children().begin(), parent_.children().end(), 0,
+                         [](int s, const Widget& widget) {
+                           return s + widget.preferredWidth();
+                         });
+}
+
+int bane::SimpleLayoutMgr::preferredHeight() const noexcept {
+  return static_cast<int>(parent_.children().size());
 }

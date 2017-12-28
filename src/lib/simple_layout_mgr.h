@@ -11,9 +11,11 @@ namespace bane {
 /// - move child to top left of parent
 class SimpleLayoutMgr : public LayoutMgr {
 public:
+  using LayoutMgr::LayoutMgr;
   ~SimpleLayoutMgr() override = default;
-  void layout(const Widget& parent,
-              boost::ptr_vector<Widget>& widgets) override;
+  void layout() override;
+  int preferredWidth() const noexcept override;
+  int preferredHeight() const noexcept override;
 };
 
 } // namespace bane

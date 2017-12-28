@@ -8,9 +8,11 @@ namespace bane {
 /// Lay out widgets in a vertical row
 class VBoxLayoutMgr : public LayoutMgr {
 public:
+  using LayoutMgr::LayoutMgr;
   ~VBoxLayoutMgr() override = default;
-  void layout(const Widget& parent,
-              boost::ptr_vector<Widget>& widgets) override;
+  void layout() override;
+  int preferredWidth() const noexcept override;
+  int preferredHeight() const noexcept override;
 };
 
 } // namespace bane
