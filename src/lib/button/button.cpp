@@ -24,7 +24,7 @@ int bane::Button::preferredWidth() const noexcept {
 int bane::Button::preferredHeight() const noexcept { return 1; }
 
 void bane::Button::doRender() {
-  BOOST_LOG_TRIVIAL(trace) << "Button::doRender" << y() << " " << x();
+  BOOST_LOG_TRIVIAL(trace) << "Button::doRender " << y() << " " << x();
   CharPoint orig{origin()};
   if (isPressed_) {
     attrset(app_->theme().engaged().nCursesColorPair());

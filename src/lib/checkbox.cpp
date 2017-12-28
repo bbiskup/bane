@@ -23,7 +23,7 @@ int bane::CheckBox::preferredWidth() const noexcept {
 int bane::CheckBox::preferredHeight() const noexcept { return 1; }
 
 void bane::CheckBox::doRender() {
-  BOOST_LOG_TRIVIAL(trace) << "CheckBox::doRender" << y() << " " << x();
+  BOOST_LOG_TRIVIAL(trace) << "CheckBox::doRender " << y() << " " << x();
   CharPoint orig{origin()};
   mvaddstr(orig.y, orig.x, isChecked_ ? "[x]" : "[ ]");
   mvaddstr(orig.y, orig.x + 3, " ");

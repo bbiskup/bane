@@ -25,12 +25,13 @@ int main() {
   bane::Pane* pane{app.rootPane.addChild<bane::Pane>()};
   pane->resize(20, 30);
   pane->setLayoutMgr<bane::VBoxLayoutMgr>();
+  /*
   pane->addChild<bane::Label>("my_label_1");
-
   bane::Label* label2 = pane->addChild<bane::Label>("my_label_2");
   label2->doOnClick([](int x, int y) {
     BOOST_LOG_TRIVIAL(trace) << "Handling click: " << x << ", " << y;
   });
+  */
 
   // label2->click(0, 2);
   // bane::Label label{"my text"};
@@ -42,7 +43,16 @@ int main() {
     app.postEvent<bane::DummyEvent>();
   });
 
+  
   pane->addChild<bane::Button>("my_button");
+  pane->addChild<bane::Label>("my_label_x");
+  pane->addChild<bane::Button>("my_button_x");
+  bane::Pane* paneH{pane->addChild<bane::Pane>()};
+  paneH->resize(50, 1);
+  paneH->setLayoutMgr<bane::HBoxLayoutMgr>();
+  paneH->addChild<bane::Button>("another_button");
+
+  /*
 
   bane::Pane* paneH{pane->addChild<bane::Pane>()};
   paneH->resize(50, 1);
@@ -55,8 +65,7 @@ int main() {
   bg1->addChild<bane::CheckBox>("my_checkbox_1");
   bg1->addChild<bane::CheckBox>("my_checkbox_2");
   bg1->addChild<bane::CheckBox>("my_checkbox_3");
+  */
 
-  // termWin.waitForKey();
-  //  return 0;
   app.run();
 }
