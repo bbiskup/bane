@@ -32,8 +32,10 @@ public:
 
   std::string id() const;
 
-  int x() const noexcept;
-  int y() const noexcept;
+  int relX() const noexcept;
+  int relY() const noexcept;
+  int absX() const noexcept;
+  int absY() const noexcept;
   int width() const noexcept;
   int height() const noexcept;
   virtual int preferredWidth() const noexcept = 0;

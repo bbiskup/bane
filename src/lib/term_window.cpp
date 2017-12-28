@@ -13,8 +13,8 @@ bane::TermWindow::TermWindow() {
   clear();
   noecho();
   timeout(nCursesTimeOut);
-  curs_set(0);   // no blinking cursor
-  //init_pair(1, COLOR_BLUE, COLOR_WHITE);
+  curs_set(0); // no blinking cursor
+  // init_pair(1, COLOR_BLUE, COLOR_WHITE);
 
   setUpMouse();
   updateSize();
@@ -37,9 +37,10 @@ void bane::TermWindow::setUpMouse() {
 void bane::TermWindow::updateClickMap(Widget& widget) {
   int w{widget.width()};
   int h{widget.height()};
-  int xOrigin{widget.x()};
-  int yOrigin{widget.y()};
-  BOOST_LOG_TRIVIAL(trace) << "updateClickMap " << w << ", " << h;
+  int xOrigin{widget.absX()};
+  int yOrigin{widget.absY()};
+  BOOST_LOG_TRIVIAL(trace) << "updateClickMap " << w << "x" << h << "+"
+                           << xOrigin << "+" << yOrigin;
   Widget* widgetAddr{&widget};
 
   // Tolerate out-of-screen updates

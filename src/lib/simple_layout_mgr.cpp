@@ -11,7 +11,7 @@ void bane::SimpleLayoutMgr::layout() {
     throw std::runtime_error{"Expecting exactly 1 child"};
   } else {
     Widget& w = parent_.children()[0];
-    w.move(parent_.x(), parent_.y());
+    w.move(parent_.relX(), parent_.relY());
   }
 }
 

@@ -43,14 +43,13 @@ int main() {
     app.postEvent<bane::DummyEvent>();
   });
 
-  
-  pane->addChild<bane::Button>("my_button");
+  //  pane->addChild<bane::Button>("my_button");
   pane->addChild<bane::Label>("my_label_x");
-  pane->addChild<bane::Button>("my_button_x");
-  bane::Pane* paneH{pane->addChild<bane::Pane>()};
-  paneH->resize(50, 1);
-  paneH->setLayoutMgr<bane::HBoxLayoutMgr>();
-  paneH->addChild<bane::Button>("another_button");
+  /* pane->addChild<bane::Button>("my_button_x");
+   bane::Pane* paneH{pane->addChild<bane::Pane>()};
+   paneH->resize(50, 1);
+   paneH->setLayoutMgr<bane::HBoxLayoutMgr>();
+   paneH->addChild<bane::Button>("another_button");*/
 
   /*
 
@@ -59,13 +58,14 @@ int main() {
   paneH->setLayoutMgr<bane::HBoxLayoutMgr>();
   paneH->addChild<bane::Button>("another_button");
   paneH->addChild<bane::Button>("yet_another_button");
+  */
 
   bane::ButtonGroup* bg1{pane->addChild<bane::ButtonGroup>(
       "button_group_1", bane::Orientation::vertical)};
   bg1->addChild<bane::CheckBox>("my_checkbox_1");
   bg1->addChild<bane::CheckBox>("my_checkbox_2");
-  bg1->addChild<bane::CheckBox>("my_checkbox_3");
-  */
+  //bg1->addChild<bane::CheckBox>("my_checkbox_3");
+  pane->addChild<bane::Label>("my_label_x2");
 
   app.run();
 }

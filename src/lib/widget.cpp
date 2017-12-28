@@ -30,9 +30,29 @@ std::string bane::Widget::id() const {
          std::to_string(instanceNum_);
 }
 
-int bane::Widget::x() const noexcept { return x_; }
+/// X coordinate relative to parent widget
+int bane::Widget::relX() const noexcept { return x_; }
 
-int bane::Widget::y() const noexcept { return y_; }
+/// Y coordinate relative to parent widget
+int bane::Widget::relY() const noexcept { return y_; }
+
+/// X coordinate with respect to terminal windo origin
+int bane::Widget::absX() const noexcept {
+  if (parent_) {
+    return parent_->absX() + relX();
+  } else {
+    return relX();
+  }
+}
+
+/// Y coordinate with respect to terminal windo origin
+int bane::Widget::absY() const noexcept {
+  if (parent_) {
+    return parent_->absY() + relY();
+  } else {
+    return relY();
+  }
+}
 
 int bane::Widget::width() const noexcept { return width_; }
 

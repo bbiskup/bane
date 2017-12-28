@@ -39,5 +39,5 @@ int bane::ButtonGroup::preferredHeight() const noexcept {
 }
 
 void bane::ButtonGroup::doRender() {
-  BOOST_LOG_TRIVIAL(trace) << "ButtonGroup::doRender" << y() << " " << x();
+  BOOST_LOG_TRIVIAL(trace) << "ButtonGroup::doRender " << relX() << " " << relY();
 }
