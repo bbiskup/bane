@@ -1,10 +1,13 @@
 #include "widget.h"
+#include "app.h"
 #include "simple_layout_mgr.h"
 #include "term_window.h"
-#include "app.h"
 
 #include <boost/core/demangle.hpp>
 #include <boost/log/trivial.hpp>
+
+#include <algorithm>
+#include <iterator>
 
 namespace {
 /// auto-incremented counter
@@ -29,6 +32,18 @@ int bane::Widget::y() const noexcept { return y_; }
 int bane::Widget::width() const noexcept { return width_; }
 
 int bane::Widget::height() const noexcept { return height_; }
+
+/// return largest preferred width of any child
+int bane::Widget::maxPreferredChildWidth() const noexcept {
+  if (children_.empty()) {
+    return 0;
+  }
+
+  std::vector<int> widths;
+  std::transform(children_.begin(), children_.end(), std::back_inserter(widths),
+                 [](const Widget& widget) { return widget.preferredWidth(); });
+  return *std::max_element(widths.begin(), widths.end());
+}
 
 void bane::Widget::resize(int width, int height) {
   width_ = width;
@@ -70,9 +85,7 @@ void bane::Widget::setTermWindow(TermWindow& termWindow) {
   termWindow_ = &termWindow;
 }
 
-void bane::Widget::setApp(const App& app){ 
-  app_ = &app;
-}
+void bane::Widget::setApp(const App& app) { app_ = &app; }
 
 /// Draw background color
 void bane::Widget::paintBackground() {
@@ -89,6 +102,9 @@ void bane::Widget::paintBackground() {
   }
   refresh();
 }
+
+/// \return number of children
+size_t bane::Widget::numChildren() const noexcept { return children_.size(); }
 
 /// Handle click event
 boost::signals2::connection

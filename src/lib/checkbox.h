@@ -1,10 +1,10 @@
 #ifndef CHECKBOX_H
 #define CHECKBOX_H
 
-#include "widget.h"
+#include "button.h"
 
 namespace bane {
-class CheckBox : public Widget {
+class CheckBox : public Button {
 public:
   CheckBox(Widget* root, std::string label, bool isChecked = false);
 

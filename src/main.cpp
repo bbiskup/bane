@@ -1,6 +1,7 @@
 
 #include "app.h"
 #include "button/button.h"
+#include "button_group.h"
 #include "checkbox.h"
 #include "h_box_layout_mgr.h"
 #include "label.h"
@@ -49,7 +50,11 @@ int main() {
   paneH->addChild<bane::Button>("another_button");
   paneH->addChild<bane::Button>("yet_another_button");
 
-  pane->addChild<bane::CheckBox>("my_checkbox");
+  bane::ButtonGroup* bg1{pane->addChild<bane::ButtonGroup>(
+      "button_group_1", bane::Orientation::vertical)};
+  bg1->addChild<bane::CheckBox>("my_checkbox_1");
+  bg1->addChild<bane::CheckBox>("my_checkbox_2");
+  bg1->addChild<bane::CheckBox>("my_checkbox_3");
 
   // termWin.waitForKey();
   //  return 0;

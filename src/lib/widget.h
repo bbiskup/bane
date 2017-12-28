@@ -39,6 +39,8 @@ public:
   virtual int preferredWidth() const noexcept = 0;
   virtual int preferredHeight() const noexcept = 0;
 
+  int maxPreferredChildWidth() const noexcept;
+
   void resize(int width, int height);
   void resizeToPreferred();
   void move(int x, int y);
@@ -58,6 +60,7 @@ public:
   template <typename WidgetT, typename... Args>
   WidgetT* addChild(Args&&... args) {
     Widget* newWidget = new WidgetT{root_, args...};
+    checkChild(*newWidget);
     newWidget->parent_ = this;
     newWidget->app_ = app_;
     newWidget->termWindow_ = termWindow_;
@@ -88,6 +91,8 @@ protected:
   TermWindow* termWindow_{};
   virtual void doRender() {}
   void paintBackground();
+  virtual void checkChild(const Widget&) const {}
+  size_t numChildren() const noexcept;
 
 private:
   void createWindow();

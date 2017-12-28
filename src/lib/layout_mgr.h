@@ -6,6 +6,8 @@
 namespace bane {
 class Widget;
 
+enum class Orientation{ horizontal, vertical};
+
 class LayoutMgr {
 public:
   virtual ~LayoutMgr() = default;
