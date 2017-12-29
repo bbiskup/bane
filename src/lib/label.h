@@ -11,6 +11,7 @@ public:
 
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;
+  void setText(std::string text);
 
   void doRender() override;
 

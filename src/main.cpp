@@ -3,10 +3,10 @@
 #include "button/button.h"
 #include "button_group.h"
 #include "checkbox.h"
-#include "radio_button.h"
 #include "h_box_layout_mgr.h"
 #include "label.h"
 #include "logging.h"
+#include "radio_button.h"
 #include "theme.h"
 #include "v_box_layout_mgr.h"
 
@@ -39,13 +39,14 @@ int main() {
   // label.resize(10, 20);
   // label.render();
 
+  bane::Label* label1{pane->addChild<bane::Label>("my_label_x")};
+  label1->setText("new_label_text");
   std::future<void> job = std::async(std::launch::async, [&app]() {
     std::this_thread::sleep_for(1s);
     app.postEvent<bane::DummyEvent>();
   });
 
   //  pane->addChild<bane::Button>("my_button");
-  pane->addChild<bane::Label>("my_label_x");
   /* pane->addChild<bane::Button>("my_button_x");
    bane::Pane* paneH{pane->addChild<bane::Pane>()};
    paneH->resize(50, 1);
@@ -67,7 +68,7 @@ int main() {
   bg1->addChild<bane::CheckBox>("my_checkbox_2");
   bg1->addChild<bane::RadioButton>("my_radio_button_1");
   bg1->addChild<bane::RadioButton>("my_radio_button_2");
-  //bg1->addChild<bane::CheckBox>("my_checkbox_3");
+  // bg1->addChild<bane::CheckBox>("my_checkbox_3");
   pane->addChild<bane::Label>("my_label_x2");
 
   app.run();

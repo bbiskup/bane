@@ -12,9 +12,16 @@ int bane::Label::preferredWidth() const noexcept {
 }
 int bane::Label::preferredHeight() const noexcept { return 1; }
 
+/// Set label text
+void bane::Label::setText(std::string text){
+    label_ = std::move(text);
+    doRender();
+}
+
 void bane::Label::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "Label::doRender " << relX() << " " << relY();
   CharPoint orig{origin()};
   attrset(app_->theme().normal().nCursesColorPair());
   mvaddstr(orig.y, orig.x, label_.c_str());
 }
+
