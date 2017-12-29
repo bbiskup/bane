@@ -3,6 +3,7 @@
 #include "button/button.h"
 #include "button_group.h"
 #include "checkbox.h"
+#include "radio_button.h"
 #include "h_box_layout_mgr.h"
 #include "label.h"
 #include "logging.h"
@@ -64,6 +65,8 @@ int main() {
       "button_group_1", bane::Orientation::vertical)};
   bg1->addChild<bane::CheckBox>("my_checkbox_1");
   bg1->addChild<bane::CheckBox>("my_checkbox_2");
+  bg1->addChild<bane::RadioButton>("my_radio_button_1");
+  bg1->addChild<bane::RadioButton>("my_radio_button_2");
   //bg1->addChild<bane::CheckBox>("my_checkbox_3");
   pane->addChild<bane::Label>("my_label_x2");
 
