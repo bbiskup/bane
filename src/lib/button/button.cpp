@@ -19,6 +19,8 @@ bane::Button::Button(Widget* root, std::string label)
         break;
       case bane::mouse::ClickType::double_:
         break;
+        case bane::mouse::ClickType::notImplemented:
+        break;
       };
     }
   });

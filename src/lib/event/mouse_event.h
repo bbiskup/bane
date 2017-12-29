@@ -8,9 +8,9 @@ namespace bane {
 class EventHandler;
 
 namespace mouse {
-enum class Button { left, middle, right };
+enum class Button { left, middle, right, notImplemented };
 
-enum class ClickType { single, double_, release };
+enum class ClickType { single, double_, release, notImplemented };
 } // namespace mouse
 
 /// allow enum class map keys
@@ -22,12 +22,12 @@ struct EnumClassHash {
 
 class MouseEvent : public PositionEvent {
 public:
-  MouseEvent(int x, int y, mouse::Button button, mouse::ClickType clickType);
+  MouseEvent(int c);
   ~MouseEvent() override = default;
   void accept(EventHandler& handler) const override;
 
-  const mouse::Button button;
-  const mouse::ClickType clickType;
+  mouse::Button button;
+  mouse::ClickType clickType;
 };
 
 } // namespace bane

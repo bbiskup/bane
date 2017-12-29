@@ -10,8 +10,8 @@ class EventHandler;
 class PositionEvent : public Event {
 public:
   PositionEvent(int x_, int y_) : x{x_}, y{y_} {}
-  const int x;
-  const int y;
+  int x;
+  int y;
 };
 
 } // namespace bane

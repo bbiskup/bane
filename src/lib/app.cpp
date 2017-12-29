@@ -1,28 +1,16 @@
 #include "app.h"
 #include "event/event.h"
-#include "event/resize_event.h"
-#include "event/mouse_event.h"
-#include "event/key_event.h"
 #include "event/event_handler.h"
+#include "event/key_event.h"
+#include "event/mouse_event.h"
+#include "event/resize_event.h"
 #include "widget.h"
 
 #include <boost/log/trivial.hpp>
 #include <ncurses.h>
 
 #include <mutex>
-#include <unordered_map>
 #include <utility>
-
-namespace {
-std::unordered_map<mmask_t,
-                   std::pair<bane::mouse::Button, bane::mouse::ClickType>>
-    buttonMap{{BUTTON1_CLICKED,
-               {bane::mouse::Button::left, bane::mouse::ClickType::single}},
-              {BUTTON1_DOUBLE_CLICKED,
-               {bane::mouse::Button::left, bane::mouse::ClickType::double_}},
-              {BUTTON1_RELEASED,
-               {bane::mouse::Button::left, bane::mouse::ClickType::release}}};
-} // namespace
 
 bane::App::App(std::string name, std::unique_ptr<Theme> theme)
     : name_{std::move(name)}, theme_{std::move(theme)} {
@@ -85,18 +73,7 @@ void bane::App::run() {
 /// Create and post a mouse event, translating from ncurses
 /// \param c ncurses character
 void bane::App::dispatchMouseEvent(int c) {
-  MEVENT mort;
-  getmouse(&mort);
-  auto eventSpecIter = buttonMap.find(mort.bstate);
-  if (eventSpecIter == buttonMap.end()) {
-    BOOST_LOG_TRIVIAL(trace)
-        << "Unsupported mouse event " << c << " " << mort.bstate;
-  } else {
-    mouse::Button button;
-    mouse::ClickType clickType;
-    std::tie(button, clickType) = eventSpecIter->second;
-    postEvent<MouseEvent>(mort.x, mort.y, button, clickType);
-  }
+  postEvent<MouseEvent>(c);
 }
 
 /// Create and post a mouse event, translating from ncurses
