@@ -4,9 +4,21 @@
 #include "widget.h"
 
 #include <boost/log/trivial.hpp>
-#include <mutex>
 #include <ncurses.h>
 
+#include <mutex>
+#include <unordered_map>
+#include <utility>
+
+namespace {
+std::unordered_map<mmask_t, std::pair<bane::mouse::Button, bane::mouse::ClickType>>
+    buttonMap{{BUTTON1_CLICKED,
+               {bane::mouse::Button::left, bane::mouse::ClickType::single}},
+              {BUTTON1_DOUBLE_CLICKED,
+               {bane::mouse::Button::left, bane::mouse::ClickType::double_}},
+              {BUTTON1_RELEASED,
+               {bane::mouse::Button::left, bane::mouse::ClickType::release}}};
+} // namespace
 
 bane::App::App(std::string name, std::unique_ptr<Theme> theme)
     : name_{std::move(name)}, theme_{std::move(theme)} {
@@ -71,21 +83,13 @@ void bane::App::run() {
 void bane::App::dispatchMouseEvent(int c) {
   MEVENT mort;
   getmouse(&mort);
-  switch (mort.bstate) {
-  case BUTTON1_CLICKED:
-    postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
-                          bane::mouse::ClickType::single);
-    break;
-  case BUTTON1_DOUBLE_CLICKED:
-    postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
-                          bane::mouse::ClickType::double_);
-    break;
-  case BUTTON1_RELEASED:
-    postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
-                          bane::mouse::ClickType::release);
-    break;
-  default:
-    BOOST_LOG_TRIVIAL(trace) << "Unknown mouse action " << c;
-    break;
-  };
+  auto eventSpecIter = buttonMap.find(mort.bstate);
+  if (eventSpecIter == buttonMap.end()) {
+    BOOST_LOG_TRIVIAL(trace) << "Unsupported mouse event " << c << " " << mort.bstate;
+  } else {
+    mouse::Button button;
+    mouse::ClickType clickType;
+    std::tie(button, clickType) = eventSpecIter->second;
+    postEvent<MouseEvent>(mort.x, mort.y, button, clickType);
+  }
 }
