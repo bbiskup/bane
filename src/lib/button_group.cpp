@@ -46,7 +46,7 @@ void bane::ButtonGroup::onAddChild(Widget& widget) {
           prevSib->requestFocus();
         }
       }
-    } else if (e.c == ' ') {
+    } else if (e.c == ' ' || e.c == '\n') {
       BOOST_LOG_TRIVIAL(trace) << "#### b: " << this;
       b->pick();
     }
