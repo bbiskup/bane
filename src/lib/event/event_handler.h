@@ -10,6 +10,7 @@ class DummyEvent;
 class ResizeEvent;
 class MouseEvent;
 class KeyEvent;
+class CustomEvent;
 
 
 /// Handler for application event.
@@ -23,6 +24,7 @@ public:
   void handle(const DummyEvent& e);
   void handle(const MouseEvent& e);
   void handle(const KeyEvent& e);
+  void handle(const CustomEvent& e);
   void handle(const Event& e);
 
 private:

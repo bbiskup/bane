@@ -4,6 +4,7 @@
 #include "event/resize_event.h"
 #include "event/mouse_event.h"
 #include "event/key_event.h"
+#include "event/custom_event.h"
 #include "widget.h"
 
 #include <boost/log/trivial.hpp>
@@ -49,6 +50,11 @@ void bane::EventHandler::handle(const KeyEvent& e) {
   } else {
     BOOST_LOG_TRIVIAL(trace) << "No widget at position " << e.x << ", " << e.y;
   }
+}
+
+void bane::EventHandler::handle(const CustomEvent& e) {
+  BOOST_LOG_TRIVIAL(trace) << "Handling custom event ";
+  e.code(app_);
 }
 
 /// Catch-all

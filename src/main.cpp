@@ -3,6 +3,7 @@
 #include "button_group.h"
 #include "checkbox.h"
 #include "event/dummy_event.h"
+#include "event/custom_event.h"
 #include "h_box_layout_mgr.h"
 #include "label.h"
 #include "logging.h"
@@ -42,9 +43,11 @@ int main() {
 
   bane::Label* label1{pane->addChild<bane::Label>("my_label_x")};
   label1->setText("new_label_text");
-  std::future<void> job = std::async(std::launch::async, [&app]() {
-    std::this_thread::sleep_for(1s);
-    app.postEvent<bane::DummyEvent>();
+  std::future<void> job = std::async(std::launch::async, [&label1, &app]() {
+    std::this_thread::sleep_for(2s);
+    // app.postEvent<bane::DummyEvent>();
+    app.postEvent<bane::CustomEvent>(
+        [&label1](bane::App&) { label1->setText("text_from_event"); });
   });
 
   //  pane->addChild<bane::Button>("my_button");
@@ -72,7 +75,7 @@ int main() {
   bg1->addChild<bane::RadioButton>("my_radio_button_2");
   // bg1->addChild<bane::CheckBox>("my_checkbox_3");
   pane->addChild<bane::Label>("my_label_x2");
-
+  bg1->children()[0].requestFocus();
 
   app.run();
 }
