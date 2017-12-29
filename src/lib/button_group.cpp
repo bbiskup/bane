@@ -21,13 +21,17 @@ bane::ButtonGroup::ButtonGroup(Widget* root, std::string label,
   };
 }
 
-void bane::ButtonGroup::checkChild(const Widget& widget) const {
+void bane::ButtonGroup::onAddChild(const Widget& widget)  {
   const Button* b = dynamic_cast<const Button*>(&widget);
   if (!b) {
     throw std::runtime_error{"ButtonGroup only supports buttons as children;"
                              " offending widget: " +
                              widget.id()};
   }
+
+  widget.doOnChange([](Widget* w) {
+    BOOST_LOG_TRIVIAL(trace) << "button " << w->id() << " changed";
+  });
 }
 
 int bane::ButtonGroup::preferredWidth() const noexcept {
@@ -39,5 +43,6 @@ int bane::ButtonGroup::preferredHeight() const noexcept {
 }
 
 void bane::ButtonGroup::doRender() {
-  BOOST_LOG_TRIVIAL(trace) << "ButtonGroup::doRender " << relX() << " " << relY();
+  BOOST_LOG_TRIVIAL(trace) << "ButtonGroup::doRender " << relX() << " "
+                           << relY();
 }

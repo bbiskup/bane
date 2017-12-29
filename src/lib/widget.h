@@ -63,7 +63,7 @@ public:
   template <typename WidgetT, typename... Args>
   WidgetT* addChild(Args&&... args) {
     Widget* newWidget = new WidgetT{root_, args...};
-    checkChild(*newWidget);
+    onAddChild(*newWidget);
     newWidget->parent_ = this;
     newWidget->app_ = app_;
     newWidget->termWindow_ = termWindow_;
@@ -75,15 +75,18 @@ public:
   // Signals & slots
   using OnClick = boost::signals2::signal<void(int x, int y)>;
   using OnClickSlotType = OnClick::slot_type;
-
-  boost::signals2::connection doOnClick(const OnClickSlotType& slot);
+  boost::signals2::connection doOnClick(const OnClickSlotType& slot) const;
   void click(int x, int y);
+
+  using OnChange = boost::signals2::signal<void(Widget*)>;
+  using OnChangeSlotType = OnChange::slot_type;
+  boost::signals2::connection doOnChange(const OnChangeSlotType& slot) const;
+  void change();
 
   using OnMouseRelease = boost::signals2::signal<void()>;
   using OnMouseReleaseSlotType = OnMouseRelease::slot_type;
-
   boost::signals2::connection
-  doOnMouseRelease(const OnMouseReleaseSlotType& slot);
+  doOnMouseRelease(const OnMouseReleaseSlotType& slot) const;
   void releaseMouse();
 
   boost::ptr_vector<Widget>& children() { return children_; }
@@ -98,7 +101,7 @@ protected:
   TermWindow* termWindow_{};
   virtual void doRender() {}
   void paintBackground();
-  virtual void checkChild(const Widget&) const {}
+  virtual void onAddChild(const Widget&) {}
 
 private:
   void createWindow();
@@ -118,8 +121,9 @@ private:
   std::unique_ptr<LayoutMgr> layoutMgr_;
   boost::ptr_vector<Widget> children_;
 
-  OnClick onClick_;
-  OnMouseRelease onMouseRelease_;
+  mutable OnClick onClick_;
+  mutable OnChange onChange_;
+  mutable OnMouseRelease onMouseRelease_;
 };
 
 } // namespace bane

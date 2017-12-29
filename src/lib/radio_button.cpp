@@ -13,6 +13,7 @@ bane::RadioButton::RadioButton(Widget* root, std::string label, bool isSelected)
     BOOST_LOG_TRIVIAL(trace) << "RadioButton: on mouse release";
     isSelected_ = !isSelected_;
     doRender();
+    change();
   });
 }
 

@@ -13,6 +13,7 @@ bane::CheckBox::CheckBox(Widget* root, std::string label, bool isChecked)
     BOOST_LOG_TRIVIAL(trace) << "CheckBox: on mouse release";
     isChecked_ = !isChecked_;
     doRender();
+    change();
   });
 }
 

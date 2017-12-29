@@ -133,16 +133,25 @@ size_t bane::Widget::numChildren() const noexcept { return children_.size(); }
 
 /// Handle click event
 boost::signals2::connection
-bane::Widget::doOnClick(const OnClickSlotType& slot) {
+bane::Widget::doOnClick(const OnClickSlotType& slot) const {
   return onClick_.connect(slot);
 }
 
 /// Dispatch click event
 void bane::Widget::click(int x, int y) { onClick_(x, y); }
 
+/// Handle change event
+boost::signals2::connection
+bane::Widget::doOnChange(const OnChangeSlotType& slot) const {
+  return onChange_.connect(slot);
+}
+
+/// Dispatch change event
+void bane::Widget::change() { onChange_(this); }
+
 /// Handle mouse release event
 boost::signals2::connection
-bane::Widget::doOnMouseRelease(const OnMouseReleaseSlotType& slot) {
+bane::Widget::doOnMouseRelease(const OnMouseReleaseSlotType& slot) const {
   return onMouseRelease_.connect(slot);
 }
 
