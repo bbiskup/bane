@@ -34,6 +34,18 @@ void bane::EventHandler::handle(const MouseEvent& e) {
   }
 }
 
+void bane::EventHandler::handle(const KeyEvent& e) {
+  BOOST_LOG_TRIVIAL(trace) << "Handling key event " << e.c;
+
+  Widget* widget = app_.termWindow().widgetAt(e.x, e.y);
+  if (widget) {
+    BOOST_LOG_TRIVIAL(trace) << "Widget: " << *widget;
+    widget->key(e);
+  } else {
+    BOOST_LOG_TRIVIAL(trace) << "No widget at position " << e.x << ", " << e.y;
+  }
+}
+
 /// Catch-all
 void bane::EventHandler::handle(const Event& e) {
   BOOST_LOG_TRIVIAL(trace) << "Unsupported event type " + e.name();

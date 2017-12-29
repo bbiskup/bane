@@ -19,6 +19,7 @@ public:
   void handle(const ResizeEvent& e);
   void handle(const DummyEvent& e);
   void handle(const MouseEvent& e);
+  void handle(const KeyEvent& e);
   void handle(const Event& e);
 
 private:

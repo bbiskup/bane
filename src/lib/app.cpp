@@ -11,7 +11,8 @@
 #include <utility>
 
 namespace {
-std::unordered_map<mmask_t, std::pair<bane::mouse::Button, bane::mouse::ClickType>>
+std::unordered_map<mmask_t,
+                   std::pair<bane::mouse::Button, bane::mouse::ClickType>>
     buttonMap{{BUTTON1_CLICKED,
                {bane::mouse::Button::left, bane::mouse::ClickType::single}},
               {BUTTON1_DOUBLE_CLICKED,
@@ -60,7 +61,7 @@ void bane::App::run() {
         postEvent<ResizeEvent>();
         break;
       default:
-        postEvent<KeyEvent>(c);
+        dispatchKeyEvent(c);
         break;
       }
     }
@@ -85,11 +86,20 @@ void bane::App::dispatchMouseEvent(int c) {
   getmouse(&mort);
   auto eventSpecIter = buttonMap.find(mort.bstate);
   if (eventSpecIter == buttonMap.end()) {
-    BOOST_LOG_TRIVIAL(trace) << "Unsupported mouse event " << c << " " << mort.bstate;
+    BOOST_LOG_TRIVIAL(trace)
+        << "Unsupported mouse event " << c << " " << mort.bstate;
   } else {
     mouse::Button button;
     mouse::ClickType clickType;
     std::tie(button, clickType) = eventSpecIter->second;
     postEvent<MouseEvent>(mort.x, mort.y, button, clickType);
   }
+}
+
+/// Create and post a mouse event, translating from ncurses
+/// \param c ncurses character
+void bane::App::dispatchKeyEvent(int c) {
+  int x, y;
+  getyx(stdscr, y, x);
+  postEvent<KeyEvent>(x, y, c);
 }

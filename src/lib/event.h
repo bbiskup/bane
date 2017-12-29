@@ -51,24 +51,33 @@ struct EnumClassHash {
   }
 };
 
-class MouseEvent : public Event {
+class PositionEvent : public Event {
+public:
+  PositionEvent(int x_, int y_) : x{x_}, y{y_} {}
+  const int x;
+  const int y;
+};
+
+class MouseEvent : public PositionEvent {
 public:
   MouseEvent(int x, int y, mouse::Button button, mouse::ClickType clickType);
   ~MouseEvent() override = default;
   void accept(EventHandler& handler) const override;
 
-  const int x;
-  const int y;
   const mouse::Button button;
   const mouse::ClickType clickType;
 };
 
-class KeyEvent : public Event {
+enum class SpecialKey { arrowUp, arrowRight, arrowDown, arrowLeft, tab };
+
+class KeyEvent : public PositionEvent {
 public:
-  KeyEvent(int c);
+  KeyEvent(int x, int y, int c);
+  ~KeyEvent() override = default;
   void accept(EventHandler& handler) const override;
 
   const int c; // ncurses character
+  boost::optional<SpecialKey> specialKey;
 };
 
 } // namespace bane

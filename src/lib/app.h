@@ -37,6 +37,7 @@ public:
 
 private:
   void dispatchMouseEvent(int c);
+  void dispatchKeyEvent(int c);
 
   TermWindow termWindow_;
   std::string name_;

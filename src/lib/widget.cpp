@@ -137,8 +137,17 @@ bane::Widget::doOnMouse(const OnMouseSlotType& slot) const {
   return onMouse_.connect(slot);
 }
 
-/// Dispatch click event
+/// Dispatch mouse event
 void bane::Widget::mouse(const MouseEvent& mouseEvent) { onMouse_(mouseEvent); }
+
+/// Handle key event
+boost::signals2::connection
+bane::Widget::doOnKey(const OnKeySlotType& slot) const {
+  return onKey_.connect(slot);
+}
+
+/// Dispatch key event
+void bane::Widget::key(const KeyEvent& keyEvent) { onKey_(keyEvent); }
 
 /// Handle change event
 boost::signals2::connection

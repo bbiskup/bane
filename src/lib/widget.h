@@ -20,6 +20,7 @@ struct CharPoint {
 class App;
 class TermWindow;
 class MouseEvent;
+class KeyEvent;
 
 class Widget {
 public:
@@ -79,6 +80,11 @@ public:
   boost::signals2::connection doOnMouse(const OnMouseSlotType& slot) const;
   void mouse(const MouseEvent& e);
 
+  using OnKey = boost::signals2::signal<void(const KeyEvent& keyEvent)>;
+  using OnKeySlotType = OnKey::slot_type;
+  boost::signals2::connection doOnKey(const OnKeySlotType& slot) const;
+  void key(const KeyEvent& e);
+
   using OnChange = boost::signals2::signal<void(Widget*)>;
   using OnChangeSlotType = OnChange::slot_type;
   boost::signals2::connection doOnChange(const OnChangeSlotType& slot) const;
@@ -117,6 +123,7 @@ private:
   boost::ptr_vector<Widget> children_;
 
   mutable OnMouse onMouse_;
+  mutable OnKey onKey_;
   mutable OnChange onChange_;
 };
 
