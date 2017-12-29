@@ -11,6 +11,9 @@ class PushButton : public Widget {
 public:
   PushButton(Widget* root, std::string label);
 
+  bool acceptsFocus() const override { return true; }
+  bool showCursorWhenFocus() const override { return false; }
+
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;
 
