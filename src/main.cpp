@@ -1,5 +1,6 @@
 
 #include "app.h"
+#include "event/dummy_event.h"
 #include "button/button.h"
 #include "button_group.h"
 #include "checkbox.h"

@@ -6,7 +6,10 @@
 namespace bane {
 
 class Event;
+class DummyEvent;
 class ResizeEvent;
+class MouseEvent;
+class KeyEvent;
 
 
 /// Handler for application event.

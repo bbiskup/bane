@@ -1,6 +1,6 @@
 #include "button.h"
 #include "app.h"
-#include "event.h"
+#include "event/mouse_event.h"
 #include <boost/log/trivial.hpp>
 
 bane::Button::Button(Widget* root, std::string label)

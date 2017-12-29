@@ -1,5 +1,9 @@
 #include "event_handler.h"
-#include "event.h"
+#include "event/event.h"
+#include "event/dummy_event.h"
+#include "event/resize_event.h"
+#include "event/mouse_event.h"
+#include "event/key_event.h"
 #include "widget.h"
 
 #include <boost/log/trivial.hpp>

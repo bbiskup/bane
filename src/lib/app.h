@@ -1,7 +1,7 @@
 #ifndef APP_H
 #define APP_H
 
-#include "event.h"
+#include "event/event.h"
 #include "pane.h"
 #include "term_window.h"
 #include "theme.h"

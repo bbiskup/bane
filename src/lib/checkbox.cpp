@@ -1,5 +1,5 @@
 #include "checkbox.h"
-#include "event.h"
+#include "event/mouse_event.h"
 
 #include <boost/log/trivial.hpp>
 
