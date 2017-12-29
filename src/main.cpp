@@ -1,7 +1,7 @@
 
 #include "app.h"
 #include "event/dummy_event.h"
-#include "button/button.h"
+#include "push_button.h"
 #include "button_group.h"
 #include "checkbox.h"
 #include "h_box_layout_mgr.h"
@@ -63,6 +63,7 @@ int main() {
   paneH->addChild<bane::Button>("yet_another_button");
   */
 
+  pane->addChild<bane::PushButton>("my_button");
   bane::ButtonGroup* bg1{pane->addChild<bane::ButtonGroup>(
       "button_group_1", bane::Orientation::vertical)};
   bg1->addChild<bane::CheckBox>("my_checkbox_1");

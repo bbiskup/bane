@@ -1,12 +1,12 @@
-#include "button.h"
+#include "push_button.h"
 #include "app.h"
 #include "event/mouse_event.h"
 #include <boost/log/trivial.hpp>
 
-bane::Button::Button(Widget* root, std::string label)
+bane::PushButton::PushButton(Widget* root, std::string label)
     : Widget{root}, label_{std::move(label)} {
   doOnMouse([this](const MouseEvent& e) {
-    BOOST_LOG_TRIVIAL(trace) << "Button: on mouse";
+    BOOST_LOG_TRIVIAL(trace) << "PushButton: on mouse";
     if (e.button == mouse::Button::left) {
       switch (e.clickType) {
       case bane::mouse::ClickType::single:
@@ -26,14 +26,14 @@ bane::Button::Button(Widget* root, std::string label)
   });
 }
 
-int bane::Button::preferredWidth() const noexcept {
-  BOOST_LOG_TRIVIAL(trace) << "Button::preferredWidth " << label_.size();
+int bane::PushButton::preferredWidth() const noexcept {
+  BOOST_LOG_TRIVIAL(trace) << "PushButton::preferredWidth " << label_.size();
   return static_cast<int>(label_.size());
 }
-int bane::Button::preferredHeight() const noexcept { return 1; }
+int bane::PushButton::preferredHeight() const noexcept { return 1; }
 
-void bane::Button::doRender() {
-  BOOST_LOG_TRIVIAL(trace) << "Button::doRender " << relX() << " " << relY();
+void bane::PushButton::doRender() {
+  BOOST_LOG_TRIVIAL(trace) << "PushButton::doRender " << relX() << " " << relY();
   CharPoint orig{origin()};
   if (isPressed_) {
     attrset(app_->theme().engaged().nCursesColorPair());

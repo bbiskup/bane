@@ -1,5 +1,5 @@
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef PUSH_BUTTON_H
+#define PUSH_BUTTON_H
 
 #include "widget.h"
 
@@ -7,16 +7,14 @@
 #include <string>
 
 namespace bane {
-class Button : public Widget {
+class PushButton : public Widget {
 public:
-  Button(Widget* root, std::string label);
+  PushButton(Widget* root, std::string label);
 
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;
 
   void doRender() override;
-
-
 
 private:
   std::string label_;
@@ -24,4 +22,4 @@ private:
 };
 } // namespace bane
 
-#endif /* BUTTON_H */
+#endif /* PUSH_BUTTON_H */
