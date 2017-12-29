@@ -70,6 +70,8 @@ int bane::Widget::maxPreferredChildHeight() const noexcept {
                          [](const Widget& w) { return w.preferredHeight(); });
 }
 
+bool bane::Widget::hasFocus() const { return app_->focusWidget() == this; }
+
 void bane::Widget::resize(int width, int height) {
   width_ = width;
   height_ = height;
@@ -83,7 +85,7 @@ void bane::Widget::resizeToPreferred() {
 }
 
 /// Move widget to new position on screen
-void bane::Widget::move(int x, int y) {
+void bane::Widget::moveTo(int x, int y) {
   x_ = x;
   y_ = y;
 }
@@ -95,6 +97,16 @@ void bane::Widget::render() {
   doRender();
   for (auto& child : children_) {
     child.render();
+  }
+  BOOST_LOG_TRIVIAL(trace) << "#### accepts? " << acceptsFocus() << ", has? "
+                           << hasFocus() << ", " << this->id();
+
+  Widget* focusWidget{app_->focusWidget()};
+  if (focusWidget) {
+    BOOST_LOG_TRIVIAL(trace) << "#### applying focus to " << focusWidget->id();
+    termWindow_->showCursor(focusWidget->showCursorWhenFocus());
+    focusWidget->onFocus();
+    //  refresh();
   }
 }
 
@@ -157,7 +169,6 @@ bane::Widget::doOnChange(const OnChangeSlotType& slot) const {
 
 /// Dispatch change event
 void bane::Widget::change() { onChange_(this); }
-
 
 std::ostream& bane::operator<<(std::ostream& strm, const Widget& w) {
   return strm << w.id();

@@ -8,7 +8,7 @@ void bane::VBoxLayoutMgr::layout() {
   int yOffset{0};
   for (Widget& child : parent_.children()) {
     child.resizeToPreferred();
-    child.move(0, yOffset);
+    child.moveTo(0, yOffset);
     BOOST_LOG_TRIVIAL(trace)
         << "VBoxLayoutMgr::layout " << parent_.id() << " -- " << child.id() << " "
         << child.relX()  << ", " << child.relY();

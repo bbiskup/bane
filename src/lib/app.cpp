@@ -34,6 +34,14 @@ void bane::App::handleResize() {
   rootPane.render();
 }
 
+void bane::App::requestFocus(Widget* widget) {
+  if (!widget->acceptsFocus()) {
+    return;
+  }
+  BOOST_LOG_TRIVIAL(trace)  << " requesting focus for " << widget->id();
+  focusWidget_ = widget;
+}
+
 /// Run application - start processing events, until explicit termination
 void bane::App::run() {
   EventHandler eventHandler(*this);
@@ -69,4 +77,3 @@ void bane::App::run() {
     }
   }
 }
-

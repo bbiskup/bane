@@ -9,6 +9,8 @@ class Button : public Widget {
 public:
   using Widget::Widget;
 
+  bool acceptsFocus() const override { return true; }
+  bool showCursorWhenFocus() const override { return true; }
   void onFocus() override;
   void onBlur() override;
 };

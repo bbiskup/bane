@@ -30,10 +30,13 @@ public:
   void render();
   void handleResize();
 
+  void requestFocus(Widget* widget);
+
   TermWindow& termWindow() { return termWindow_; }
   const Theme& theme() const { return *theme_; }
 
   Pane rootPane{};
+  Widget* focusWidget() const{return focusWidget_;}
 
 private:
   TermWindow termWindow_;
@@ -41,6 +44,7 @@ private:
   std::unique_ptr<Theme> theme_;
   std::queue<std::unique_ptr<Event>> queue_;
   std::mutex queueMutex_;
+  Widget* focusWidget_{nullptr};
 };
 } // namespace bane
 

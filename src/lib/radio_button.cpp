@@ -15,7 +15,7 @@ bane::RadioButton::RadioButton(Widget* root, std::string label, bool isSelected)
     if (e.clickType == mouse::ClickType::single ||
         e.clickType == mouse::ClickType::release) {
       isSelected_ = true;
-      doRender();
+      render();
       change();
     }
   });
@@ -39,6 +39,6 @@ void bane::RadioButton::doRender() {
 void bane::RadioButton::setSelected(bool isSelected) {
   if (isSelected_ != isSelected) {
     isSelected_ = isSelected;
-    doRender();
+    render();
   }
 }

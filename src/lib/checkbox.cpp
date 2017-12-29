@@ -15,7 +15,7 @@ bane::CheckBox::CheckBox(Widget* root, std::string label, bool isChecked)
 
     if (e.clickType == mouse::ClickType::single || e.clickType == mouse::ClickType::release) {
       isChecked_ = !isChecked_;
-      doRender();
+      render();
       change();
     }
   });

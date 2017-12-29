@@ -46,12 +46,15 @@ public:
   int maxPreferredChildWidth() const noexcept;
   int maxPreferredChildHeight() const noexcept;
 
+  virtual bool acceptsFocus() const { return false; }
+  virtual bool showCursorWhenFocus() const { return false; }
   virtual void onFocus() {}
   virtual void onBlur() {}
+  bool hasFocus() const;
 
   void resize(int width, int height);
   void resizeToPreferred();
-  void move(int x, int y);
+  void moveTo(int x, int y);
   void render();
   Widget* root() { return root_ ? root_ : this; }
   CharPoint origin() const;

@@ -69,11 +69,10 @@ int main() {
   bg1->addChild<bane::CheckBox>("my_checkbox_1");
   bg1->addChild<bane::CheckBox>("my_checkbox_2");
   bg1->addChild<bane::RadioButton>("my_radio_button_1");
-  bane::RadioButton* rbx{bg1->addChild<bane::RadioButton>("my_radio_button_2")};
+  bg1->addChild<bane::RadioButton>("my_radio_button_2");
   // bg1->addChild<bane::CheckBox>("my_checkbox_3");
   pane->addChild<bane::Label>("my_label_x2");
 
-  rbx->onFocus();
 
   app.run();
 }
