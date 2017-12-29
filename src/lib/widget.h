@@ -51,6 +51,7 @@ public:
   virtual void onFocus() {}
   virtual void onBlur() {}
   bool hasFocus() const;
+  void requestFocus();
 
   void resize(int width, int height);
   void resizeToPreferred();
@@ -58,7 +59,7 @@ public:
   void render();
   Widget* root() { return root_ ? root_ : this; }
   CharPoint origin() const;
-  void setApp(const App& app);
+  void setApp(App& app);
   void setTermWindow(TermWindow& termWindow);
 
   template <class LayoutMgrT> void setLayoutMgr() {
@@ -99,16 +100,21 @@ public:
   boost::ptr_vector<Widget>& children() { return children_; }
   size_t numChildren() const noexcept;
 
+  Widget* nextSibling();
+  Widget* previousSibling();
+
+  bool operator==(const Widget& rhs) const { return id() == rhs.id(); }
+
   friend std::ostream& operator<<(std::ostream& strm, const Widget& w);
   friend class LayoutMgr;
 
 protected:
   Widget* root_{};
-  const App* app_{};
+  App* app_{};
   TermWindow* termWindow_{};
   virtual void doRender() {}
   void paintBackground();
-  virtual void onAddChild(const Widget&) {}
+  virtual void onAddChild(Widget&) {}
 
 private:
   void createWindow();

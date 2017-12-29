@@ -72,6 +72,8 @@ int bane::Widget::maxPreferredChildHeight() const noexcept {
 
 bool bane::Widget::hasFocus() const { return app_->focusWidget() == this; }
 
+void bane::Widget::requestFocus() { app_->requestFocus(this); }
+
 void bane::Widget::resize(int width, int height) {
   width_ = width;
   height_ = height;
@@ -122,7 +124,7 @@ void bane::Widget::setTermWindow(TermWindow& termWindow) {
   termWindow_ = &termWindow;
 }
 
-void bane::Widget::setApp(const App& app) { app_ = &app; }
+void bane::Widget::setApp(App& app) { app_ = &app; }
 
 /// Draw background color
 void bane::Widget::paintBackground() {
@@ -142,6 +144,19 @@ void bane::Widget::paintBackground() {
 
 /// \return number of children
 size_t bane::Widget::numChildren() const noexcept { return children_.size(); }
+
+/// \return next sibling, or nullptr if this Widget is last child of parent
+bane::Widget* bane::Widget::nextSibling() {
+  if (!parent_) {
+    return nullptr;
+  }
+  auto thisIter =
+      std::find(parent_->children_.begin(), parent_->children_.end(), *this);
+  ++thisIter;
+  return thisIter != parent_->children_.end() ? &*thisIter : nullptr;
+}
+
+bane::Widget* bane::Widget::previousSibling() { return nullptr; }
 
 /// Handle mouse event
 boost::signals2::connection

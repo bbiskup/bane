@@ -1,5 +1,7 @@
 #include "button_group.h"
+#include "app.h"
 #include "button.h"
+#include "event/key_event.h"
 #include "h_box_layout_mgr.h"
 #include "radio_button.h"
 #include "v_box_layout_mgr.h"
@@ -22,13 +24,30 @@ bane::ButtonGroup::ButtonGroup(Widget* root, std::string label,
   };
 }
 
-void bane::ButtonGroup::onAddChild(const Widget& widget) {
+void bane::ButtonGroup::onAddChild(Widget& widget) {
   const Button* b = dynamic_cast<const Button*>(&widget);
   if (!b) {
     throw std::runtime_error{"ButtonGroup only supports buttons as children;"
                              " offending widget: " +
                              widget.id()};
   }
+
+  widget.doOnKey([this, &widget](const KeyEvent& e) {
+    BOOST_LOG_TRIVIAL(trace) << "@@@@@@@" << std::endl;
+    if (e.specialKey) {
+      BOOST_LOG_TRIVIAL(trace) << "@@@@@@@ special" << std::endl;
+      if (*e.specialKey == SpecialKey::arrowDown) {
+        BOOST_LOG_TRIVIAL(trace) << "@@@@@@@ down" << std::endl;
+        Widget* nextSib = widget.nextSibling();
+        if (nextSib) {
+          BOOST_LOG_TRIVIAL(trace)
+              << "@@@@@@@ next sib" << nextSib->id() << std::endl;
+          nextSib->requestFocus();
+        }
+      }
+      render();
+    }
+  });
 
   widget.doOnChange([this](Widget* w) {
     BOOST_LOG_TRIVIAL(trace) << "button " << w->id() << " changed";

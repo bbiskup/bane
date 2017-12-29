@@ -16,7 +16,7 @@ public:
   void doRender() override;
 
 protected:
-  void onAddChild(const Widget& widget) override;
+  void onAddChild(Widget& widget) override;
 
 private:
   std::string label_;
