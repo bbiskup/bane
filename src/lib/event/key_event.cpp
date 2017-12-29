@@ -15,7 +15,8 @@ std::unordered_map<int, bane::SpecialKey> specialKeyMap{
 };
 }
 
-bane::KeyEvent::KeyEvent(int x, int y, int c_) : PositionEvent{x, y}, c{c_} {
+bane::KeyEvent::KeyEvent(int c_) : c{c_} {
+  getyx(stdscr, y, x);
   auto specialKeyIt = specialKeyMap.find(c);
   if (specialKeyIt != specialKeyMap.end()) {
     specialKey = specialKeyIt->second;

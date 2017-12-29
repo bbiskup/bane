@@ -9,9 +9,8 @@ class EventHandler;
 
 class PositionEvent : public Event {
 public:
-  PositionEvent(int x_, int y_) : x{x_}, y{y_} {}
-  int x;
-  int y;
+  int x{-1};
+  int y{-1};
 };
 
 } // namespace bane

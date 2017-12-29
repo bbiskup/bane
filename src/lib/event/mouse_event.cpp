@@ -1,8 +1,8 @@
 #include "event/mouse_event.h"
 #include "event/event_handler.h"
 
-#include <ncurses.h>
 #include <boost/log/trivial.hpp>
+#include <ncurses.h>
 #include <unordered_map>
 
 namespace {
@@ -17,7 +17,7 @@ std::unordered_map<mmask_t,
 } // namespace
 
 /// \param c ncurses character
-bane::MouseEvent::MouseEvent(int c) : PositionEvent{-1, -1} {
+bane::MouseEvent::MouseEvent(int c) {
   MEVENT mort;
   getmouse(&mort);
   x = mort.x;

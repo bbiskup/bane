@@ -36,9 +36,6 @@ public:
   Pane rootPane{};
 
 private:
-  void dispatchMouseEvent(int c);
-  void dispatchKeyEvent(int c);
-
   TermWindow termWindow_;
   std::string name_;
   std::unique_ptr<Theme> theme_;

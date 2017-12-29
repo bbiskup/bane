@@ -13,7 +13,7 @@ enum class SpecialKey { arrowUp, arrowRight, arrowDown, arrowLeft, tab };
 
 class KeyEvent : public PositionEvent {
 public:
-  KeyEvent(int x, int y, int c);
+  KeyEvent(int c);
   ~KeyEvent() override = default;
   void accept(EventHandler& handler) const override;
 

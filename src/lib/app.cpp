@@ -44,7 +44,7 @@ void bane::App::run() {
     // non-blocking read returns -1
 
     if (c == KEY_MOUSE) {
-      dispatchMouseEvent(c);
+      postEvent<MouseEvent>(c);
     } else if (c != -1) {
 
       switch (c) {
@@ -52,7 +52,7 @@ void bane::App::run() {
         postEvent<ResizeEvent>();
         break;
       default:
-        dispatchKeyEvent(c);
+        postEvent<KeyEvent>(c);
         break;
       }
     }
@@ -70,16 +70,3 @@ void bane::App::run() {
   }
 }
 
-/// Create and post a mouse event, translating from ncurses
-/// \param c ncurses character
-void bane::App::dispatchMouseEvent(int c) {
-  postEvent<MouseEvent>(c);
-}
-
-/// Create and post a mouse event, translating from ncurses
-/// \param c ncurses character
-void bane::App::dispatchKeyEvent(int c) {
-  int x, y;
-  getyx(stdscr, y, x);
-  postEvent<KeyEvent>(x, y, c);
-}
