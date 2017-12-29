@@ -2,9 +2,9 @@
 #define APP_H
 
 #include "event.h"
-#include "theme.h"
 #include "pane.h"
 #include "term_window.h"
+#include "theme.h"
 #include <mutex>
 #include <queue>
 #include <string>
@@ -31,11 +31,13 @@ public:
   void handleResize();
 
   TermWindow& termWindow() { return termWindow_; }
-  const Theme& theme() const{return *theme_;}
+  const Theme& theme() const { return *theme_; }
 
   Pane rootPane{};
 
 private:
+  void dispatchMouseEvent(int c);
+
   TermWindow termWindow_;
   std::string name_;
   std::unique_ptr<Theme> theme_;

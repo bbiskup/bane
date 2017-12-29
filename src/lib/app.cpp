@@ -7,6 +7,7 @@
 #include <mutex>
 #include <ncurses.h>
 
+
 bane::App::App(std::string name, std::unique_ptr<Theme> theme)
     : name_{std::move(name)}, theme_{std::move(theme)} {
   rootPane.setApp(*this);
@@ -34,30 +35,12 @@ void bane::App::run() {
   EventHandler eventHandler(*this);
   BOOST_LOG_TRIVIAL(trace) << "App::run";
   render();
-  MEVENT mort;
   while (true) {
     int c = getch();
     // non-blocking read returns -1
 
     if (c == KEY_MOUSE) {
-      getmouse(&mort);
-      switch (mort.bstate) {
-      case BUTTON1_CLICKED:
-        postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
-                              bane::mouse::ClickType::single);
-        break;
-      case BUTTON1_DOUBLE_CLICKED:
-        postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
-                              bane::mouse::ClickType::double_);
-        break;
-      case BUTTON1_RELEASED:
-        postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
-                              bane::mouse::ClickType::release);
-        break;
-      default:
-        BOOST_LOG_TRIVIAL(trace) << "Unknown mouse action " << c;
-        break;
-      };
+      dispatchMouseEvent(c);
     } else if (c != -1) {
 
       switch (c) {
@@ -81,4 +64,28 @@ void bane::App::run() {
       }
     }
   }
+}
+
+/// Create and post a mouse event, translating from ncurses
+/// \param c ncurses character
+void bane::App::dispatchMouseEvent(int c) {
+  MEVENT mort;
+  getmouse(&mort);
+  switch (mort.bstate) {
+  case BUTTON1_CLICKED:
+    postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
+                          bane::mouse::ClickType::single);
+    break;
+  case BUTTON1_DOUBLE_CLICKED:
+    postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
+                          bane::mouse::ClickType::double_);
+    break;
+  case BUTTON1_RELEASED:
+    postEvent<MouseEvent>(mort.x, mort.y, bane::mouse::Button::left,
+                          bane::mouse::ClickType::release);
+    break;
+  default:
+    BOOST_LOG_TRIVIAL(trace) << "Unknown mouse action " << c;
+    break;
+  };
 }
