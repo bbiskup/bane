@@ -13,7 +13,7 @@ bane::TermWindow::TermWindow() {
   clear();
   noecho();
   timeout(nCursesTimeOut);
-  curs_set(0); // no blinking cursor
+  showCursor(false);
   // init_pair(1, COLOR_BLUE, COLOR_WHITE);
 
   setUpMouse();
@@ -72,3 +72,7 @@ void bane::TermWindow::updateSize() {
 }
 
 void bane::TermWindow::waitForKey() const { getch(); }
+
+void bane::TermWindow::showCursor(bool show){
+  curs_set(show); 
+}
