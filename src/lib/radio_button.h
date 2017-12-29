@@ -11,6 +11,8 @@ public:
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;
 
+  void pick() override;
+
   void doRender() override;
 
 private:

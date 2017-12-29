@@ -8,6 +8,8 @@ class CheckBox : public StatefulButton {
 public:
   CheckBox(Widget* root, std::string label, bool isChecked = false);
 
+  void pick() override;
+
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;
 

@@ -12,6 +12,7 @@ public:
 
   void toggleState();
   void setState(bool state=true);
+  virtual void pick() = 0;
 
   bool acceptsFocus() const override { return true; }
   bool showCursorWhenFocus() const override { return true; }

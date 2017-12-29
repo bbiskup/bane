@@ -13,12 +13,18 @@ bane::CheckBox::CheckBox(Widget* root, std::string label, bool isChecked)
   doOnMouse([this](const MouseEvent& e) {
     BOOST_LOG_TRIVIAL(trace) << "CheckBox: on mouse";
 
-    if (e.clickType == mouse::ClickType::single || e.clickType == mouse::ClickType::release) {
-      toggleState();
-      render();
-      change();
+    if (e.clickType == mouse::ClickType::single ||
+        e.clickType == mouse::ClickType::release) {
+      pick();
     }
   });
+}
+
+/// Activate and refresh UI
+void bane::CheckBox::pick() {
+  toggleState();
+  render();
+  change();
 }
 
 int bane::CheckBox::preferredWidth() const noexcept {

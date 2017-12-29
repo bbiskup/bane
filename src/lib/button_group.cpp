@@ -1,9 +1,9 @@
 #include "button_group.h"
 #include "app.h"
-#include "stateful_button.h"
 #include "event/key_event.h"
 #include "h_box_layout_mgr.h"
 #include "radio_button.h"
+#include "stateful_button.h"
 #include "v_box_layout_mgr.h"
 
 #include <boost/log/trivial.hpp>
@@ -25,28 +25,32 @@ bane::ButtonGroup::ButtonGroup(Widget* root, std::string label,
 }
 
 void bane::ButtonGroup::onAddChild(Widget& widget) {
-  const StatefulButton* b = dynamic_cast<const StatefulButton*>(&widget);
+  StatefulButton* b = dynamic_cast<StatefulButton*>(&widget);
   if (!b) {
     throw std::runtime_error{"ButtonGroup only supports buttons as children;"
                              " offending widget: " +
                              widget.id()};
   }
 
-  widget.doOnKey([this, &widget](const KeyEvent& e) {
+  widget.doOnKey([this, b](const KeyEvent& e) {
+    BOOST_LOG_TRIVIAL(trace) << "### doOnKey";
     if (e.specialKey) {
       if (*e.specialKey == SpecialKey::arrowDown) {
-        Widget* nextSib = widget.nextSibling();
+        Widget* nextSib = b->nextSibling();
         if (nextSib) {
           nextSib->requestFocus();
         }
       } else if (*e.specialKey == SpecialKey::arrowUp) {
-        Widget* prevSib = widget.previousSibling();
+        Widget* prevSib = b->previousSibling();
         if (prevSib) {
           prevSib->requestFocus();
         }
       }
-      render();
+    } else if (e.c == ' ') {
+      BOOST_LOG_TRIVIAL(trace) << "#### b: " << this;
+      b->pick();
     }
+    render();
   });
 
   widget.doOnChange([this](Widget* w) {
@@ -63,6 +67,7 @@ void bane::ButtonGroup::onAddChild(Widget& widget) {
         }
       }
     }
+    render();
   });
 }
 

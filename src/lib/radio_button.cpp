@@ -14,11 +14,21 @@ bane::RadioButton::RadioButton(Widget* root, std::string label, bool isSelected)
     BOOST_LOG_TRIVIAL(trace) << "RadioButton: on mouse";
     if (e.clickType == mouse::ClickType::single ||
         e.clickType == mouse::ClickType::release) {
-      setState();
-      render();
-      change();
+      pick();
     }
   });
+}
+
+/// Activate and refresh UI
+void bane::RadioButton::pick() {
+  BOOST_LOG_TRIVIAL(trace) << "#### pick " << this;
+  BOOST_LOG_TRIVIAL(trace) << "@1";
+  setState();
+    BOOST_LOG_TRIVIAL(trace) << "@2";
+    render();
+    BOOST_LOG_TRIVIAL(trace) << "@3";
+    change();
+    BOOST_LOG_TRIVIAL(trace) << "@4";
 }
 
 int bane::RadioButton::preferredWidth() const noexcept {
@@ -35,4 +45,3 @@ void bane::RadioButton::doRender() {
   mvaddstr(orig.y, orig.x + 3, " ");
   mvaddstr(orig.y, orig.x + 4, label_.c_str());
 }
-

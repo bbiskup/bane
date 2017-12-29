@@ -22,6 +22,7 @@ bane::MouseEvent::MouseEvent(int c) {
   getmouse(&mort);
   x = mort.x;
   y = mort.y;
+  BOOST_LOG_TRIVIAL(trace) << "MouseEvent: " << x << ", " << y;
   auto eventSpecIter = buttonMap.find(mort.bstate);
   if (eventSpecIter == buttonMap.end()) {
     BOOST_LOG_TRIVIAL(trace)

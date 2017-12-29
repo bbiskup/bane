@@ -17,6 +17,7 @@ std::unordered_map<int, bane::SpecialKey> specialKeyMap{
 
 bane::KeyEvent::KeyEvent(int c_) : c{c_} {
   getyx(stdscr, y, x);
+  BOOST_LOG_TRIVIAL(trace) << "KeyEvent: " << x << ", " << y;
   auto specialKeyIt = specialKeyMap.find(c);
   if (specialKeyIt != specialKeyMap.end()) {
     specialKey = specialKeyIt->second;
