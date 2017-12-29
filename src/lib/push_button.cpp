@@ -19,7 +19,7 @@ bane::PushButton::PushButton(Widget* root, std::string label)
         break;
       case bane::mouse::ClickType::double_:
         break;
-        case bane::mouse::ClickType::notImplemented:
+      case bane::mouse::ClickType::notImplemented:
         break;
       };
     }
@@ -33,7 +33,8 @@ int bane::PushButton::preferredWidth() const noexcept {
 int bane::PushButton::preferredHeight() const noexcept { return 1; }
 
 void bane::PushButton::doRender() {
-  BOOST_LOG_TRIVIAL(trace) << "PushButton::doRender " << relX() << " " << relY();
+  BOOST_LOG_TRIVIAL(trace) << "PushButton::doRender " << relX() << " "
+                           << relY();
   CharPoint orig{origin()};
   if (isPressed_) {
     attrset(app_->theme().engaged().nCursesColorPair());
@@ -41,4 +42,5 @@ void bane::PushButton::doRender() {
     attrset(app_->theme().active().nCursesColorPair());
   }
   mvaddstr(orig.y, orig.x, label_.c_str());
+  attrset(app_->theme().normal().nCursesColorPair());
 }
