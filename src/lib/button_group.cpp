@@ -33,16 +33,16 @@ void bane::ButtonGroup::onAddChild(Widget& widget) {
   }
 
   widget.doOnKey([this, &widget](const KeyEvent& e) {
-    BOOST_LOG_TRIVIAL(trace) << "@@@@@@@" << std::endl;
     if (e.specialKey) {
-      BOOST_LOG_TRIVIAL(trace) << "@@@@@@@ special" << std::endl;
       if (*e.specialKey == SpecialKey::arrowDown) {
-        BOOST_LOG_TRIVIAL(trace) << "@@@@@@@ down" << std::endl;
         Widget* nextSib = widget.nextSibling();
         if (nextSib) {
-          BOOST_LOG_TRIVIAL(trace)
-              << "@@@@@@@ next sib" << nextSib->id() << std::endl;
           nextSib->requestFocus();
+        }
+      } else if (*e.specialKey == SpecialKey::arrowUp) {
+        Widget* prevSib = widget.previousSibling();
+        if (prevSib) {
+          prevSib->requestFocus();
         }
       }
       render();

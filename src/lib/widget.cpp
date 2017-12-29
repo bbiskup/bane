@@ -100,12 +100,9 @@ void bane::Widget::render() {
   for (auto& child : children_) {
     child.render();
   }
-  BOOST_LOG_TRIVIAL(trace) << "#### accepts? " << acceptsFocus() << ", has? "
-                           << hasFocus() << ", " << this->id();
 
   Widget* focusWidget{app_->focusWidget()};
   if (focusWidget) {
-    BOOST_LOG_TRIVIAL(trace) << "#### applying focus to " << focusWidget->id();
     termWindow_->showCursor(focusWidget->showCursorWhenFocus());
     focusWidget->onFocus();
     //  refresh();
@@ -156,7 +153,15 @@ bane::Widget* bane::Widget::nextSibling() {
   return thisIter != parent_->children_.end() ? &*thisIter : nullptr;
 }
 
-bane::Widget* bane::Widget::previousSibling() { return nullptr; }
+bane::Widget* bane::Widget::previousSibling() {
+  if (!parent_) {
+    return nullptr;
+  }
+  auto thisIter =
+      std::find(parent_->children_.begin(), parent_->children_.end(), *this);
+  --thisIter;
+  return thisIter != parent_->children_.end() ? &*thisIter : nullptr;
+}
 
 /// Handle mouse event
 boost::signals2::connection
