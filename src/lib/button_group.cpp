@@ -33,7 +33,6 @@ void bane::ButtonGroup::onAddChild(Widget& widget) {
   }
 
   widget.doOnKey([this, b](const KeyEvent& e) {
-    BOOST_LOG_TRIVIAL(trace) << "### doOnKey";
     if (e.specialKey) {
       if (*e.specialKey == SpecialKey::arrowDown) {
         Widget* nextSib = b->nextSibling();
@@ -47,7 +46,6 @@ void bane::ButtonGroup::onAddChild(Widget& widget) {
         }
       }
     } else if (e.c == ' ' || e.c == '\n') {
-      BOOST_LOG_TRIVIAL(trace) << "#### b: " << this;
       b->pick();
     }
     render();

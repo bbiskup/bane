@@ -21,14 +21,9 @@ bane::RadioButton::RadioButton(Widget* root, std::string label, bool isSelected)
 
 /// Activate and refresh UI
 void bane::RadioButton::pick() {
-  BOOST_LOG_TRIVIAL(trace) << "#### pick " << this;
-  BOOST_LOG_TRIVIAL(trace) << "@1";
   setState();
-    BOOST_LOG_TRIVIAL(trace) << "@2";
-    render();
-    BOOST_LOG_TRIVIAL(trace) << "@3";
-    change();
-    BOOST_LOG_TRIVIAL(trace) << "@4";
+  render();
+  change();
 }
 
 int bane::RadioButton::preferredWidth() const noexcept {
