@@ -19,6 +19,7 @@ struct CharPoint {
 
 class App;
 class TermWindow;
+class MouseEvent;
 
 class Widget {
 public:
@@ -73,21 +74,15 @@ public:
   }
 
   // Signals & slots
-  using OnClick = boost::signals2::signal<void(int x, int y)>;
-  using OnClickSlotType = OnClick::slot_type;
-  boost::signals2::connection doOnClick(const OnClickSlotType& slot) const;
-  void click(int x, int y);
+  using OnMouse = boost::signals2::signal<void(const MouseEvent& mouseEvent)>;
+  using OnMouseSlotType = OnMouse::slot_type;
+  boost::signals2::connection doOnMouse(const OnMouseSlotType& slot) const;
+  void mouse(const MouseEvent& e);
 
   using OnChange = boost::signals2::signal<void(Widget*)>;
   using OnChangeSlotType = OnChange::slot_type;
   boost::signals2::connection doOnChange(const OnChangeSlotType& slot) const;
   void change();
-
-  using OnMouseRelease = boost::signals2::signal<void()>;
-  using OnMouseReleaseSlotType = OnMouseRelease::slot_type;
-  boost::signals2::connection
-  doOnMouseRelease(const OnMouseReleaseSlotType& slot) const;
-  void releaseMouse();
 
   boost::ptr_vector<Widget>& children() { return children_; }
   size_t numChildren() const noexcept;
@@ -121,9 +116,8 @@ private:
   std::unique_ptr<LayoutMgr> layoutMgr_;
   boost::ptr_vector<Widget> children_;
 
-  mutable OnClick onClick_;
+  mutable OnMouse onMouse_;
   mutable OnChange onChange_;
-  mutable OnMouseRelease onMouseRelease_;
 };
 
 } // namespace bane

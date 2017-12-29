@@ -28,16 +28,7 @@ void bane::EventHandler::handle(const MouseEvent& e) {
   Widget* widget = app_.termWindow().widgetAt(e.x, e.y);
   if (widget) {
     BOOST_LOG_TRIVIAL(trace) << "Widget: " << *widget;
-    switch (e.clickType) {
-    case bane::mouse::ClickType::single:
-      widget->click(e.x, e.y);
-      break;
-    case bane::mouse::ClickType::release:
-      widget->releaseMouse();
-      break;
-    case bane::mouse::ClickType::double_:
-      BOOST_LOG_TRIVIAL(trace) << "unhandled mouse event";
-    };
+    widget->mouse(e);
   } else {
     BOOST_LOG_TRIVIAL(trace) << "No widget at position " << e.x << ", " << e.y;
   }

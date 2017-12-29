@@ -1,21 +1,28 @@
 #include "button.h"
 #include "app.h"
+#include "event.h"
 #include <boost/log/trivial.hpp>
 
 bane::Button::Button(Widget* root, std::string label)
     : Widget{root}, label_{std::move(label)} {
-  doOnClick([this](int, int) {
-    BOOST_LOG_TRIVIAL(trace) << "on mouse press";
-    isPressed_ = true;
-    doRender();
-  });
-  doOnMouseRelease([this]() {
-    BOOST_LOG_TRIVIAL(trace) << "on mouse release";
-    isPressed_ = false;
-    doRender();
+  doOnMouse([this](const MouseEvent& e) {
+    BOOST_LOG_TRIVIAL(trace) << "Button: on mouse";
+    if (e.button == mouse::Button::left) {
+      switch (e.clickType) {
+      case bane::mouse::ClickType::single:
+        isPressed_ = true;
+        doRender();
+        break;
+      case bane::mouse::ClickType::release:
+        isPressed_ = false;
+        doRender();
+        break;
+      case bane::mouse::ClickType::double_:
+        break;
+      };
+    }
   });
 }
-
 
 int bane::Button::preferredWidth() const noexcept {
   BOOST_LOG_TRIVIAL(trace) << "Button::preferredWidth " << label_.size();

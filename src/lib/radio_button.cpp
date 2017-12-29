@@ -1,4 +1,5 @@
 #include "radio_button.h"
+#include "event.h"
 
 #include <boost/log/trivial.hpp>
 
@@ -9,11 +10,13 @@ constexpr const int radioButtonPartWidth{4};
 
 bane::RadioButton::RadioButton(Widget* root, std::string label, bool isSelected)
     : Button{root}, label_{std::move(label)}, isSelected_{isSelected} {
-  doOnMouseRelease([this]() {
-    BOOST_LOG_TRIVIAL(trace) << "RadioButton: on mouse release";
-    isSelected_ = !isSelected_;
-    doRender();
-    change();
+  doOnMouse([this](const MouseEvent& e) {
+    BOOST_LOG_TRIVIAL(trace) << "RadioButton: on mouse";
+    if (e.clickType == bane::mouse::ClickType::release) {
+      isSelected_ = !isSelected_;
+      doRender();
+      change();
+    }
   });
 }
 

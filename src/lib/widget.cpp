@@ -131,14 +131,14 @@ void bane::Widget::paintBackground() {
 /// \return number of children
 size_t bane::Widget::numChildren() const noexcept { return children_.size(); }
 
-/// Handle click event
+/// Handle mouse event
 boost::signals2::connection
-bane::Widget::doOnClick(const OnClickSlotType& slot) const {
-  return onClick_.connect(slot);
+bane::Widget::doOnMouse(const OnMouseSlotType& slot) const {
+  return onMouse_.connect(slot);
 }
 
 /// Dispatch click event
-void bane::Widget::click(int x, int y) { onClick_(x, y); }
+void bane::Widget::mouse(const MouseEvent& mouseEvent) { onMouse_(mouseEvent); }
 
 /// Handle change event
 boost::signals2::connection
@@ -149,14 +149,6 @@ bane::Widget::doOnChange(const OnChangeSlotType& slot) const {
 /// Dispatch change event
 void bane::Widget::change() { onChange_(this); }
 
-/// Handle mouse release event
-boost::signals2::connection
-bane::Widget::doOnMouseRelease(const OnMouseReleaseSlotType& slot) const {
-  return onMouseRelease_.connect(slot);
-}
-
-/// Dispatch mouse release event
-void bane::Widget::releaseMouse() { onMouseRelease_(); }
 
 std::ostream& bane::operator<<(std::ostream& strm, const Widget& w) {
   return strm << w.id();

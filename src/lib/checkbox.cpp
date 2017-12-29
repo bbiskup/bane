@@ -1,4 +1,5 @@
 #include "checkbox.h"
+#include "event.h"
 
 #include <boost/log/trivial.hpp>
 
@@ -9,11 +10,14 @@ constexpr const int checkBoxPartWidth{4};
 
 bane::CheckBox::CheckBox(Widget* root, std::string label, bool isChecked)
     : Button{root}, label_{std::move(label)}, isChecked_{isChecked} {
-  doOnMouseRelease([this]() {
-    BOOST_LOG_TRIVIAL(trace) << "CheckBox: on mouse release";
-    isChecked_ = !isChecked_;
-    doRender();
-    change();
+  doOnMouse([this](const MouseEvent& e) {
+    BOOST_LOG_TRIVIAL(trace) << "CheckBox: on mouse";
+
+    if (e.clickType == bane::mouse::ClickType::release) {
+      isChecked_ = !isChecked_;
+      doRender();
+      change();
+    }
   });
 }
 
