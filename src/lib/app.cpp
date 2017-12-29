@@ -60,7 +60,7 @@ void bane::App::run() {
         postEvent<ResizeEvent>();
         break;
       default:
-        BOOST_LOG_TRIVIAL(trace) << "Unknown key " << c;
+        postEvent<KeyEvent>(c);
         break;
       }
     }
