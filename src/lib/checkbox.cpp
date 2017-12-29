@@ -13,7 +13,7 @@ bane::CheckBox::CheckBox(Widget* root, std::string label, bool isChecked)
   doOnMouse([this](const MouseEvent& e) {
     BOOST_LOG_TRIVIAL(trace) << "CheckBox: on mouse";
 
-    if (e.clickType == bane::mouse::ClickType::release) {
+    if (e.clickType == mouse::ClickType::single || e.clickType == mouse::ClickType::release) {
       isChecked_ = !isChecked_;
       doRender();
       change();
