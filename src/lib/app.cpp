@@ -3,7 +3,7 @@
 #include "event/resize_event.h"
 #include "event/mouse_event.h"
 #include "event/key_event.h"
-#include "event_handler.h"
+#include "event/event_handler.h"
 #include "widget.h"
 
 #include <boost/log/trivial.hpp>

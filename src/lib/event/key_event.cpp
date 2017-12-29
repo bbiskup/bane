@@ -1,5 +1,5 @@
 #include "event/key_event.h"
-#include "event_handler.h"
+#include "event/event_handler.h"
 
 #include <boost/log/trivial.hpp>
 #include <ncurses.h>
