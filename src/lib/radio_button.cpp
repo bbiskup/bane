@@ -24,9 +24,17 @@ int bane::RadioButton::preferredWidth() const noexcept {
 int bane::RadioButton::preferredHeight() const noexcept { return 1; }
 
 void bane::RadioButton::doRender() {
-  BOOST_LOG_TRIVIAL(trace) << "RadioButton::doRender " << relX() << " " << relY();
+  BOOST_LOG_TRIVIAL(trace) << "RadioButton::doRender " << relX() << " "
+                           << relY();
   CharPoint orig{origin()};
   mvaddstr(orig.y, orig.x, isSelected_ ? "(o)" : "( )");
   mvaddstr(orig.y, orig.x + 3, " ");
   mvaddstr(orig.y, orig.x + 4, label_.c_str());
+}
+
+void bane::RadioButton::setSelected(bool isSelected) {
+  if (isSelected_ != isSelected) {
+    isSelected_ = isSelected;
+    doRender();
+  }
 }

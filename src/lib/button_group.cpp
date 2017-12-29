@@ -1,6 +1,7 @@
 #include "button_group.h"
 #include "button.h"
 #include "h_box_layout_mgr.h"
+#include "radio_button.h"
 #include "v_box_layout_mgr.h"
 
 #include <boost/log/trivial.hpp>
@@ -21,7 +22,7 @@ bane::ButtonGroup::ButtonGroup(Widget* root, std::string label,
   };
 }
 
-void bane::ButtonGroup::onAddChild(const Widget& widget)  {
+void bane::ButtonGroup::onAddChild(const Widget& widget) {
   const Button* b = dynamic_cast<const Button*>(&widget);
   if (!b) {
     throw std::runtime_error{"ButtonGroup only supports buttons as children;"
@@ -29,8 +30,20 @@ void bane::ButtonGroup::onAddChild(const Widget& widget)  {
                              widget.id()};
   }
 
-  widget.doOnChange([](Widget* w) {
+  widget.doOnChange([this](Widget* w) {
     BOOST_LOG_TRIVIAL(trace) << "button " << w->id() << " changed";
+
+    // Ensure only a single radio button is enabled at all times.
+    // Other types of buttons (e.g. CheckBox) have no influence as they behave
+    // independently
+    if (dynamic_cast<RadioButton*>(w)) {
+      for (Widget& child : children()) {
+        RadioButton* rb{dynamic_cast<RadioButton*>(&child)};
+        if (rb && rb != w) {
+          rb->setSelected(false);
+        }
+      }
+    }
   });
 }
 
