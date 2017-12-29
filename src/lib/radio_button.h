@@ -12,11 +12,9 @@ public:
   int preferredHeight() const noexcept override;
 
   void doRender() override;
-  void setSelected(bool isSelected);
 
 private:
   std::string label_;
-  bool isSelected_{false};
 };
 } // namespace bane
 

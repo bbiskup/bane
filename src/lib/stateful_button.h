@@ -8,11 +8,18 @@ class StatefulButton : public Widget {
 
 public:
   using Widget::Widget;
+  StatefulButton(Widget* root, bool state=false);
+
+  void toggleState();
+  void setState(bool state=true);
 
   bool acceptsFocus() const override { return true; }
   bool showCursorWhenFocus() const override { return true; }
   void onFocus() override;
   void onBlur() override;
+
+protected:
+  bool state_{false};
 };
 } // namespace bane
 

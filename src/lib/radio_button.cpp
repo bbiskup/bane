@@ -9,12 +9,12 @@ constexpr const int radioButtonPartWidth{4};
 } // namespace
 
 bane::RadioButton::RadioButton(Widget* root, std::string label, bool isSelected)
-    : StatefulButton{root}, label_{std::move(label)}, isSelected_{isSelected} {
+    : StatefulButton{root, isSelected}, label_{std::move(label)} {
   doOnMouse([this](const MouseEvent& e) {
     BOOST_LOG_TRIVIAL(trace) << "RadioButton: on mouse";
     if (e.clickType == mouse::ClickType::single ||
         e.clickType == mouse::ClickType::release) {
-      isSelected_ = true;
+      setState();
       render();
       change();
     }
@@ -31,14 +31,8 @@ void bane::RadioButton::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "RadioButton::doRender " << relX() << " "
                            << relY();
   CharPoint orig{origin()};
-  mvaddstr(orig.y, orig.x, isSelected_ ? "(o)" : "( )");
+  mvaddstr(orig.y, orig.x, state_ ? "(o)" : "( )");
   mvaddstr(orig.y, orig.x + 3, " ");
   mvaddstr(orig.y, orig.x + 4, label_.c_str());
 }
 
-void bane::RadioButton::setSelected(bool isSelected) {
-  if (isSelected_ != isSelected) {
-    isSelected_ = isSelected;
-    render();
-  }
-}

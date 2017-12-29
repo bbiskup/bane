@@ -15,7 +15,6 @@ public:
 
 private:
   std::string label_;
-  bool isChecked_{false};
 };
 } // namespace bane
 

@@ -59,7 +59,7 @@ void bane::ButtonGroup::onAddChild(Widget& widget) {
       for (Widget& child : children()) {
         RadioButton* rb{dynamic_cast<RadioButton*>(&child)};
         if (rb && rb != w) {
-          rb->setSelected(false);
+          rb->setState(false);
         }
       }
     }

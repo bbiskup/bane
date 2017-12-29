@@ -9,12 +9,12 @@ constexpr const int checkBoxPartWidth{4};
 } // namespace
 
 bane::CheckBox::CheckBox(Widget* root, std::string label, bool isChecked)
-    : StatefulButton{root}, label_{std::move(label)}, isChecked_{isChecked} {
+    : StatefulButton{root, isChecked}, label_{std::move(label)} {
   doOnMouse([this](const MouseEvent& e) {
     BOOST_LOG_TRIVIAL(trace) << "CheckBox: on mouse";
 
     if (e.clickType == mouse::ClickType::single || e.clickType == mouse::ClickType::release) {
-      isChecked_ = !isChecked_;
+      toggleState();
       render();
       change();
     }
@@ -30,7 +30,7 @@ int bane::CheckBox::preferredHeight() const noexcept { return 1; }
 void bane::CheckBox::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "CheckBox::doRender " << relX() << " " << relY();
   CharPoint orig{origin()};
-  mvaddstr(orig.y, orig.x, isChecked_ ? "[x]" : "[ ]");
+  mvaddstr(orig.y, orig.x, state_ ? "[x]" : "[ ]");
   mvaddstr(orig.y, orig.x + 3, " ");
   mvaddstr(orig.y, orig.x + 4, label_.c_str());
 }
