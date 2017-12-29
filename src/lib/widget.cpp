@@ -159,8 +159,11 @@ bane::Widget* bane::Widget::previousSibling() {
   }
   auto thisIter =
       std::find(parent_->children_.begin(), parent_->children_.end(), *this);
+  if (thisIter == parent_->children_.begin()) {
+    return nullptr;
+  }
   --thisIter;
-  return thisIter != parent_->children_.end() ? &*thisIter : nullptr;
+  return &*thisIter;
 }
 
 /// Handle mouse event
