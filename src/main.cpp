@@ -1,12 +1,12 @@
 
 #include "app.h"
-#include "event/dummy_event.h"
-#include "push_button.h"
 #include "button_group.h"
 #include "checkbox.h"
+#include "event/dummy_event.h"
 #include "h_box_layout_mgr.h"
 #include "label.h"
 #include "logging.h"
+#include "push_button.h"
 #include "radio_button.h"
 #include "theme.h"
 #include "v_box_layout_mgr.h"
@@ -69,9 +69,11 @@ int main() {
   bg1->addChild<bane::CheckBox>("my_checkbox_1");
   bg1->addChild<bane::CheckBox>("my_checkbox_2");
   bg1->addChild<bane::RadioButton>("my_radio_button_1");
-  bg1->addChild<bane::RadioButton>("my_radio_button_2");
+  bane::RadioButton* rbx{bg1->addChild<bane::RadioButton>("my_radio_button_2")};
   // bg1->addChild<bane::CheckBox>("my_checkbox_3");
   pane->addChild<bane::Label>("my_label_x2");
+
+  rbx->onFocus();
 
   app.run();
 }

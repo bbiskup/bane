@@ -8,6 +8,9 @@ class Button : public Widget {
 
 public:
   using Widget::Widget;
+
+  void onFocus() override;
+  void onBlur() override;
 };
 } // namespace bane
 

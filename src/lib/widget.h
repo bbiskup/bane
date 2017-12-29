@@ -46,6 +46,9 @@ public:
   int maxPreferredChildWidth() const noexcept;
   int maxPreferredChildHeight() const noexcept;
 
+  virtual void onFocus() {}
+  virtual void onBlur() {}
+
   void resize(int width, int height);
   void resizeToPreferred();
   void move(int x, int y);

@@ -19,7 +19,7 @@ public:
   void waitForKey() const;
   int width() const{return width_;}
   int height() const{return height_;}
-  void showCursor(bool show);
+  void showCursor(bool show=true);
 
 private:
   void setUpMouse();
