@@ -9,7 +9,7 @@ constexpr const int radioButtonPartWidth{4};
 } // namespace
 
 bane::RadioButton::RadioButton(Widget* root, std::string label, bool isSelected)
-    : Button{root}, label_{std::move(label)}, isSelected_{isSelected} {
+    : StatefulButton{root}, label_{std::move(label)}, isSelected_{isSelected} {
   doOnMouse([this](const MouseEvent& e) {
     BOOST_LOG_TRIVIAL(trace) << "RadioButton: on mouse";
     if (e.clickType == mouse::ClickType::single ||

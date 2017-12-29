@@ -4,7 +4,7 @@
 #include "widget.h"
 
 namespace bane {
-class Button : public Widget {
+class StatefulButton : public Widget {
 
 public:
   using Widget::Widget;

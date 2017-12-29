@@ -1,6 +1,6 @@
 #include "button_group.h"
 #include "app.h"
-#include "button.h"
+#include "stateful_button.h"
 #include "event/key_event.h"
 #include "h_box_layout_mgr.h"
 #include "radio_button.h"
@@ -25,7 +25,7 @@ bane::ButtonGroup::ButtonGroup(Widget* root, std::string label,
 }
 
 void bane::ButtonGroup::onAddChild(Widget& widget) {
-  const Button* b = dynamic_cast<const Button*>(&widget);
+  const StatefulButton* b = dynamic_cast<const StatefulButton*>(&widget);
   if (!b) {
     throw std::runtime_error{"ButtonGroup only supports buttons as children;"
                              " offending widget: " +

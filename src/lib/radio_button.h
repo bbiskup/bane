@@ -1,10 +1,10 @@
 #ifndef RADIO_BUTTON_H
 #define RADIO_BUTTON_H
 
-#include "button.h"
+#include "stateful_button.h"
 
 namespace bane {
-class RadioButton : public Button {
+class RadioButton : public StatefulButton {
 public:
   RadioButton(Widget* root, std::string label, bool isSelected = false);
 

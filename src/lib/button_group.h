@@ -4,7 +4,6 @@
 #include "widget.h"
 
 namespace bane {
-class Button;
 
 /// Container for buttons
 class ButtonGroup : public Widget {
