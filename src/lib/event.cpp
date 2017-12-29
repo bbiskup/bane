@@ -23,3 +23,10 @@ bane::MouseEvent::MouseEvent(int x_, int y_, mouse::Button button_, mouse::Click
 void bane::MouseEvent::accept(EventHandler& handler) const{
     handler.handle(*this);
 }
+
+bane::KeyEvent::KeyEvent(int c_): c{c_}{}
+
+
+void bane::KeyEvent::accept(EventHandler& handler) const{
+    handler.handle(*this);
+}

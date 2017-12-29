@@ -63,10 +63,13 @@ public:
   const mouse::ClickType clickType;
 };
 
-/*class MouseEvent() {
+class KeyEvent : public Event {
 public:
-  void handle(Widget * widget) override;
-};*/
+  KeyEvent(int c);
+  void accept(EventHandler& handler) const override;
+
+  const int c; // ncurses character
+};
 
 } // namespace bane
 
