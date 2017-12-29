@@ -11,7 +11,7 @@ namespace bane {
 
 class EventHandler;
 
-/// Placeholder event for testing
+/// CustomEvent allows execution of code on the UI thread
 class CustomEvent : public Event {
 public:
   using CodeT = std::function<void(App& app)>;
