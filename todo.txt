@@ -8,6 +8,9 @@
 
 - 'x' button to delete contents (unicode 'MULTIPLICATION SIGN' U+00D7)
 - handle CTRL and ALT properly (suppress input)
+  - ok for normal keys
+  - but e.g. alt + arrrowUp gives 'kUP3' and ctrl + arrowUp gives 'kUP5'
+  --> possibly suppress all keys with length of keyname() > 1
 - nice-to-have: autocomplete
   - pop-down over other widgets, no realignment
   - concept of layers? (also e.g. for menus, dialogs)
