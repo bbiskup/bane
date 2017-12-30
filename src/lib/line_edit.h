@@ -2,6 +2,7 @@
 #define LINE_EDIT_H
 
 #include "widget.h"
+#include "event/key_event.h"
 
 #include <string>
 
@@ -26,7 +27,9 @@ public:
 
 private:
   unsigned long textStartOffset() const;
-  void positionCursor(int x, int y);
+  void positionCursorInWidget(int x);
+  void positionCursorInText(int x);
+  void handleSpecialKey(SpecialKey key);
   std::string label_;
   int textFieldWidth_;
   std::string text_;

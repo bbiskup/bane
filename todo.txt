@@ -1,3 +1,15 @@
 
 # Build
 - add CMake target_compile_features
+
+# Functionality
+## Widgets
+### LineEdit
+
+- 'x' button to delete contents (unicode 'MULTIPLICATION SIGN' U+00D7)
+
+## Focus
+
+- restore focus e.g. when updating label from asynchronous event
+  (focus is lost e.g. when typing into line edit while a custom event arrives that causes
+   update of the text of another label)

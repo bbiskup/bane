@@ -78,6 +78,8 @@ int main() {
   pane->addChild<bane::Label>("my_label_x2");
   bg1->children()[0].requestFocus();
   pane->addChild<bane::LineEdit>("My text", 20, "initial text");
+  bane::LineEdit* ledx = pane->addChild<bane::LineEdit>("My other text", 30, "other initial text");
+  ledx->requestFocus();
 
   app.run();
 }

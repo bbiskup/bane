@@ -1,4 +1,5 @@
 #include "line_edit.h"
+#include "event/key_event.h"
 #include "event/mouse_event.h"
 #include "term_window.h"
 
@@ -17,7 +18,13 @@ bane::LineEdit::LineEdit(Widget* root, std::string label, int textFieldWidth,
     BOOST_LOG_TRIVIAL(trace) << "LineEdit: on mouse";
     if (e.clickType == mouse::ClickType::single ||
         e.clickType == mouse::ClickType::release) {
-      positionCursor(e.x, e.y);
+      CharPoint rel{screenToRelative(e.x, e.y)};
+      positionCursorInWidget(rel.x);
+    }
+  });
+  doOnKey([this](const KeyEvent& e) {
+    if (e.specialKey) {
+      handleSpecialKey(*e.specialKey);
     }
   });
 }
@@ -54,19 +61,41 @@ unsigned long bane::LineEdit::textStartOffset() const {
   return label_.size() + labelSeparator.size();
 }
 
-void bane::LineEdit::positionCursor(int x, int y) {
-  CharPoint rel{screenToRelative(x, y)};
-  BOOST_LOG_TRIVIAL(trace) << "LineEdit::positionCursor " << x << ", " << y
-                           << " " << cursorPos_;
-  BOOST_LOG_TRIVIAL(trace) << "  rel " << rel.x << ", " << rel.y << " "
+/// Position cursor in text field
+/// \param x widget coordinate
+void bane::LineEdit::positionCursorInWidget(int x) {
+  BOOST_LOG_TRIVIAL(trace) << "LineEdit::positionCursor " << x << " cursor pos "
                            << cursorPos_;
   int textOffset{static_cast<int>(textStartOffset())};
-  int newRelX;
-  if (rel.x < textOffset) {
+  if (x < textOffset) {
     // If label was clicked, move cursor to first character position
-    newRelX = textOffset;
+    positionCursorInText(0);
   } else {
-    newRelX = rel.x;
+    positionCursorInText(x - textOffset);
   }
-  move(absY(), absX() + static_cast<int>(newRelX));
+}
+
+/// \param x cursor position with respect to text field (not counting label)
+void bane::LineEdit::positionCursorInText(int x) {
+    BOOST_LOG_TRIVIAL(trace) << "positionCursorInText: " << x << " of " << textFieldWidth_;
+  if (x >= 0 && x <= textFieldWidth_ + 1) {
+    move(absY(),
+         absX() + static_cast<int>(textStartOffset()) + static_cast<int>(x));
+    cursorPos_ = x;
+  }
+}
+
+void bane::LineEdit::handleSpecialKey(SpecialKey key) {
+  switch (key) {
+  case SpecialKey::arrowLeft:
+      positionCursorInText(cursorPos_ - 1);
+    break;
+  case SpecialKey::arrowRight:
+      positionCursorInText(cursorPos_ + 1);
+    break;
+  case SpecialKey::arrowUp:
+  case SpecialKey::arrowDown:
+  case SpecialKey::tab:
+    break;
+  };
 }
