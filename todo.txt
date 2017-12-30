@@ -8,9 +8,69 @@
 
 - 'x' button to delete contents (unicode 'MULTIPLICATION SIGN' U+00D7)
 - handle CTRL and ALT properly (suppress input)
+- nice-to-have: autocomplete
+  - pop-down over other widgets, no realignment
+  - concept of layers? (also e.g. for menus, dialogs)
+- nice-to-have: text mask and/or regexp mask
+- proper inverse input area
+- copy/paste behavior?
+
+### ListBox
+
+- autocomplete
+
+### ProgressBar
+
+### StatusBar
+
+### MenuBar
+
+### DatePicker
+
+### TimePicker
+
+### DataTable
+
+### Tree (nice-to-have)
+
+### Dialog
+
+- overlay
+- always modal
+- probably not movable
+
+### TextArea
+
+- multi-line input
+- similar to LineEdit (LineEdit could actually be a TextArea of height 1)
 
 ## Focus
 
 - restore focus e.g. when updating label from asynchronous event
   (focus is lost e.g. when typing into line edit while a custom event arrives that causes
    update of the text of another label)
+- concept of yielding focus; decide how to pass focus to siblings/parents
+
+## Autocomplete
+
+- asynchronous
+
+## Separator
+
+- horizontal or vertical
+- fixed width, or expand
+
+## Layout
+
+- resize policy: expandX, expandY to consume available space
+
+## Font rendering
+
+- Classes / stream operators for font attributes?
+
+# Testing
+## Make TerminalWindow an abstract interface to allow mocking and inspection?
+
+
+
+
