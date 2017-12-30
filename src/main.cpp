@@ -44,12 +44,13 @@ int main() {
 
   bane::Label* label1{pane->addChild<bane::Label>("my_label_x")};
   label1->setText("new_label_text");
+  /*
   std::future<void> job = std::async(std::launch::async, [&label1, &app]() {
     std::this_thread::sleep_for(2s);
     // app.postEvent<bane::DummyEvent>();
     app.postEvent<bane::CustomEvent>(
         [&label1](bane::App&) { label1->setText("text_from_event"); });
-  });
+  });*/
 
   //  pane->addChild<bane::Button>("my_button");
   /* pane->addChild<bane::Button>("my_button_x");
@@ -77,8 +78,8 @@ int main() {
   // bg1->addChild<bane::CheckBox>("my_checkbox_3");
   pane->addChild<bane::Label>("my_label_x2");
   bg1->children()[0].requestFocus();
-  pane->addChild<bane::LineEdit>("My text", 20, "initial text");
-  bane::LineEdit* ledx = pane->addChild<bane::LineEdit>("My other text", 30, "other initial text");
+  //pane->addChild<bane::LineEdit>("My text", 20, "initial text");
+  bane::LineEdit* ledx = pane->addChild<bane::LineEdit>("My other text", 30ul, "other initial text");
   ledx->requestFocus();
 
   app.run();

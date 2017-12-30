@@ -9,7 +9,7 @@
 namespace bane {
 class LineEdit : public Widget {
 public:
-  LineEdit(Widget* root, std::string label, int textFieldWidth = 20,
+  LineEdit(Widget* root, std::string label, size_t textFieldWidth = 20,
            std::string text = "");
 
   int preferredWidth() const noexcept override;
@@ -17,7 +17,7 @@ public:
 
   void setLabel(std::string label);
   void setText(std::string text);
-  void setTextFieldWidth(int width);
+  void setTextFieldWidth(size_t width);
   void doRender() override;
 
   bool acceptsFocus() const override { return true; }
@@ -27,13 +27,13 @@ public:
 
 private:
   unsigned long textStartOffset() const;
-  void positionCursorInWidget(int x);
-  void positionCursorInText(int x);
+  void positionCursorInWidget(size_t x);
+  void positionCursorInText(size_t x);
   void handleSpecialKey(SpecialKey key);
   std::string label_;
-  int textFieldWidth_;
+  size_t textFieldWidth_;
   std::string text_;
-  int cursorPos_{0};
+  size_t cursorPos_{0};
 };
 } // namespace bane
 
