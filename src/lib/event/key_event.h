@@ -17,6 +17,7 @@ enum class SpecialKey {
   home,
   end,
   backspace,
+  delete_,
   tab
 };
 

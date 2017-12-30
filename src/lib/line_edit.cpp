@@ -128,11 +128,15 @@ void bane::LineEdit::handleSpecialKey(SpecialKey key) {
   case SpecialKey::backspace:
     handleBackSpace();
     break;
+  case SpecialKey::delete_:
+    handleDelete();
+    break;
   case SpecialKey::arrowUp:
   case SpecialKey::arrowDown:
   case SpecialKey::tab:
     break;
   };
+  doRender();
 }
 
 void bane::LineEdit::handleBackSpace() {
@@ -141,5 +145,11 @@ void bane::LineEdit::handleBackSpace() {
   }
   text_.erase(cursorPos_ - 1, 1);
   positionCursorInText(cursorPos_ - 1);
-  doRender();
+}
+
+void bane::LineEdit::handleDelete() {
+  if (text_.empty() || cursorPos_ >= text_.size()) {
+    return;
+  }
+  text_.erase(cursorPos_, 1);
 }

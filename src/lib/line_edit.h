@@ -32,6 +32,7 @@ private:
   void handleTextKey(int c);
   void handleSpecialKey(SpecialKey key);
   void handleBackSpace();
+  void handleDelete();
   std::string label_;
   size_t textFieldWidth_;
   std::string text_;
