@@ -61,7 +61,6 @@ void bane::LineEdit::doRender() {
       text_.size() >= textFieldWidth_ ? 0 : textFieldWidth_ - text_.size() + 1};
   const std::string paddedText{text_ + std::string(padLen, ' ')};
   mvaddstr(orig.y, orig.x, (label_ + labelSeparator + paddedText).c_str());
-  BOOST_LOG_TRIVIAL(trace) << "#### positioning " << cursorPos_;
   positionCursorInText(cursorPos_);
 }
 
