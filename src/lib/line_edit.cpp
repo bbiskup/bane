@@ -58,7 +58,7 @@ void bane::LineEdit::doRender() {
   // the text field must be padded to ensure the widget actually occupies the
   // entire space
   const size_t padLen{
-      text_.size() >= textFieldWidth_ ? 0 : textFieldWidth_ - text_.size()};
+      text_.size() >= textFieldWidth_ ? 0 : textFieldWidth_ - text_.size() + 1};
   const std::string paddedText{text_ + std::string(padLen, ' ')};
   mvaddstr(orig.y, orig.x, (label_ + labelSeparator + paddedText).c_str());
   BOOST_LOG_TRIVIAL(trace) << "#### positioning " << cursorPos_;
@@ -104,7 +104,7 @@ void bane::LineEdit::positionCursorInText(size_t x) {
 }
 
 void bane::LineEdit::handleTextKey(int c) {
-  if (cursorPos_ < textFieldWidth_ - 2) {
+  if (cursorPos_ < textFieldWidth_ - 2 && text_.size() <= textFieldWidth_) {
     text_.insert(std::min(cursorPos_, text_.size()), 1, static_cast<char>(c));
     positionCursorInText(cursorPos_ + 1);
     doRender();
