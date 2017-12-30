@@ -104,6 +104,7 @@ void bane::LineEdit::positionCursorInText(size_t x) {
 void bane::LineEdit::handleTextKey(int c) {
   if (cursorPos_ < textFieldWidth_ - 1) {
       text_.insert(cursorPos_, 1, static_cast<char>(c));
+      positionCursorInText(cursorPos_+1);
       render();
   }
 }

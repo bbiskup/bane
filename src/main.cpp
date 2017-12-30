@@ -78,7 +78,7 @@ int main() {
   // bg1->addChild<bane::CheckBox>("my_checkbox_3");
   pane->addChild<bane::Label>("my_label_x2");
   bg1->children()[0].requestFocus();
-  //pane->addChild<bane::LineEdit>("My text", 20, "initial text");
+  pane->addChild<bane::LineEdit>("My text", 20ul);
   bane::LineEdit* ledx = pane->addChild<bane::LineEdit>("My other text", 30ul, "other initial text");
   ledx->requestFocus();
 
