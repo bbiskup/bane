@@ -26,9 +26,11 @@ public:
 
 private:
   unsigned long textStartOffset() const;
+  void positionCursor(int x, int y);
   std::string label_;
   int textFieldWidth_;
   std::string text_;
+  int cursorPos_{0};
 };
 } // namespace bane
 
