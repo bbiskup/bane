@@ -57,60 +57,65 @@ void bane::LineEdit::doRender() {
   // entire space
   const size_t padLen{
       text_.size() >= textFieldWidth_ ? 0 : textFieldWidth_ - text_.size()};
-  const std::string paddedText {
-    text_ + std::string(padLen, ' ')};
-    mvaddstr(orig.y, orig.x, (label_ + labelSeparator + paddedText).c_str());
-  }
+  const std::string paddedText{text_ + std::string(padLen, ' ')};
+  mvaddstr(orig.y, orig.x, (label_ + labelSeparator + paddedText).c_str());
+}
 
-  void bane::LineEdit::onFocus() {
-    BOOST_LOG_TRIVIAL(trace)
-        << "LineEdit::onFocus: " << absY() << " " << absX() + 1;
-    move(absY(), absX() + static_cast<int>(textStartOffset()));
-  }
+void bane::LineEdit::onFocus() {
+  BOOST_LOG_TRIVIAL(trace) << "LineEdit::onFocus: " << absY() << " "
+                           << absX() + 1;
+  move(absY(), absX() + static_cast<int>(textStartOffset()));
+}
 
-  void bane::LineEdit::onBlur() { termWindow_->showCursor(false); }
+void bane::LineEdit::onBlur() { termWindow_->showCursor(false); }
 
-  unsigned long bane::LineEdit::textStartOffset() const {
-    // Label, colon, space
-    return label_.size() + labelSeparator.size();
-  }
+unsigned long bane::LineEdit::textStartOffset() const {
+  // Label, colon, space
+  return label_.size() + labelSeparator.size();
+}
 
-  /// Position cursor in text field
-  /// \param x widget coordinate
-  void bane::LineEdit::positionCursorInWidget(size_t x) {
-    BOOST_LOG_TRIVIAL(trace)
-        << "LineEdit::positionCursor " << x << " cursor pos " << cursorPos_;
-    size_t textOffset{textStartOffset()};
-    if (x < textOffset) {
-      // If label was clicked, move cursor to first character position
-      positionCursorInText(0);
-    } else {
-      positionCursorInText(x - textOffset);
-    }
+/// Position cursor in text field
+/// \param x widget coordinate
+void bane::LineEdit::positionCursorInWidget(size_t x) {
+  BOOST_LOG_TRIVIAL(trace) << "LineEdit::positionCursor " << x << " cursor pos "
+                           << cursorPos_;
+  size_t textOffset{textStartOffset()};
+  if (x < textOffset) {
+    // If label was clicked, move cursor to first character position
+    positionCursorInText(0);
+  } else {
+    positionCursorInText(x - textOffset);
   }
+}
 
-  /// \param x cursor position with respect to text field (not counting label)
-  void bane::LineEdit::positionCursorInText(size_t x) {
-    BOOST_LOG_TRIVIAL(trace)
-        << "positionCursorInText: " << x << " of " << textFieldWidth_;
-    if (x < textFieldWidth_ - 1) {
-      move(absY(),
-           absX() + static_cast<int>(textStartOffset()) + static_cast<int>(x));
-      cursorPos_ = x;
-    }
+/// \param x cursor position with respect to text field (not counting label)
+void bane::LineEdit::positionCursorInText(size_t x) {
+  BOOST_LOG_TRIVIAL(trace) << "positionCursorInText: " << x << " of "
+                           << textFieldWidth_;
+  if (x < textFieldWidth_ - 1) {
+    move(absY(),
+         absX() + static_cast<int>(textStartOffset()) + static_cast<int>(x));
+    cursorPos_ = x;
   }
+}
 
-  void bane::LineEdit::handleSpecialKey(SpecialKey key) {
-    switch (key) {
-    case SpecialKey::arrowLeft:
-      positionCursorInText(cursorPos_ - 1);
-      break;
-    case SpecialKey::arrowRight:
-      positionCursorInText(cursorPos_ + 1);
-      break;
-    case SpecialKey::arrowUp:
-    case SpecialKey::arrowDown:
-    case SpecialKey::tab:
-      break;
-    };
-  }
+void bane::LineEdit::handleSpecialKey(SpecialKey key) {
+  switch (key) {
+  case SpecialKey::arrowLeft:
+    positionCursorInText(cursorPos_ - 1);
+    break;
+  case SpecialKey::arrowRight:
+    positionCursorInText(cursorPos_ + 1);
+    break;
+  case SpecialKey::home:
+    positionCursorInText(0);
+    break;
+  case SpecialKey::end:
+    positionCursorInText(text_.empty() ? 0 : text_.size() - 1);
+    break;
+  case SpecialKey::arrowUp:
+  case SpecialKey::arrowDown:
+  case SpecialKey::tab:
+    break;
+  };
+}

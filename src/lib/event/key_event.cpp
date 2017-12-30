@@ -12,6 +12,9 @@ std::unordered_map<int, bane::SpecialKey> specialKeyMap{
     {KEY_RIGHT, bane::SpecialKey::arrowRight},
     {KEY_DOWN, bane::SpecialKey::arrowDown},
     {KEY_LEFT, bane::SpecialKey::arrowLeft},
+
+    {KEY_HOME, bane::SpecialKey::home},
+    {KEY_END, bane::SpecialKey::end},
 };
 }
 
