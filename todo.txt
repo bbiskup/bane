@@ -71,8 +71,9 @@
 
 - Classes / stream operators for font attributes?
 
-# Testing
-## Make TerminalWindow an abstract interface to allow mocking and inspection?
+# Testing & Debugging
+- Make TerminalWindow an abstract interface to allow mocking and inspection?
+- Red flash in rendered areas?
 
 
 
