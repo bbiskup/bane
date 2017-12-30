@@ -29,6 +29,8 @@ public:
 
   const int c; // ncurses character
   boost::optional<SpecialKey> specialKey;
+  bool ctrl{false};
+  bool altGr{false};
 };
 
 } // namespace bane
