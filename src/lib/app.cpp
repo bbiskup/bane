@@ -38,8 +38,9 @@ void bane::App::requestFocus(Widget* widget) {
   if (!widget->acceptsFocus()) {
     return;
   }
-  BOOST_LOG_TRIVIAL(trace)  << " requesting focus for " << widget->id();
+  BOOST_LOG_TRIVIAL(trace)  << "requesting focus for " << widget->id();
   focusWidget_ = widget;
+  widget->render();
 }
 
 /// Run application - start processing events, until explicit termination

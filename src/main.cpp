@@ -6,6 +6,7 @@
 #include "event/custom_event.h"
 #include "h_box_layout_mgr.h"
 #include "label.h"
+#include "line_edit.h"
 #include "logging.h"
 #include "push_button.h"
 #include "radio_button.h"
@@ -76,6 +77,7 @@ int main() {
   // bg1->addChild<bane::CheckBox>("my_checkbox_3");
   pane->addChild<bane::Label>("my_label_x2");
   bg1->children()[0].requestFocus();
+  pane->addChild<bane::LineEdit>("My text", 20, "initial text");
 
   app.run();
 }
