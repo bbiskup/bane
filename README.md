@@ -7,8 +7,8 @@ State: **early development - incomplete**
 
 # Monitoring log file
 
- cd build
- tail -F bane.log
+  cd build
+  tail -F bane.log
 
 ## Known issues
 
