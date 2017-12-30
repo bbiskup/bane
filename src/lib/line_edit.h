@@ -29,6 +29,7 @@ private:
   unsigned long textStartOffset() const;
   void positionCursorInWidget(size_t x);
   void positionCursorInText(size_t x);
+  void handleTextKey(int c);
   void handleSpecialKey(SpecialKey key);
   std::string label_;
   size_t textFieldWidth_;

@@ -27,6 +27,8 @@ bane::LineEdit::LineEdit(Widget* root, std::string label, size_t textFieldWidth,
   doOnKey([this](const KeyEvent& e) {
     if (e.specialKey) {
       handleSpecialKey(*e.specialKey);
+    } else {
+      handleTextKey(e.c);
     }
   });
 }
@@ -96,6 +98,13 @@ void bane::LineEdit::positionCursorInText(size_t x) {
     move(absY(),
          absX() + static_cast<int>(textStartOffset()) + static_cast<int>(x));
     cursorPos_ = x;
+  }
+}
+
+void bane::LineEdit::handleTextKey(int c) {
+  if (cursorPos_ < textFieldWidth_ - 1) {
+      text_.insert(cursorPos_, 1, static_cast<char>(c));
+      render();
   }
 }
 
