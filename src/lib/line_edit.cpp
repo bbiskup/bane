@@ -61,6 +61,8 @@ void bane::LineEdit::doRender() {
       text_.size() >= textFieldWidth_ ? 0 : textFieldWidth_ - text_.size()};
   const std::string paddedText{text_ + std::string(padLen, ' ')};
   mvaddstr(orig.y, orig.x, (label_ + labelSeparator + paddedText).c_str());
+  BOOST_LOG_TRIVIAL(trace) << "#### positioning " << cursorPos_;
+  positionCursorInText(cursorPos_);
 }
 
 void bane::LineEdit::onFocus() {
@@ -103,9 +105,9 @@ void bane::LineEdit::positionCursorInText(size_t x) {
 
 void bane::LineEdit::handleTextKey(int c) {
   if (cursorPos_ < textFieldWidth_ - 1) {
-      text_.insert(cursorPos_, 1, static_cast<char>(c));
-      positionCursorInText(cursorPos_+1);
-      render();
+    text_.insert(std::min(cursorPos_, text_.size()), 1, static_cast<char>(c));
+    positionCursorInText(cursorPos_ + 1);
+    doRender();
   }
 }
 
@@ -123,9 +125,21 @@ void bane::LineEdit::handleSpecialKey(SpecialKey key) {
   case SpecialKey::end:
     positionCursorInText(text_.empty() ? 0 : text_.size() - 1);
     break;
+  case SpecialKey::backspace:
+    handleBackSpace();
+    break;
   case SpecialKey::arrowUp:
   case SpecialKey::arrowDown:
   case SpecialKey::tab:
     break;
   };
+}
+
+void bane::LineEdit::handleBackSpace() {
+  if (text_.empty() || cursorPos_ == 0) {
+    return;
+  }
+  text_.erase(cursorPos_ - 1, 1);
+  positionCursorInText(cursorPos_ - 1);
+  doRender();
 }

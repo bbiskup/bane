@@ -31,6 +31,7 @@ private:
   void positionCursorInText(size_t x);
   void handleTextKey(int c);
   void handleSpecialKey(SpecialKey key);
+  void handleBackSpace();
   std::string label_;
   size_t textFieldWidth_;
   std::string text_;

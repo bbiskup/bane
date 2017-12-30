@@ -15,6 +15,7 @@ std::unordered_map<int, bane::SpecialKey> specialKeyMap{
 
     {KEY_HOME, bane::SpecialKey::home},
     {KEY_END, bane::SpecialKey::end},
+    {KEY_BACKSPACE, bane::SpecialKey::backspace},
 };
 }
 

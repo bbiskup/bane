@@ -9,7 +9,16 @@ namespace bane {
 
 class EventHandler;
 
-enum class SpecialKey { arrowUp, arrowRight, arrowDown, arrowLeft, home, end, tab };
+enum class SpecialKey {
+  arrowUp,
+  arrowRight,
+  arrowDown,
+  arrowLeft,
+  home,
+  end,
+  backspace,
+  tab
+};
 
 class KeyEvent : public PositionEvent {
 public:
