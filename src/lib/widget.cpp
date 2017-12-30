@@ -36,7 +36,7 @@ int bane::Widget::relX() const noexcept { return x_; }
 /// Y coordinate relative to parent widget
 int bane::Widget::relY() const noexcept { return y_; }
 
-/// X coordinate with respect to terminal windo origin
+/// X coordinate with respect to terminal window origin
 int bane::Widget::absX() const noexcept {
   if (parent_) {
     return parent_->absX() + relX();
@@ -45,7 +45,7 @@ int bane::Widget::absX() const noexcept {
   }
 }
 
-/// Y coordinate with respect to terminal windo origin
+/// Y coordinate with respect to terminal window origin
 int bane::Widget::absY() const noexcept {
   if (parent_) {
     return parent_->absY() + relY();
@@ -115,6 +115,12 @@ bane::CharPoint bane::Widget::origin() const {
   } else {
     return {x_, y_};
   }
+}
+
+
+/// Convert screen coordinates to in-widget coordinates
+bane::CharPoint bane::Widget::screenToRelative(int x, int y){
+    return {x - absX(), y - absY()};
 }
 
 void bane::Widget::setTermWindow(TermWindow& termWindow) {

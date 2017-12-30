@@ -59,6 +59,7 @@ public:
   void render();
   Widget* root() { return root_ ? root_ : this; }
   CharPoint origin() const;
+  CharPoint screenToRelative(int x, int y);
   void setApp(App& app);
   void setTermWindow(TermWindow& termWindow);
 
