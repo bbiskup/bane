@@ -104,7 +104,7 @@ void bane::LineEdit::positionCursorInText(size_t x) {
 }
 
 void bane::LineEdit::handleTextKey(int c) {
-  if (cursorPos_ < textFieldWidth_ - 1) {
+  if (cursorPos_ < textFieldWidth_ - 2) {
     text_.insert(std::min(cursorPos_, text_.size()), 1, static_cast<char>(c));
     positionCursorInText(cursorPos_ + 1);
     doRender();
@@ -123,7 +123,7 @@ void bane::LineEdit::handleSpecialKey(SpecialKey key) {
     positionCursorInText(0);
     break;
   case SpecialKey::end:
-    positionCursorInText(text_.empty() ? 0 : text_.size() - 1);
+    positionCursorInText(text_.empty() ? 0 : text_.size());
     break;
   case SpecialKey::backspace:
     handleBackSpace();
