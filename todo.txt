@@ -36,7 +36,18 @@
 
 ### DataTable
 
+- cells should be widgets (or, initially, strings)
+- sortable by column
+- filterable
+
 ### Tree (nice-to-have)
+
+### Tab
+
+### Card/Stack
+
+- a widget that can have multiple children, with only one child
+  visible at a time
 
 ### Dialog
 
