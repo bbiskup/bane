@@ -88,6 +88,10 @@
 - Make TerminalWindow an abstract interface to allow mocking and inspection?
 - Red flash in rendered areas?
 
+# Misc. issues
 
+- entering special characters problematic: e.g AltGr-o (should render as ö)
+  - received as multi-character input, (1) M-C, (2) M-6
+  - Input with EurKey keyboard works on when using getnstr
 
 
