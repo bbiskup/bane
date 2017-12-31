@@ -22,6 +22,13 @@ class TermWindow;
 class MouseEvent;
 class KeyEvent;
 
+/// Indicate whether the focus was yielded by moving
+/// before or after widget. This information is used to decide
+/// which widget should receive focus next
+enum class FocusYieldHint{
+    start, end
+};
+
 class Widget {
 public:
   enum WidgetSize : int {
@@ -52,6 +59,11 @@ public:
   virtual void onBlur() {}
   bool hasFocus() const;
   void requestFocus();
+  void yieldFocus(FocusYieldHint yieldHint);
+  void setFocusPredecessor(Widget* successor);
+  void setFocusSuccessor(Widget* successor);
+  Widget* focusPredecessor() const;
+  Widget* focusSuccessor() const;
 
   void resize(int width, int height);
   void resizeToPreferred();
@@ -111,6 +123,8 @@ public:
 
 protected:
   Widget* root_{};
+  Widget* focusPredecessor_{};
+  Widget* focusSuccessor_{};
   App* app_{};
   TermWindow* termWindow_{};
   virtual void doRender() {}

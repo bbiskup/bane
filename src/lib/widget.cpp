@@ -17,6 +17,8 @@ int widgetNum{0};
 int maxPreferredDim(const boost::ptr_vector<bane::Widget>& widgets,
                     std::function<int(const bane::Widget&)> dimGetter);
 
+void ensureAcceptsFocus(const bane::Widget* w);
+
 } // namespace
 
 bane::Widget::Widget(Widget* root)
@@ -73,6 +75,25 @@ int bane::Widget::maxPreferredChildHeight() const noexcept {
 bool bane::Widget::hasFocus() const { return app_->focusWidget() == this; }
 
 void bane::Widget::requestFocus() { app_->requestFocus(this); }
+void bane::Widget::yieldFocus(FocusYieldHint yieldHint) {
+  app_->yieldFocus(this, yieldHint);
+}
+
+void bane::Widget::setFocusPredecessor(Widget* predecessor) {
+  ensureAcceptsFocus(predecessor);
+  focusPredecessor_ = predecessor;
+}
+
+void bane::Widget::setFocusSuccessor(Widget* successor) {
+  ensureAcceptsFocus(successor);
+  focusSuccessor_ = successor;
+}
+
+bane::Widget* bane::Widget::focusPredecessor() const {
+  return focusPredecessor_;
+}
+
+bane::Widget* bane::Widget::focusSuccessor() const { return focusSuccessor_; }
 
 void bane::Widget::resize(int width, int height) {
   width_ = width;
@@ -117,10 +138,9 @@ bane::CharPoint bane::Widget::origin() const {
   }
 }
 
-
 /// Convert screen coordinates to in-widget coordinates
-bane::CharPoint bane::Widget::screenToRelative(int x, int y){
-    return {x - absX(), y - absY()};
+bane::CharPoint bane::Widget::screenToRelative(int x, int y) {
+  return {x - absX(), y - absY()};
 }
 
 void bane::Widget::setTermWindow(TermWindow& termWindow) {
@@ -215,5 +235,11 @@ int maxPreferredDim(const boost::ptr_vector<bane::Widget>& widgets,
       widgets.begin(), widgets.end(), std::back_inserter(widths),
       [&dimGetter](const bane::Widget& widget) { return dimGetter(widget); });
   return *std::max_element(widths.begin(), widths.end());
+}
+
+void ensureAcceptsFocus(const bane::Widget* w) {
+  if (!w->acceptsFocus()) {
+    throw std::runtime_error{"Widget " + w->id() + " does not accept focus"};
+  }
 }
 } // namespace

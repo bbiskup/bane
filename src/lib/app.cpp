@@ -38,9 +38,21 @@ void bane::App::requestFocus(Widget* widget) {
   if (!widget->acceptsFocus()) {
     return;
   }
-  BOOST_LOG_TRIVIAL(trace)  << "requesting focus for " << widget->id();
+  BOOST_LOG_TRIVIAL(trace) << "requesting focus for " << widget->id();
   focusWidget_ = widget;
   widget->render();
+}
+
+void bane::App::yieldFocus(Widget* widget, FocusYieldHint yieldHint) {
+  if (yieldHint == FocusYieldHint::start) {
+    if (widget->focusPredecessor()) {
+      requestFocus(widget->focusPredecessor());
+    }
+  } else if (yieldHint == FocusYieldHint::end) {
+    if (widget->focusSuccessor()) {
+      requestFocus(widget->focusSuccessor());
+    }
+  }
 }
 
 /// Run application - start processing events, until explicit termination

@@ -38,11 +38,15 @@ void bane::ButtonGroup::onAddChild(Widget& widget) {
         Widget* nextSib = b->nextSibling();
         if (nextSib) {
           nextSib->requestFocus();
+        } else {
+          yieldFocus(FocusYieldHint::end);
         }
       } else if (*e.specialKey == SpecialKey::arrowUp) {
         Widget* prevSib = b->previousSibling();
         if (prevSib) {
           prevSib->requestFocus();
+        }else{
+          yieldFocus(FocusYieldHint::start);
         }
       }
     } else if (e.c == ' ' || e.c == '\n') {

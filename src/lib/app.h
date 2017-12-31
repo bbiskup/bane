@@ -4,12 +4,14 @@
 #include "event/event.h"
 #include "pane.h"
 #include "term_window.h"
+#include "widget.h"
 #include "theme.h"
 #include <mutex>
 #include <queue>
 #include <string>
 
 namespace bane {
+
 /// Application
 class App {
 public:
@@ -31,6 +33,7 @@ public:
   void handleResize();
 
   void requestFocus(Widget* widget);
+  void yieldFocus(Widget* widget, FocusYieldHint yieldHint);
 
   TermWindow& termWindow() { return termWindow_; }
   const Theme& theme() const { return *theme_; }

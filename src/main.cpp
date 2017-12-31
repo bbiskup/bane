@@ -82,5 +82,14 @@ int main() {
   bane::LineEdit* ledx = pane->addChild<bane::LineEdit>("My other text", 30ul, "other initial text");
   ledx->requestFocus();
 
+  pane->addChild<bane::Label>("-------------------------");
+  bane::ButtonGroup* bg2{pane->addChild<bane::ButtonGroup>(
+      "button_group_2", bane::Orientation::vertical)};
+  bane::CheckBox* cb3{bg2->addChild<bane::CheckBox>("my_checkbox_3")};
+  bg2->addChild<bane::CheckBox>("my_checkbox_4");
+
+  bg1->setFocusSuccessor(cb3);
+
+
   app.run();
 }
