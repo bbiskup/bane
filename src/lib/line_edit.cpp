@@ -88,9 +88,12 @@ void bane::LineEdit::positionCursorInWidget(size_t x) {
   if (x < textOffset) {
     // If label was clicked, move cursor to first character position
     positionCursorInText(0);
+  } else if (x > textOffset + text_.size()) {
+    positionCursorInText(text_.size());
   } else {
     positionCursorInText(x - textOffset);
   }
+  doRender();
 }
 
 /// \param x cursor position with respect to text field (not counting label)
