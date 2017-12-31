@@ -88,7 +88,8 @@ int main() {
   bg2->addChild<bane::CheckBox>("my_checkbox_3");
   bg2->addChild<bane::CheckBox>("my_checkbox_4");
 
-  bg1->setFocusSuccessor(bg2);
+  bg1->setFocusSuccessor(ledx);
+  ledx->setFocusSuccessor(bg2);
 
 
   app.run();

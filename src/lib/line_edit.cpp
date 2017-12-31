@@ -139,7 +139,11 @@ void bane::LineEdit::handleSpecialKey(SpecialKey key) {
     handleDelete();
     break;
   case SpecialKey::arrowUp:
+    yieldFocus(FocusYieldHint::start);
+    return;
   case SpecialKey::arrowDown:
+    yieldFocus(FocusYieldHint::end);
+    return;
   case SpecialKey::tab:
     break;
   };
