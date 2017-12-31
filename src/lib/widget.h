@@ -6,7 +6,6 @@
 #include <boost/signals2.hpp>
 #include <iostream>
 #include <memory>
-#include <ncurses.h>
 
 namespace bane {
 

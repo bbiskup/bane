@@ -38,7 +38,9 @@ bane::Widget* bane::TermWindow::widgetAt(int x, int y) const {
 }
 
 void bane::TermWindow::updateSize() {
-  getmaxyx(stdscr, height_, width_);
+  CharPoint screenDims{screenDimensions()};
+  width_ = screenDims.x;
+  height_ = screenDims.y;
   BOOST_LOG_TRIVIAL(trace) << "updateSize " << width_ << ", " << height_;
   clickMap_.reset(
       new std::vector<Widget*>{static_cast<unsigned long>(width_ * height_)});

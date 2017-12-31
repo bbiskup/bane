@@ -2,7 +2,6 @@
 #include "app.h"
 #include <boost/log/trivial.hpp>
 #include <iostream>
-#include <ncurses.h>
 
 bane::Label::Label(Widget* root, std::string label)
     : Widget{root}, label_{std::move(label)} {}
@@ -22,6 +21,6 @@ void bane::Label::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "Label::doRender " << relX() << " " << relY();
   CharPoint orig{origin()};
   attrset(app_->theme().normal().nCursesColorPair());
-  mvaddstr(orig.y, orig.x, label_.c_str());
+  termWindow_->drawString(orig, label_);
 }
 

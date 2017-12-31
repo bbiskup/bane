@@ -62,14 +62,14 @@ void bane::LineEdit::doRender() {
   const size_t padLen{
       text_.size() >= textFieldWidth_ ? 0 : textFieldWidth_ - text_.size() + 1};
   const std::string paddedText{text_ + std::string(padLen, ' ')};
-  mvaddstr(orig.y, orig.x, (label_ + labelSeparator + paddedText).c_str());
+  termWindow_->drawString(orig, label_ + labelSeparator + paddedText);
   positionCursorInText(cursorPos_);
 }
 
 void bane::LineEdit::onFocus() {
   BOOST_LOG_TRIVIAL(trace) << "LineEdit::onFocus: " << absY() << " "
                            << absX() + 1;
-  move(absY(), absX() + static_cast<int>(textStartOffset()));
+  termWindow_->move(absX() + static_cast<int>(textStartOffset()), absY());
 }
 
 void bane::LineEdit::onBlur() { termWindow_->showCursor(false); }
@@ -101,8 +101,9 @@ void bane::LineEdit::positionCursorInText(size_t x) {
   BOOST_LOG_TRIVIAL(trace) << "positionCursorInText: " << x << " of "
                            << textFieldWidth_;
   if (x < textFieldWidth_ - 1) {
-    move(absY(),
-         absX() + static_cast<int>(textStartOffset()) + static_cast<int>(x));
+    termWindow_->move(absX() + static_cast<int>(textStartOffset()) +
+                          static_cast<int>(x),
+                      absY());
     cursorPos_ = x;
   }
 }

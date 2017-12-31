@@ -15,6 +15,11 @@ public:
   void waitForKey() const override;
   void showCursor(bool show = true) override;
 
+  void move(int x, int y) override;
+  void refresh() override;
+  void drawString(int x, int y, const TerminalText& text) override;
+  CharPoint screenDimensions() const override;
+
 protected:
   void setUpMouse() override;
 };

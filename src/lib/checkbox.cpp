@@ -1,5 +1,6 @@
 #include "checkbox.h"
 #include "event/mouse_event.h"
+#include "term/term_window.h"
 
 #include <boost/log/trivial.hpp>
 
@@ -36,7 +37,7 @@ int bane::CheckBox::preferredHeight() const noexcept { return 1; }
 void bane::CheckBox::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "CheckBox::doRender " << relX() << " " << relY();
   CharPoint orig{origin()};
-  mvaddstr(orig.y, orig.x, state_ ? "[x]" : "[ ]");
-  mvaddstr(orig.y, orig.x + 3, " ");
-  mvaddstr(orig.y, orig.x + 4, label_.c_str());
+  termWindow_->drawString(orig, state_ ? "[x]" : "[ ]");
+  termWindow_->drawString(orig.x + 3, orig.y, " ");
+  termWindow_->drawString(orig.x + 4, orig.y, label_);
 }

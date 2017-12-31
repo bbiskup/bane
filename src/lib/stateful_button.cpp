@@ -21,7 +21,7 @@ void bane::StatefulButton::setState(bool state) {
 void bane::StatefulButton::onFocus() {
   BOOST_LOG_TRIVIAL(trace) << "StatefulButton::onFocus: " << absY() << " "
                            << absX() + 1;
-  move(absY(), absX() + 1);
+  termWindow_->move(absX() + 1, absY());
 }
 
 void bane::StatefulButton::onBlur() { termWindow_->showCursor(false); }

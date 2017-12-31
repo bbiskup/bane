@@ -41,6 +41,6 @@ void bane::PushButton::doRender() {
   } else {
     attrset(app_->theme().active().nCursesColorPair());
   }
-  mvaddstr(orig.y, orig.x, label_.c_str());
+  termWindow_->drawString(orig, label_);
   attrset(app_->theme().normal().nCursesColorPair());
 }

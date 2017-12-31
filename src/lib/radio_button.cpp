@@ -1,5 +1,6 @@
 #include "radio_button.h"
 #include "event/mouse_event.h"
+#include "term/term_window.h"
 
 #include <boost/log/trivial.hpp>
 
@@ -36,7 +37,7 @@ void bane::RadioButton::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "RadioButton::doRender " << relX() << " "
                            << relY();
   CharPoint orig{origin()};
-  mvaddstr(orig.y, orig.x, state_ ? "(o)" : "( )");
-  mvaddstr(orig.y, orig.x + 3, " ");
-  mvaddstr(orig.y, orig.x + 4, label_.c_str());
+  termWindow_->drawString(orig, state_ ? "(o)" : "( )");
+  termWindow_->drawString(orig.x + 3, orig.y, " ");
+  termWindow_->drawString(orig.x + 4, orig.y, label_);
 }

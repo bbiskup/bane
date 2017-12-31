@@ -2,10 +2,14 @@
 #define TERM_WINDOW_H
 
 #include "widget.h"
+
 #include <memory>
 #include <vector>
+#include <string>
 
 namespace bane {
+
+using TerminalText = std::string;
 
 /// Abstraction of terminal
 class TermWindow {
@@ -16,12 +20,31 @@ public:
   void updateSize();
   void updateClickMap(Widget& w);
   Widget* widgetAt(int x, int y) const;
-  virtual void waitForKey() const = 0;
   int width() const{return width_;}
   int height() const{return height_;}
+
+  /// Wait until a key has been pressed
+  virtual void waitForKey() const = 0;
+
+  /// Whether or not cursor should be displayed
   virtual void showCursor(bool show=true) = 0;
 
+  /// Move cursor to given position
+  virtual void move(int x, int y) = 0;
+
+  /// Refresh screen
+  virtual void refresh() = 0;
+
+  /// Draw a string at given absolute position
+  virtual void drawString(int x, int y, const TerminalText& text) = 0;
+  void drawString(const CharPoint& charPoint, const TerminalText& text){
+      drawString(charPoint.x, charPoint.y, text);
+  }
+
+  virtual CharPoint screenDimensions() const = 0;
+
 protected:
+  /// Configure terminal to accept mouse input
   virtual void setUpMouse() = 0;
 
 private:
