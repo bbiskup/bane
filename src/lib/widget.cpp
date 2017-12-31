@@ -74,19 +74,26 @@ int bane::Widget::maxPreferredChildHeight() const noexcept {
 
 bool bane::Widget::hasFocus() const { return app_->focusWidget() == this; }
 
-void bane::Widget::requestFocus() { app_->requestFocus(this); }
+void bane::Widget::requestFocus() {
+  ensureAcceptsFocus(this);
+  app_->requestFocus(this);
+}
 void bane::Widget::yieldFocus(FocusYieldHint yieldHint) {
   app_->yieldFocus(this, yieldHint);
 }
 
 void bane::Widget::setFocusPredecessor(Widget* predecessor) {
+  ensureAcceptsFocus(this);
   ensureAcceptsFocus(predecessor);
   focusPredecessor_ = predecessor;
+  predecessor->focusSuccessor_ = this;
 }
 
 void bane::Widget::setFocusSuccessor(Widget* successor) {
+  ensureAcceptsFocus(this);
   ensureAcceptsFocus(successor);
   focusSuccessor_ = successor;
+  successor->focusPredecessor_ = this;
 }
 
 bane::Widget* bane::Widget::focusPredecessor() const {

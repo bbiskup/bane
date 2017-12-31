@@ -85,3 +85,10 @@ void bane::ButtonGroup::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "ButtonGroup::doRender " << relX() << " "
                            << relY();
 }
+
+void bane::ButtonGroup::onFocus(){
+    // delegate focus
+    if (!children().empty()){
+        children()[0].requestFocus();
+    }
+}

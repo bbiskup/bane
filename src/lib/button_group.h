@@ -14,6 +14,10 @@ public:
 
   void doRender() override;
 
+  bool acceptsFocus() const override { return true; }
+  bool showCursorWhenFocus() const override { return true; }
+  void onFocus() override;
+
 protected:
   void onAddChild(Widget& widget) override;
 
