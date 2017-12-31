@@ -1,7 +1,7 @@
 #include "line_edit.h"
 #include "event/key_event.h"
 #include "event/mouse_event.h"
-#include "term_window.h"
+#include "term/term_window.h"
 
 #include <boost/log/trivial.hpp>
 

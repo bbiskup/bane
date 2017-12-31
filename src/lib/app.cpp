@@ -4,6 +4,7 @@
 #include "event/key_event.h"
 #include "event/mouse_event.h"
 #include "event/resize_event.h"
+#include "term/ncurses_term_window.h"
 #include "widget.h"
 
 #include <boost/log/trivial.hpp>
@@ -14,8 +15,9 @@
 
 bane::App::App(std::string name, std::unique_ptr<Theme> theme)
     : name_{std::move(name)}, theme_{std::move(theme)} {
+  termWindow_.reset(new NCursesTermWindow);
   rootPane.setApp(*this);
-  rootPane.setTermWindow(termWindow_);
+  rootPane.setTermWindow(termWindow_.get());
   handleResize();
   rootPane.render();
 }
@@ -27,8 +29,8 @@ bane::App::~App() {
 void bane::App::render() { rootPane.render(); }
 void bane::App::handleResize() {
   BOOST_LOG_TRIVIAL(trace) << "App::handleResize";
-  termWindow_.updateSize();
-  rootPane.resize(termWindow_.width(), termWindow_.height());
+  termWindow_->updateSize();
+  rootPane.resize(termWindow_->width(), termWindow_->height());
   clear();
   refresh();
   rootPane.render();

@@ -1,7 +1,6 @@
 #include "widget.h"
 #include "app.h"
 #include "simple_layout_mgr.h"
-#include "term_window.h"
 
 #include <boost/core/demangle.hpp>
 #include <boost/log/trivial.hpp>
@@ -150,8 +149,8 @@ bane::CharPoint bane::Widget::screenToRelative(int x, int y) {
   return {x - absX(), y - absY()};
 }
 
-void bane::Widget::setTermWindow(TermWindow& termWindow) {
-  termWindow_ = &termWindow;
+void bane::Widget::setTermWindow(TermWindow* termWindow) {
+  termWindow_ = termWindow;
 }
 
 void bane::Widget::setApp(App& app) { app_ = &app; }

@@ -1,5 +1,5 @@
-#ifndef SCREEN_H
-#define SCREEN_H
+#ifndef TERM_WINDOW_H
+#define TERM_WINDOW_H
 
 #include "widget.h"
 #include <memory>
@@ -11,18 +11,20 @@ namespace bane {
 class TermWindow {
 public:
   TermWindow();
-  ~TermWindow();
+  virtual ~TermWindow();
 
   void updateSize();
   void updateClickMap(Widget& w);
   Widget* widgetAt(int x, int y) const;
-  void waitForKey() const;
+  virtual void waitForKey() const = 0;
   int width() const{return width_;}
   int height() const{return height_;}
-  void showCursor(bool show=true);
+  virtual void showCursor(bool show=true) = 0;
+
+protected:
+  virtual void setUpMouse() = 0;
 
 private:
-  void setUpMouse();
   inline unsigned long clickMapIndex(int x, int y) const {
     return static_cast<unsigned long>(y * width_ + x);
   }

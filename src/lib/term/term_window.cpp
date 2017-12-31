@@ -1,37 +1,11 @@
 #include "term_window.h"
 #include <boost/log/trivial.hpp>
-#include <ncurses.h>
 #include <stdexcept>
 
-namespace {
-// Timeout for non-blocking read
-constexpr const int nCursesTimeOut{10};
-} // namespace
 
-bane::TermWindow::TermWindow() {
-  initscr();
-  clear();
-  noecho();
-  timeout(nCursesTimeOut);
-  showCursor(false);
-  // init_pair(1, COLOR_BLUE, COLOR_WHITE);
+bane::TermWindow::TermWindow() {}
 
-  setUpMouse();
-  updateSize();
-  refresh();
-}
-
-bane::TermWindow::~TermWindow() { endwin(); }
-
-void bane::TermWindow::setUpMouse() {
-  if (NCURSES_MOUSE_VERSION <= 0) {
-    throw std::runtime_error{"No mouse available"};
-  }
-
-  mousemask(ALL_MOUSE_EVENTS, nullptr);
-  keypad(stdscr, TRUE);
-  BOOST_LOG_TRIVIAL(trace) << "Mouse set up";
-}
+bane::TermWindow::~TermWindow() {}
 
 /// Indicate area occupied by Widget
 void bane::TermWindow::updateClickMap(Widget& widget) {
@@ -71,8 +45,3 @@ void bane::TermWindow::updateSize() {
   // TODO repaint all widgets
 }
 
-void bane::TermWindow::waitForKey() const { getch(); }
-
-void bane::TermWindow::showCursor(bool show){
-  curs_set(show); 
-}

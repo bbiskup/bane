@@ -73,7 +73,7 @@ public:
   CharPoint origin() const;
   CharPoint screenToRelative(int x, int y);
   void setApp(App& app);
-  void setTermWindow(TermWindow& termWindow);
+  void setTermWindow(TermWindow* termWindow);
 
   template <class LayoutMgrT> void setLayoutMgr() {
     layoutMgr_.reset(new LayoutMgrT{*this});

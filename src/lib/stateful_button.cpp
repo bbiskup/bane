@@ -1,5 +1,5 @@
 #include "stateful_button.h"
-#include "term_window.h"
+#include "term/term_window.h"
 
 #include <boost/log/trivial.hpp>
 

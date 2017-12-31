@@ -30,7 +30,7 @@ void bane::EventHandler::handle(const MouseEvent& e) {
   BOOST_LOG_TRIVIAL(trace) << "Handling mouse event " << e.name() << " "
                            << clickTypeStrs[e.clickType];
 
-  Widget* widget = app_.termWindow().widgetAt(e.x, e.y);
+  Widget* widget = app_.termWindow()->widgetAt(e.x, e.y);
   if (widget) {
     BOOST_LOG_TRIVIAL(trace) << "Widget: " << *widget;
     app_.requestFocus(widget);
@@ -43,7 +43,7 @@ void bane::EventHandler::handle(const MouseEvent& e) {
 void bane::EventHandler::handle(const KeyEvent& e) {
   BOOST_LOG_TRIVIAL(trace) << "Handling key event " << e.c;
 
-  Widget* widget = app_.termWindow().widgetAt(e.x, e.y);
+  Widget* widget = app_.termWindow()->widgetAt(e.x, e.y);
   if (widget) {
     BOOST_LOG_TRIVIAL(trace) << "Widget: " << *widget;
     widget->key(e);
