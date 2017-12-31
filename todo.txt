@@ -17,6 +17,7 @@
 - nice-to-have: text mask and/or regexp mask
 - proper inverse input area
 - copy/paste behavior?
+- yield focus to 'next' widget when pressing enter (form-like behavior)
 
 ### ListBox
 
