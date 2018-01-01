@@ -143,10 +143,10 @@ void bane::LineEdit::handleSpecialKey(SpecialKey key) {
     yieldFocus(FocusYieldHint::start);
     return;
   case SpecialKey::arrowDown:
+  case SpecialKey::enter:
+  case SpecialKey::tab:
     yieldFocus(FocusYieldHint::end);
     return;
-  case SpecialKey::tab:
-    break;
   };
   doRender();
 }

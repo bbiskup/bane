@@ -18,7 +18,8 @@ enum class SpecialKey {
   end,
   backspace,
   delete_,
-  tab
+  tab,
+  enter
 };
 
 class KeyEvent : public PositionEvent {
@@ -28,6 +29,7 @@ public:
   void accept(EventHandler& handler) const override;
 
   const int c; // ncurses character
+  const std::string keyName;
   boost::optional<SpecialKey> specialKey;
   bool ctrl{false};
   bool altGr{false};

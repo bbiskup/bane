@@ -21,16 +21,25 @@ std::unordered_map<int, bane::SpecialKey> specialKeyMap{
     // 'delete character' key
     {KEY_DC, bane::SpecialKey::delete_},
 };
-}
 
-bane::KeyEvent::KeyEvent(int c_) : c{c_} {
+namespace key {
+const std::string enter {"^J"};
+const std::string tab {"^I"};
+} // namespace key
+} // namespace
+
+bane::KeyEvent::KeyEvent(int c_) : c{c_}, keyName{keyname(c)} {
   getyx(stdscr, y, x);
   auto specialKeyIt = specialKeyMap.find(c);
   if (specialKeyIt != specialKeyMap.end()) {
     specialKey = specialKeyIt->second;
   }
 
-  std::string keyName{keyname(c)};
+  if (keyName == key::enter) {
+    specialKey = SpecialKey::enter;
+  } else if (keyName == key::tab) {
+    specialKey = SpecialKey::tab;
+  }
 
   if (keyName.size() > 1 && keyName[0] == '^') {
     ctrl = true;
