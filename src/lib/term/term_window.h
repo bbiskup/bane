@@ -29,6 +29,9 @@ public:
   int width() const { return width_; }
   int height() const { return height_; }
 
+  // Clear entire screen using default theme colors
+  virtual void clearScreen() = 0;
+
   /// Wait until a key has been pressed
   virtual void waitForKey() const = 0;
 

@@ -14,7 +14,8 @@ class NCursesTermWindow : public TermWindow {
 public:
   NCursesTermWindow(std::unique_ptr<Theme> theme);
   ~NCursesTermWindow() override;
-
+  
+  void clearScreen() override;
   void waitForKey() const override;
   void showCursor(bool show = true) override;
 

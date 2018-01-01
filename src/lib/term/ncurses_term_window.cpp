@@ -15,18 +15,21 @@ constexpr const int nCursesTimeOut{10};
 bane::NCursesTermWindow::NCursesTermWindow(std::unique_ptr<Theme> theme)
     : TermWindow{std::move(theme)} {
   ::initscr();
-  ::clear();
+  clearScreen();
   ::noecho();
   ::timeout(nCursesTimeOut);
   showCursor(false);
-  // init_pair(1, COLOR_BLUE, COLOR_WHITE);
-
   setUpMouse();
   updateSize();
   ::refresh();
 }
 
 bane::NCursesTermWindow::~NCursesTermWindow() { ::endwin(); }
+
+void bane::NCursesTermWindow::clearScreen() {
+  *this << theme_->normal();
+  ::clear();
+}
 
 void bane::NCursesTermWindow::waitForKey() const { ::getch(); }
 
@@ -61,7 +64,7 @@ bane::TermWindow& bane::NCursesTermWindow::operator<<(Font fontWeight) {
   case Font::normal:
     standend();
     // attrset(A_NORMAL);
-  *this << theme_->normal();
+    *this << theme_->normal();
     break;
   case Font::bold:
     attron(A_BOLD);

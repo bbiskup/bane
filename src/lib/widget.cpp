@@ -174,7 +174,8 @@ void bane::Widget::paintBackground() {
   }
   BOOST_LOG_TRIVIAL(trace) << "paintBackground " << width_ << ", " << height_;
   CharPoint orig{origin()};
-  attrset(COLOR_PAIR(1));
+  termWindow_->move(orig);
+  *termWindow_ << termWindow_->theme().normal();
   std::string rowStr(static_cast<unsigned long>(width_), ' ');
   for (int y{orig.y}; y < orig.y + height_; ++y) {
     mvaddstr(y, x_, rowStr.c_str());

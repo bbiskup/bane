@@ -33,6 +33,7 @@ bane::ColorPair::ColorPair(short nCursesForeground, short nCursesBackground)
 chtype bane::ColorPair::nCursesColorPair() const { return nCursesColorPair_; }
 
 const bane::ColorPair bane::color::white_on_blue{COLOR_WHITE, COLOR_BLUE};
+const bane::ColorPair bane::color::white_on_black{COLOR_WHITE, COLOR_BLACK};
 const bane::ColorPair bane::color::yellow_on_green{COLOR_YELLOW, COLOR_GREEN};
 const bane::ColorPair bane::color::yellow_on_red{COLOR_YELLOW, COLOR_RED};
 const bane::ColorPair bane::color::red_on_blue{COLOR_RED, COLOR_BLUE};

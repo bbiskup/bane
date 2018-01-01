@@ -19,6 +19,7 @@ private:
 
 namespace color {
 extern const ColorPair white_on_blue;
+extern const ColorPair white_on_black;
 extern const ColorPair yellow_on_red;
 extern const ColorPair yellow_on_green;
 extern const ColorPair red_on_blue;
