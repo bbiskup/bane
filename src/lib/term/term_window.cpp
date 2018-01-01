@@ -1,8 +1,10 @@
 #include "term_window.h"
 #include <boost/log/trivial.hpp>
 #include <stdexcept>
+#include <stdexcept>
 
-bane::TermWindow::TermWindow() {}
+bane::TermWindow::TermWindow(std::unique_ptr<Theme> theme)
+    : theme_{std::move(theme)} {}
 
 bane::TermWindow::~TermWindow() {}
 

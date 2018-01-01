@@ -2,6 +2,9 @@
 #define NCURSES_TERM_WINDOW_H
 
 #include "term/term_window.h"
+#include "theme.h"
+
+#include <memory>
 
 namespace bane {
 
@@ -9,7 +12,7 @@ namespace bane {
 // Terminal implementation based on ncurses library
 class NCursesTermWindow : public TermWindow {
 public:
-  NCursesTermWindow();
+  NCursesTermWindow(std::unique_ptr<Theme> theme);
   ~NCursesTermWindow() override;
 
   void waitForKey() const override;
@@ -21,6 +24,7 @@ public:
 
   TermWindow& operator<<(const std::string s) override;
   TermWindow& operator<<(Font fontWeight) override;
+  TermWindow& operator<<(const ColorPair& colorPair) override;
 
   CharPoint screenDimensions() const override;
 

@@ -2,6 +2,8 @@
 #define TERM_WINDOW_H
 
 #include "widget.h"
+#include "theme.h"
+#include "color_pair.h"
 
 #include <memory>
 #include <string>
@@ -11,13 +13,14 @@ namespace bane {
 
 enum class Font { normal, bold, underline, dim, reverse };
 
+
 using FontStyles = std::vector<Font>;
 using TerminalText = std::string;
 
 /// Abstraction of terminal
 class TermWindow {
 public:
-  TermWindow();
+  TermWindow(std::unique_ptr<Theme> theme);
   virtual ~TermWindow();
 
   void updateSize();
@@ -54,11 +57,18 @@ public:
   virtual TermWindow& operator<<(Font fontStyle) = 0;
   TermWindow& operator<<(const FontStyles& fontStyles);
 
+  /// Set foreground and background color
+  virtual TermWindow& operator<<(const ColorPair& colorPair) = 0;
+
   virtual CharPoint screenDimensions() const = 0;
+
+  const Theme& theme() const { return *theme_; }
 
 protected:
   /// Configure terminal to accept mouse input
   virtual void setUpMouse() = 0;
+
+  std::unique_ptr<Theme> theme_;
 
 private:
   inline unsigned long clickMapIndex(int x, int y) const {

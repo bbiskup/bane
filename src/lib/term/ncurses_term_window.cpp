@@ -12,7 +12,8 @@ namespace {
 constexpr const int nCursesTimeOut{10};
 } // namespace
 
-bane::NCursesTermWindow::NCursesTermWindow() {
+bane::NCursesTermWindow::NCursesTermWindow(std::unique_ptr<Theme> theme)
+    : TermWindow{std::move(theme)} {
   ::initscr();
   ::clear();
   ::noecho();
@@ -60,6 +61,7 @@ bane::TermWindow& bane::NCursesTermWindow::operator<<(Font fontWeight) {
   case Font::normal:
     standend();
     // attrset(A_NORMAL);
+  *this << theme_->normal();
     break;
   case Font::bold:
     attron(A_BOLD);
@@ -82,6 +84,12 @@ bane::CharPoint bane::NCursesTermWindow::screenDimensions() const {
   int height;
   getmaxyx(stdscr, height, width);
   return {width, height};
+}
+
+bane::TermWindow& bane::NCursesTermWindow::
+operator<<(const ColorPair& colorPair) {
+  attrset(colorPair.nCursesColorPair());
+  return *this;
 }
 
 #pragma clang diagnostic pop

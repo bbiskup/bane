@@ -130,7 +130,10 @@ void bane::Widget::render() {
   layoutMgr_->layout();
   termWindow_->updateClickMap(*this);
   paintBackground();
+
   termWindow_->move(origin());
+  *termWindow_ << app_->theme().normal();
+
   doRender();
   for (auto& child : children_) {
     child.render();

@@ -37,7 +37,7 @@ public:
   void yieldFocus(Widget* widget, FocusYieldHint yieldHint);
 
   TermWindow* termWindow() { return termWindow_.get(); }
-  const Theme& theme() const { return *theme_; }
+  const Theme& theme() const { return termWindow_->theme(); }
 
   Pane rootPane{};
   Widget* focusWidget() const{return focusWidget_;}
@@ -45,7 +45,6 @@ public:
 private:
   std::unique_ptr<TermWindow> termWindow_;
   std::string name_;
-  std::unique_ptr<Theme> theme_;
   std::queue<std::unique_ptr<Event>> queue_;
   std::mutex queueMutex_;
   Widget* focusWidget_{nullptr};

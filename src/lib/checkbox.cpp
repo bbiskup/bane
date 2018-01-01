@@ -1,4 +1,5 @@
 #include "checkbox.h"
+#include "app.h"
 #include "event/mouse_event.h"
 #include "term/term_window.h"
 
@@ -37,6 +38,7 @@ int bane::CheckBox::preferredHeight() const noexcept { return 1; }
 void bane::CheckBox::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "CheckBox::doRender " << relX() << " " << relY();
   const std::string checkMark{state_ ? "x" : " "};
-  *termWindow_ << Font::normal << Font::dim << "[" << Font::normal << Font::bold << checkMark 
-       << Font::normal << Font::dim << "]" << Font::normal << " " << label_;
+  *termWindow_ << Font::dim << "[" << Font::normal << Font::bold << checkMark
+               << Font::normal << Font::dim << "]" << Font::normal << " "
+               << label_;
 }

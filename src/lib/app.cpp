@@ -14,8 +14,8 @@
 #include <utility>
 
 bane::App::App(std::string name, std::unique_ptr<Theme> theme)
-    : name_{std::move(name)}, theme_{std::move(theme)} {
-  termWindow_.reset(new NCursesTermWindow);
+    : name_{std::move(name)} {
+  termWindow_.reset(new NCursesTermWindow{std::move(theme)});
   rootPane.setApp(*this);
   rootPane.setTermWindow(termWindow_.get());
   handleResize();
