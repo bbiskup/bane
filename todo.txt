@@ -59,6 +59,9 @@
 
 - multi-line input
 - similar to LineEdit (LineEdit could actually be a TextArea of height 1)
+- also for read-only output, e.g. log
+- scrollable
+- optionally discard top lines when scrolling? (e.g. for large logs)
 
 ## Focus
 
@@ -94,4 +97,5 @@
   - received as multi-character input, (1) M-C, (2) M-6
   - Input with EurKey keyboard works on when using getnstr
 
-
+# Optimization
+- paint background only where there is no widget (using click map)?
