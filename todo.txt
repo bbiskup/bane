@@ -74,6 +74,13 @@
 
 - asynchronous
 
+## Enabling/disabling widgets
+
+- don't route mouse/keyboard events to disabled widgets
+- draw widget in dim mode
+  - consider switch for TerminalWindow stream output to temporarily disable
+    all formatting and forcing dim style
+
 ## Separator
 
 - horizontal or vertical
