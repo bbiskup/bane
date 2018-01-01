@@ -4,8 +4,8 @@
 #include "widget.h"
 
 #include <memory>
-#include <vector>
 #include <string>
+#include <vector>
 
 namespace bane {
 
@@ -23,16 +23,19 @@ public:
   void updateSize();
   void updateClickMap(Widget& w);
   Widget* widgetAt(int x, int y) const;
-  int width() const{return width_;}
-  int height() const{return height_;}
+  int width() const { return width_; }
+  int height() const { return height_; }
 
   /// Wait until a key has been pressed
   virtual void waitForKey() const = 0;
 
   /// Whether or not cursor should be displayed
-  virtual void showCursor(bool show=true) = 0;
+  virtual void showCursor(bool show = true) = 0;
 
-  /// Move cursor to given position
+  /// Move cursor to given absolute screen position
+  virtual void move(const CharPoint& p) { this->move(p.x, p.y); }
+ 
+  /// Move cursor to given absolute screen position
   virtual void move(int x, int y) = 0;
 
   /// Refresh screen
@@ -40,8 +43,8 @@ public:
 
   /// Draw a string at given absolute position
   virtual void drawString(int x, int y, const TerminalText& text) = 0;
-  void drawString(const CharPoint& charPoint, const TerminalText& text){
-      drawString(charPoint.x, charPoint.y, text);
+  void drawString(const CharPoint& charPoint, const TerminalText& text) {
+    drawString(charPoint.x, charPoint.y, text);
   }
 
   /// Emit text, applying currently set font style

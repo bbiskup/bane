@@ -67,6 +67,7 @@ public:
   void resize(int width, int height);
   void resizeToPreferred();
   void moveTo(int x, int y);
+  void moveTo(const CharPoint& point);
   void render();
   Widget* root() { return root_ ? root_ : this; }
   CharPoint origin() const;

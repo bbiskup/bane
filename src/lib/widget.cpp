@@ -118,11 +118,19 @@ void bane::Widget::moveTo(int x, int y) {
   x_ = x;
   y_ = y;
 }
+
+void bane::Widget::moveTo(const CharPoint& p) {
+  x_ = p.x;
+  y_ = p.y;
+}
+
+
 void bane::Widget::render() {
   BOOST_LOG_TRIVIAL(trace) << "render";
   layoutMgr_->layout();
   termWindow_->updateClickMap(*this);
   paintBackground();
+  termWindow_->move(origin());
   doRender();
   for (auto& child : children_) {
     child.render();
