@@ -36,8 +36,7 @@ int bane::RadioButton::preferredHeight() const noexcept { return 1; }
 void bane::RadioButton::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "RadioButton::doRender " << relX() << " "
                            << relY();
-  CharPoint orig{origin()};
-  termWindow_->drawString(orig, state_ ? "(o)" : "( )");
-  termWindow_->drawString(orig.x + 3, orig.y, " ");
-  termWindow_->drawString(orig.x + 4, orig.y, label_);
+  const std::string selectMark{state_ ? "o" : " "};
+  *termWindow_ << Font::normal << Font::dim << "(" << Font::normal << Font::bold << selectMark 
+       << Font::normal << Font::dim << ")" << Font::normal << " " << label_;
 }
