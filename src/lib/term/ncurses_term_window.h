@@ -24,6 +24,7 @@ public:
   void drawString(int x, int y, const TerminalText& text) override;
 
   TermWindow& operator<<(const std::string s) override;
+  TermWindow& operator<<(char c) override;
   TermWindow& operator<<(Font fontWeight) override;
   TermWindow& operator<<(const ColorPair& colorPair) override;
 

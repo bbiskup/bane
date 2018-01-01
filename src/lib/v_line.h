@@ -1,5 +1,5 @@
-#ifndef H_LINE_H
-#define H_LINE_H
+#ifndef V_LINE_H
+#define V_LINE_H
 
 #include "widget.h"
 
@@ -7,10 +7,10 @@
 
 namespace bane {
 
-// Horizontal line (separator)
-class HLine : public Widget {
+// Vertical line (separator)
+class VLine : public Widget {
 public:
-  HLine(Widget* root, char lineChar='-');
+  VLine(Widget* root, char lineChar='|');
 
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;

@@ -21,5 +21,9 @@ int bane::VBoxLayoutMgr::preferredWidth() const noexcept {
 }
 
 int bane::VBoxLayoutMgr::preferredHeight() const noexcept {
-  return static_cast<int>(parent_.numChildren());
+  // Sum of heights of children
+  return std::accumulate(parent_.children().begin(), parent_.children().end(), 0,
+                         [](int s, const Widget& widget) {
+                           return s + widget.preferredHeight();
+                         });
 }

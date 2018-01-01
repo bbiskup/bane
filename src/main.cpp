@@ -5,14 +5,15 @@
 #include "event/custom_event.h"
 #include "event/dummy_event.h"
 #include "h_box_layout_mgr.h"
-#include "label.h"
 #include "h_line.h"
+#include "label.h"
 #include "line_edit.h"
 #include "logging.h"
 #include "push_button.h"
 #include "radio_button.h"
 #include "theme.h"
 #include "v_box_layout_mgr.h"
+#include "v_line.h"
 
 #include <boost/log/trivial.hpp>
 #include <chrono>
@@ -55,20 +56,14 @@ int main() {
   });*/
 
   //  pane->addChild<bane::Button>("my_button");
-  /* pane->addChild<bane::Button>("my_button_x");
-   bane::Pane* paneH{pane->addChild<bane::Pane>()};
-   paneH->resize(50, 1);
-   paneH->setLayoutMgr<bane::HBoxLayoutMgr>();
-   paneH->addChild<bane::Button>("another_button");*/
-
-  /*
-
+  /* pane->addChild<bane::Button>("my_button_x");*/
   bane::Pane* paneH{pane->addChild<bane::Pane>()};
-  paneH->resize(50, 1);
+  paneH->resize(50, 5);
   paneH->setLayoutMgr<bane::HBoxLayoutMgr>();
-  paneH->addChild<bane::Button>("another_button");
-  paneH->addChild<bane::Button>("yet_another_button");
-  */
+  paneH->addChild<bane::PushButton>("another_button");
+  paneH->addChild<bane::VLine>();
+  paneH->addChild<bane::Label>("label_in_paneH");
+  BOOST_LOG_TRIVIAL(trace) << "######## " << paneH->height();
 
   pane->addChild<bane::PushButton>("my_button");
   bane::ButtonGroup* bg1{pane->addChild<bane::ButtonGroup>(

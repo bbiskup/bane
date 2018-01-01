@@ -59,6 +59,11 @@ bane::TermWindow& bane::NCursesTermWindow::operator<<(const std::string s) {
   return *this;
 }
 
+bane::TermWindow& bane::NCursesTermWindow::operator<<(char c) {
+  addch(c);
+  return *this;
+}
+
 bane::TermWindow& bane::NCursesTermWindow::operator<<(Font fontWeight) {
   switch (fontWeight) {
   case Font::normal:

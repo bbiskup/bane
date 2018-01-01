@@ -55,6 +55,7 @@ public:
 
   /// Emit text, applying currently set font style
   virtual TermWindow& operator<<(const std::string s) = 0;
+  virtual TermWindow& operator<<(char c) = 0;
 
   /// Set font style
   virtual TermWindow& operator<<(Font fontStyle) = 0;
