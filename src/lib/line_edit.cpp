@@ -54,15 +54,13 @@ void bane::LineEdit::setTextFieldWidth(size_t width) {
 
 void bane::LineEdit::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "LineEdit::doRender " << relX() << " " << relY();
-
-  const CharPoint orig{origin()};
-
   // the text field must be padded to ensure the widget actually occupies the
   // entire space
   const size_t padLen{
       text_.size() >= textFieldWidth_ ? 0 : textFieldWidth_ - text_.size() + 1};
   const std::string paddedText{text_ + std::string(padLen, ' ')};
-  termWindow_->drawString(orig, label_ + labelSeparator + paddedText);
+  termWindow_->move(origin());
+  *termWindow_ << Font::normal << label_ << labelSeparator << Font::reverse << paddedText;
   positionCursorInText(cursorPos_);
 }
 
