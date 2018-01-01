@@ -6,6 +6,7 @@
 #include "event/dummy_event.h"
 #include "h_box_layout_mgr.h"
 #include "label.h"
+#include "h_line.h"
 #include "line_edit.h"
 #include "logging.h"
 #include "push_button.h"
@@ -44,6 +45,7 @@ int main() {
 
   bane::Label* label1{pane->addChild<bane::Label>("my_label_x")};
   label1->setText("new_label_text");
+  pane->addChild<bane::HLine>();
   /*
   std::future<void> job = std::async(std::launch::async, [&label1, &app]() {
     std::this_thread::sleep_for(2s);
