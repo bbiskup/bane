@@ -2,7 +2,6 @@
 #include <boost/log/trivial.hpp>
 #include <stdexcept>
 
-
 bane::TermWindow::TermWindow() {}
 
 bane::TermWindow::~TermWindow() {}
@@ -47,3 +46,10 @@ void bane::TermWindow::updateSize() {
   // TODO repaint all widgets
 }
 
+/// Apply multiple font styles at once
+bane::TermWindow& bane::TermWindow::operator<<(const FontStyles& fontStyles) {
+  for (Font f : fontStyles) {
+    *this << f;
+  }
+  return *this;
+}

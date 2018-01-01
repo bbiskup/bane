@@ -18,6 +18,10 @@ public:
   void move(int x, int y) override;
   void refresh() override;
   void drawString(int x, int y, const TerminalText& text) override;
+
+  TermWindow& operator<<(const std::string s) override;
+  TermWindow& operator<<(Font fontWeight) override;
+
   CharPoint screenDimensions() const override;
 
 protected:

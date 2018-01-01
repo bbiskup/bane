@@ -9,6 +9,9 @@
 
 namespace bane {
 
+enum class Font { normal, bold, underline, dim, reverse };
+
+using FontStyles = std::vector<Font>;
 using TerminalText = std::string;
 
 /// Abstraction of terminal
@@ -40,6 +43,13 @@ public:
   void drawString(const CharPoint& charPoint, const TerminalText& text){
       drawString(charPoint.x, charPoint.y, text);
   }
+
+  /// Emit text, applying currently set font style
+  virtual TermWindow& operator<<(const std::string s) = 0;
+
+  /// Set font style
+  virtual TermWindow& operator<<(Font fontStyle) = 0;
+  TermWindow& operator<<(const FontStyles& fontStyles);
 
   virtual CharPoint screenDimensions() const = 0;
 

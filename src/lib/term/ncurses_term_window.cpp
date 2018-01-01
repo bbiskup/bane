@@ -3,6 +3,10 @@
 #include <boost/log/trivial.hpp>
 #include <ncurses.h>
 
+// Ncurses 'attrset' and other macros use legacy definition of NULL
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
+
 namespace {
 // Timeout for non-blocking read
 constexpr const int nCursesTimeOut{10};
@@ -46,9 +50,38 @@ void bane::NCursesTermWindow::drawString(int x, int y,
   mvaddstr(y, x, text.c_str());
 }
 
+bane::TermWindow& bane::NCursesTermWindow::operator<<(const std::string s) {
+  addstr(s.c_str());
+  return *this;
+}
+
+bane::TermWindow& bane::NCursesTermWindow::operator<<(Font fontWeight) {
+  switch (fontWeight) {
+  case Font::normal:
+    standend();
+    // attrset(A_NORMAL);
+    break;
+  case Font::bold:
+    attron(A_BOLD);
+    break;
+  case Font::dim:
+    attron(A_DIM);
+    break;
+  case Font::reverse:
+    attron(A_REVERSE);
+    break;
+  case Font::underline:
+    attron(A_UNDERLINE);
+    break;
+  }
+  return *this;
+}
+
 bane::CharPoint bane::NCursesTermWindow::screenDimensions() const {
   int width;
   int height;
   getmaxyx(stdscr, height, width);
   return {width, height};
 }
+
+#pragma clang diagnostic pop
