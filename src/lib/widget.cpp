@@ -8,6 +8,10 @@
 #include <algorithm>
 #include <functional>
 #include <iterator>
+#include <thread>
+#include <thread>
+
+using namespace std::chrono_literals;
 
 namespace {
 /// auto-incremented counter
@@ -135,7 +139,8 @@ void bane::Widget::render() {
 
   if (blush_) {
     // Don't override block rectangle when debugging layout
-    return;
+      refresh();
+      std::this_thread::sleep_for(20ms);
   }
 
   doRender();
