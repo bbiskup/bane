@@ -61,7 +61,7 @@ int main() {
   //  pane->addChild<bane::Button>("my_button");
   /* pane->addChild<bane::Button>("my_button_x");*/
 
-  /*
+  
   bane::Pane* paneH{pane->addChild<bane::Pane>()};
   // paneH->resize(50, 2);
   paneH->setLayoutMgr<bane::HBoxLayoutMgr>();
@@ -72,7 +72,7 @@ int main() {
 
   // pane->addChild<bane::PushButton>("my_button");
   pane->addChild<bane::Label>("my_label");
-  */
+  
 
     bane::ButtonGroup* bg1{pane->addChild<bane::ButtonGroup>(
         "button_group_1", bane::Orientation::vertical)};

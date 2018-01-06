@@ -24,8 +24,8 @@ void ensureAcceptsFocus(const bane::Widget* w);
 } // namespace
 
 bane::Widget::Widget(Widget* root)
-    : root_{root}, instanceNum_{widgetNum++}, layoutMgr_{
-                                                  new SimpleLayoutMgr{*this}} {}
+    : root_{root}, layoutMgr_{new SimpleLayoutMgr{*this}}, instanceNum_{
+                                                               widgetNum++} {}
 
 bane::Widget::~Widget() { BOOST_LOG_TRIVIAL(trace) << "Widget::~Widget"; }
 

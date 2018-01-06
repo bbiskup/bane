@@ -24,9 +24,7 @@ class KeyEvent;
 /// Indicate whether the focus was yielded by moving
 /// before or after widget. This information is used to decide
 /// which widget should receive focus next
-enum class FocusYieldHint{
-    start, end
-};
+enum class FocusYieldHint { start, end };
 
 class Widget {
 public:
@@ -124,14 +122,16 @@ public:
   friend class LayoutMgr;
 
 protected:
+  virtual void doRender() {}
+  void paintBackground();
+  virtual void onAddChild(Widget&) {}
+
   Widget* root_{};
   Widget* focusPredecessor_{};
   Widget* focusSuccessor_{};
   App* app_{};
   TermWindow* termWindow_{};
-  virtual void doRender() {}
-  void paintBackground();
-  virtual void onAddChild(Widget&) {}
+  std::unique_ptr<LayoutMgr> layoutMgr_;
 
 private:
   void createWindow();
@@ -148,7 +148,6 @@ private:
 
   int width_{};
   int height_{};
-  std::unique_ptr<LayoutMgr> layoutMgr_;
   boost::ptr_vector<Widget> children_;
   bool blush_{false};
 
