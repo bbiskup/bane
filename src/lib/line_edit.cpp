@@ -10,6 +10,7 @@
 namespace {
 /// Separator between label and text
 const std::string labelSeparator = ": ";
+const std::string eraseButton = "x";
 } // namespace
 
 bane::LineEdit::LineEdit(Widget* root, std::string label, size_t textFieldWidth,
@@ -38,8 +39,9 @@ bane::LineEdit::LineEdit(Widget* root, std::string label, size_t textFieldWidth,
 int bane::LineEdit::preferredWidth() const noexcept {
   return static_cast<int>(
       label_.size() + labelSeparator.size() +
-      std::max<size_t>(static_cast<unsigned long>(textFieldWidth_),
-                       text_.size()));
+      std::max<size_t>(static_cast<unsigned long>(textFieldWidth_) + 1,
+                       text_.size()) +
+      eraseButton.size());
 }
 
 int bane::LineEdit::preferredHeight() const noexcept { return 1; }
@@ -60,7 +62,8 @@ void bane::LineEdit::doRender() {
       text_.size() >= textFieldWidth_ ? 0 : textFieldWidth_ - text_.size() + 1};
   const std::string paddedText{text_ + std::string(padLen, ' ')};
   termWindow_->move(origin());
-  *termWindow_ << Font::normal << label_ << labelSeparator << Font::reverse << paddedText;
+  *termWindow_ << Font::normal << label_ << labelSeparator << Font::reverse
+               << paddedText << Font::dim << eraseButton;
   positionCursorInText(cursorPos_);
 }
 
@@ -86,6 +89,10 @@ void bane::LineEdit::positionCursorInWidget(size_t x) {
   if (x < textOffset) {
     // If label was clicked, move cursor to first character position
     positionCursorInText(0);
+  } else if (static_cast<int>(x) == width() - 1) {
+    // eraser button
+    text_ = "";
+    positionCursorInText(text_.size());
   } else if (x > textOffset + text_.size()) {
     positionCursorInText(text_.size());
   } else {
