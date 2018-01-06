@@ -61,7 +61,6 @@ int main() {
   //  pane->addChild<bane::Button>("my_button");
   /* pane->addChild<bane::Button>("my_button_x");*/
 
-  
   bane::Pane* paneH{pane->addChild<bane::Pane>()};
   // paneH->resize(50, 2);
   paneH->setLayoutMgr<bane::HBoxLayoutMgr>();
@@ -72,19 +71,17 @@ int main() {
 
   // pane->addChild<bane::PushButton>("my_button");
   pane->addChild<bane::Label>("my_label");
-  
 
-    bane::ButtonGroup* bg1{pane->addChild<bane::ButtonGroup>(
-        "button_group_1", bane::Orientation::vertical)};
-    bg1->addChild<bane::CheckBox>("my_checkbox_1");
-    bg1->addChild<bane::CheckBox>("my_checkbox_2");
-    bg1->addChild<bane::RadioButton>("my_radio_button_1");
-    bg1->addChild<bane::RadioButton>("my_radio_button_2");
-    // bg1->addChild<bane::CheckBox>("my_checkbox_3");
-     
+  bane::ButtonGroup* bg1{pane->addChild<bane::ButtonGroup>(
+      "button_group_1", bane::Orientation::vertical)};
+  bg1->addChild<bane::CheckBox>("my_checkbox_1");
+  bg1->addChild<bane::CheckBox>("my_checkbox_2");
+  bg1->addChild<bane::RadioButton>("my_radio_button_1");
+  bg1->addChild<bane::RadioButton>("my_radio_button_2");
+  // bg1->addChild<bane::CheckBox>("my_checkbox_3");
+
   pane->addChild<bane::Label>("fourth_label");
 
-  /*
   pane->addChild<bane::Label>("my_label_x2");
   // bg1->children()[0].requestFocus();
   pane->addChild<bane::LineEdit>("My text", 20ul);
@@ -100,7 +97,6 @@ int main() {
 
   bg1->setFocusSuccessor(ledx);
   ledx->setFocusSuccessor(bg2);
-  */
 
   app.run();
 }
