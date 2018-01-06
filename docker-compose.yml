@@ -1,0 +1,13 @@
+dev:
+  build: .
+  volumes:
+    - .:/code
+    - ./.ccache:/root/.ccache
+    - ./.bash_history:/root/.bash_history
+    - /tmp/.X11-unix/X0:/tmp/.X11-unix/X0
+  command: "bash"
+  stdin_open: true
+  tty: true
+  security_opt:
+      - seccomp:unconfined
+
