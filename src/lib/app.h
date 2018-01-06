@@ -4,19 +4,20 @@
 #include "event/event.h"
 #include "pane.h"
 #include "term/term_window.h"
-#include "widget.h"
 #include "theme.h"
+#include "widget.h"
+#include <memory>
 #include <mutex>
 #include <queue>
 #include <string>
-#include <memory>
 
 namespace bane {
 
-/// Application 
+/// Application
 class App {
 public:
-  explicit App(std::string name, std::unique_ptr<Theme> theme);
+  explicit App(std::string name, std::unique_ptr<Theme> theme,
+               bool debug = false);
   ~App();
   App(const App&) = delete;
   App(App&&) = delete;
@@ -35,19 +36,22 @@ public:
 
   void requestFocus(Widget* widget);
   void yieldFocus(Widget* widget, FocusYieldHint yieldHint);
-  Widget* focusWidget() const{return focusWidget_;}
+  Widget* focusWidget() const { return focusWidget_; }
 
   void blush(Widget* widget);
-  Widget* blushWidget() const{return blushWidget_;}
+  Widget* blushWidget() const { return blushWidget_; }
 
   TermWindow* termWindow() { return termWindow_.get(); }
   const Theme& theme() const { return termWindow_->theme(); }
+
+  bool isDebug() const { return debug_; }
 
   Pane rootPane{};
 
 private:
   std::unique_ptr<TermWindow> termWindow_;
   std::string name_;
+  bool debug_;
   std::queue<std::unique_ptr<Event>> queue_;
   std::mutex queueMutex_;
   Widget* focusWidget_{nullptr};

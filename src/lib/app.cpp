@@ -13,8 +13,8 @@
 #include <mutex>
 #include <utility>
 
-bane::App::App(std::string name, std::unique_ptr<Theme> theme)
-    : name_{std::move(name)} {
+bane::App::App(std::string name, std::unique_ptr<Theme> theme, bool debug)
+    : name_{std::move(name)}, debug_{debug} {
   termWindow_.reset(new NCursesTermWindow{std::move(theme)});
   rootPane.setApp(*this);
   rootPane.setTermWindow(termWindow_.get());

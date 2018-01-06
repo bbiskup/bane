@@ -33,7 +33,7 @@ void bane::EventHandler::handle(const MouseEvent& e) {
   Widget* widget = app_.termWindow()->widgetAt(e.x, e.y);
   if (widget) {
     BOOST_LOG_TRIVIAL(trace) << "########## Event for widget: " << *widget;
-    if (e.button == mouse::Button::none) {
+    if (e.button == mouse::Button::none && app_.blushWidget() != widget) {
       app_.blush(widget);
     }
 
@@ -41,7 +41,11 @@ void bane::EventHandler::handle(const MouseEvent& e) {
       app_.requestFocus(widget);
     }
 
-    widget->mouse(e);
+    // For now, don't dispatch mouse move events to avoid
+    // excessive processing and rendering
+    if (e.clickType != mouse::ClickType::none){
+      widget->mouse(e);
+    }
   } else {
     BOOST_LOG_TRIVIAL(trace) << "No widget at position " << e.x << ", " << e.y;
   }

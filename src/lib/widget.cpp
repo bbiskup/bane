@@ -175,9 +175,7 @@ void bane::Widget::setTermWindow(TermWindow* termWindow) {
 /// If true, widget is painted in a solid color.
 /// This is useful for debugging layout and rendering.
 void bane::Widget::blush(bool isBlush) {
-  BOOST_LOG_TRIVIAL(trace) << "##### " << (isBlush ? "BLUSH" : "UN-BLUSH")
-                           << " " << id();
-  blush_ = isBlush;
+  blush_ = isBlush && app_->isDebug();
   render();
 }
 
