@@ -38,7 +38,8 @@ void bane::NCursesTermWindow::setUpMouse() {
     throw std::runtime_error{"No mouse available"};
   }
 
-  mousemask(ALL_MOUSE_EVENTS, nullptr);
+  mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, nullptr);
+  printf("\033[?1003h\n"); // make term report mouse movement
   keypad(stdscr, TRUE);
   BOOST_LOG_TRIVIAL(trace) << "Mouse set up";
 }

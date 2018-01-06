@@ -1,10 +1,10 @@
 #include "event/event_handler.h"
-#include "event/event.h"
-#include "event/dummy_event.h"
-#include "event/resize_event.h"
-#include "event/mouse_event.h"
-#include "event/key_event.h"
 #include "event/custom_event.h"
+#include "event/dummy_event.h"
+#include "event/event.h"
+#include "event/key_event.h"
+#include "event/mouse_event.h"
+#include "event/resize_event.h"
 #include "widget.h"
 
 #include <boost/log/trivial.hpp>
@@ -33,7 +33,10 @@ void bane::EventHandler::handle(const MouseEvent& e) {
   Widget* widget = app_.termWindow()->widgetAt(e.x, e.y);
   if (widget) {
     BOOST_LOG_TRIVIAL(trace) << "Widget: " << *widget;
-    app_.requestFocus(widget);
+    if (e.wasClicked()) {
+      BOOST_LOG_TRIVIAL(trace) << "####### FOCUS";
+      app_.requestFocus(widget);
+    }
     widget->mouse(e);
   } else {
     BOOST_LOG_TRIVIAL(trace) << "No widget at position " << e.x << ", " << e.y;
