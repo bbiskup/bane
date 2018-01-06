@@ -16,6 +16,8 @@ namespace {
 /// auto-incremented counter
 int widgetNum{0};
 
+std::chrono::milliseconds blushTime{50ms};
+
 int maxPreferredDim(const boost::ptr_vector<bane::Widget>& widgets,
                     std::function<int(const bane::Widget&)> dimGetter);
 
@@ -139,7 +141,7 @@ void bane::Widget::render() {
   if (blush_) {
     // Don't override block rectangle when debugging layout
     refresh();
-    std::this_thread::sleep_for(20ms);
+    std::this_thread::sleep_for(blushTime);
   }
 
   doRender();
