@@ -57,6 +57,14 @@ void bane::App::yieldFocus(Widget* widget, FocusYieldHint yieldHint) {
   }
 }
 
+void bane::App::blush(Widget* widget) {
+  if (blushWidget_) {
+    blushWidget_->blush(false);
+  }
+  blushWidget_ = widget;
+  blushWidget_->blush(true);
+}
+
 /// Run application - start processing events, until explicit termination
 void bane::App::run() {
   EventHandler eventHandler(*this);

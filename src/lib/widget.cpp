@@ -124,7 +124,6 @@ void bane::Widget::moveTo(const CharPoint& p) {
   y_ = p.y;
 }
 
-
 void bane::Widget::render() {
   BOOST_LOG_TRIVIAL(trace) << "render";
   layoutMgr_->layout();
@@ -133,6 +132,11 @@ void bane::Widget::render() {
 
   termWindow_->move(origin());
   *termWindow_ << app_->theme().normal();
+
+  if (blush_) {
+    // Don't override block rectangle when debugging layout
+    return;
+  }
 
   doRender();
   for (auto& child : children_) {
@@ -164,6 +168,15 @@ void bane::Widget::setTermWindow(TermWindow* termWindow) {
   termWindow_ = termWindow;
 }
 
+/// If true, widget is painted in a solid color.
+/// This is useful for debugging layout and rendering.
+void bane::Widget::blush(bool isBlush) {
+  BOOST_LOG_TRIVIAL(trace) << "##### " << (isBlush ? "BLUSH" : "UN-BLUSH")
+                           << " " << id();
+  blush_ = isBlush;
+    render();
+}
+
 void bane::Widget::setApp(App& app) { app_ = &app; }
 
 /// Draw background color
@@ -175,7 +188,8 @@ void bane::Widget::paintBackground() {
   BOOST_LOG_TRIVIAL(trace) << "paintBackground " << width_ << ", " << height_;
   CharPoint orig{origin()};
   termWindow_->move(orig);
-  *termWindow_ << termWindow_->theme().normal();
+  *termWindow_ << (blush_ ? termWindow_->theme().blush()
+                          : termWindow_->theme().normal());
   std::string rowStr(static_cast<unsigned long>(width_), ' ');
   for (int y{orig.y}; y < orig.y + height_; ++y) {
     mvaddstr(y, x_, rowStr.c_str());

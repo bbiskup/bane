@@ -35,12 +35,15 @@ public:
 
   void requestFocus(Widget* widget);
   void yieldFocus(Widget* widget, FocusYieldHint yieldHint);
+  Widget* focusWidget() const{return focusWidget_;}
+
+  void blush(Widget* widget);
+  Widget* blushWidget() const{return blushWidget_;}
 
   TermWindow* termWindow() { return termWindow_.get(); }
   const Theme& theme() const { return termWindow_->theme(); }
 
   Pane rootPane{};
-  Widget* focusWidget() const{return focusWidget_;}
 
 private:
   std::unique_ptr<TermWindow> termWindow_;
@@ -48,6 +51,7 @@ private:
   std::queue<std::unique_ptr<Event>> queue_;
   std::mutex queueMutex_;
   Widget* focusWidget_{nullptr};
+  Widget* blushWidget_{nullptr};
 };
 } // namespace bane
 

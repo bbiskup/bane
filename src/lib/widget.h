@@ -75,6 +75,8 @@ public:
   void setApp(App& app);
   void setTermWindow(TermWindow* termWindow);
 
+  void blush(bool isBlush);
+
   template <class LayoutMgrT> void setLayoutMgr() {
     layoutMgr_.reset(new LayoutMgrT{*this});
   }
@@ -148,6 +150,7 @@ private:
   int height_{};
   std::unique_ptr<LayoutMgr> layoutMgr_;
   boost::ptr_vector<Widget> children_;
+  bool blush_{false};
 
   mutable OnMouse onMouse_;
   mutable OnKey onKey_;

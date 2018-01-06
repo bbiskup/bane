@@ -23,6 +23,9 @@ public:
   /// ColorPair combination for active elements (e.g. buttons)
   /// in used state (e.g. button while pressed)
   virtual ColorPair engaged() const = 0;
+
+  /// ColorPair combination in blush (debug highlighting) mode
+  virtual ColorPair blush() const = 0;
 };
 
 class SimpleTheme : public Theme {
@@ -32,6 +35,7 @@ public:
   ColorPair normal() const override;
   ColorPair active() const override;
   ColorPair engaged() const override;
+  ColorPair blush() const override;
 };
 } // namespace bane
 
