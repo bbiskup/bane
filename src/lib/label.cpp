@@ -19,8 +19,7 @@ void bane::Label::setText(std::string text){
 
 void bane::Label::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "Label::doRender " << relX() << " " << relY();
-  CharPoint orig{origin()};
-  attrset(app_->theme().normal().nCursesColorPair());
-  termWindow_->drawString(orig, label_);
+  //attrset(app_->theme().normal().nCursesColorPair());
+  *termWindow_ << Font::normal << label_;
 }
 

@@ -1,7 +1,6 @@
 #include "term_window.h"
 #include <boost/log/trivial.hpp>
 #include <stdexcept>
-#include <stdexcept>
 
 bane::TermWindow::TermWindow(std::unique_ptr<Theme> theme)
     : theme_{std::move(theme)} {}
@@ -14,8 +13,8 @@ void bane::TermWindow::updateClickMap(Widget& widget) {
   int h{widget.height()};
   int xOrigin{widget.absX()};
   int yOrigin{widget.absY()};
-  BOOST_LOG_TRIVIAL(trace) << "updateClickMap " << w << "x" << h << "+"
-                           << xOrigin << "+" << yOrigin;
+  BOOST_LOG_TRIVIAL(trace) << "updateClickMap " << widget.id() << " " << w
+                           << "x" << h << "+" << xOrigin << "+" << yOrigin;
   Widget* widgetAddr{&widget};
 
   // Tolerate out-of-screen updates

@@ -8,7 +8,7 @@ void bane::HBoxLayoutMgr::layout() {
   int xOffset{0};
   for (Widget& widget : parent_.children()) {
     widget.resizeToPreferred();
-    widget.moveTo(parent_.relX() + xOffset, parent_.relY());
+    widget.moveTo(xOffset, 0);
     BOOST_LOG_TRIVIAL(trace)
         << "HBoxLayoutMgr::layout " << parent_.relX() << ", " << parent_.relY();
     xOffset += widget.width() + padding;

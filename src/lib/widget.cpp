@@ -9,7 +9,6 @@
 #include <functional>
 #include <iterator>
 #include <thread>
-#include <thread>
 
 using namespace std::chrono_literals;
 
@@ -139,8 +138,8 @@ void bane::Widget::render() {
 
   if (blush_) {
     // Don't override block rectangle when debugging layout
-      refresh();
-      std::this_thread::sleep_for(20ms);
+    refresh();
+    std::this_thread::sleep_for(20ms);
   }
 
   doRender();
@@ -179,7 +178,7 @@ void bane::Widget::blush(bool isBlush) {
   BOOST_LOG_TRIVIAL(trace) << "##### " << (isBlush ? "BLUSH" : "UN-BLUSH")
                            << " " << id();
   blush_ = isBlush;
-    render();
+  render();
 }
 
 void bane::Widget::setApp(App& app) { app_ = &app; }
