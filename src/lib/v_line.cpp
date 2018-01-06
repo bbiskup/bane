@@ -13,7 +13,7 @@ int bane::VLine::preferredHeight() const noexcept {
 
 void bane::VLine::doRender() {
   CharPoint orig{origin()};
-  for (int i = 0; i < width(); ++i) {
+  for (int i = 0; i < height(); ++i) {
     termWindow_->move(orig.x, orig.y + i);
     *termWindow_ << lineChar_;
   }
