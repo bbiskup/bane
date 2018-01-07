@@ -10,7 +10,7 @@ namespace bane {
 // Vertical line (separator)
 class VLine : public Widget {
 public:
-  VLine(Widget* root, char lineChar='|');
+  VLine(Widget* root, wchar_t lineChar=L'|');
 
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;
@@ -18,7 +18,7 @@ public:
   void doRender() override;
 
 private:
-  const char lineChar_;
+  const wchar_t lineChar_;
 };
 } // namespace bane
 

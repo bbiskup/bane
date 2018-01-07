@@ -1,7 +1,7 @@
 #include "v_line.h"
 #include "term/term_window.h"
 
-bane::VLine::VLine(Widget* root, char lineChar)
+bane::VLine::VLine(Widget* root, wchar_t lineChar)
     : Widget{root}, lineChar_{lineChar} {}
 
 int bane::VLine::preferredWidth() const noexcept { return 1; }

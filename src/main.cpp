@@ -67,6 +67,7 @@ int main() {
   paneH->setLayoutMgr<bane::HBoxLayoutMgr>();
   paneH->addChild<bane::PushButton>(L"another_button");
   paneH->addChild<bane::VLine>();
+  paneH->addChild<bane::VLine>(L'Ü');
   paneH->addChild<bane::Label>(L"label_in_paneH");
   BOOST_LOG_TRIVIAL(trace) << "######## " << paneH->height();
 

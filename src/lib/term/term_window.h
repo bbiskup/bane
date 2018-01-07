@@ -57,6 +57,7 @@ public:
   virtual TermWindow& operator<<(const std::string& s) = 0;
   virtual TermWindow& operator<<(const std::wstring& s) = 0;
   virtual TermWindow& operator<<(char c) = 0;
+  virtual TermWindow& operator<<(wchar_t c) = 0;
 
   /// Set font style
   virtual TermWindow& operator<<(Font fontStyle) = 0;

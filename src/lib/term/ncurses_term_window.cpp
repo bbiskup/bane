@@ -78,6 +78,10 @@ bane::TermWindow& bane::NCursesTermWindow::operator<<(char c) {
   return *this;
 }
 
+bane::TermWindow& bane::NCursesTermWindow::operator<<(wchar_t c) {
+  return operator<<(std::wstring{c});
+}
+
 bane::TermWindow& bane::NCursesTermWindow::operator<<(Font fontWeight) {
   switch (fontWeight) {
   case Font::normal:
