@@ -11,7 +11,7 @@
 #include <algorithm>
 #include <stdexcept>
 
-bane::ButtonGroup::ButtonGroup(Widget* root, std::string label,
+bane::ButtonGroup::ButtonGroup(Widget* root, std::wstring label,
                                Orientation orientation)
     : Widget{root}, label_{std::move(label)} {
   switch (orientation) {

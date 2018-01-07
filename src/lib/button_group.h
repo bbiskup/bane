@@ -8,7 +8,7 @@ namespace bane {
 /// Container for buttons
 class ButtonGroup : public Widget {
 public:
-  ButtonGroup(Widget* root, std::string label, Orientation orientation);
+  ButtonGroup(Widget* root, std::wstring label, Orientation orientation);
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;
 
@@ -22,7 +22,7 @@ protected:
   void onAddChild(Widget& widget) override;
 
 private:
-  std::string label_;
+  std::wstring label_;
 };
 } // namespace bane
 

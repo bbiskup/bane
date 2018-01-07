@@ -73,7 +73,7 @@ int main() {
   pane->addChild<bane::Label>(L"my_label");
 
   bane::ButtonGroup* bg1{pane->addChild<bane::ButtonGroup>(
-      "button_group_1", bane::Orientation::vertical)};
+      L"button_group_1", bane::Orientation::vertical)};
   bg1->addChild<bane::CheckBox>(L"my_checkbox_1");
   bg1->addChild<bane::CheckBox>(L"my_checkbox_2");
   bg1->addChild<bane::RadioButton>(L"my_radio_button_1");
@@ -90,7 +90,7 @@ int main() {
   ledx->requestFocus();
 
   bane::ButtonGroup* bg2{pane->addChild<bane::ButtonGroup>(
-      "button_group_2", bane::Orientation::horizontal)};
+      L"button_group_2", bane::Orientation::horizontal)};
   bg2->addChild<bane::CheckBox>(L"my_checkbox_3 i¹²ëý");
   bg2->addChild<bane::CheckBox>(L"my_checkbox_4");
 
