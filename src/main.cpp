@@ -36,6 +36,7 @@ void test_misc(bane::App& app);
 int main() {
   bane::initLogging();
   bane::App app{L"test-Äpp", std::make_unique<bane::SimpleTheme>()};
+  test_tab(app);
 
   app.run();
 }
@@ -52,6 +53,8 @@ void test_tab(bane::App& app){
   pane2->setLayoutMgr<bane::HBoxLayoutMgr>();
   pane2->addChild<bane::Label>(L"Label 1 of pane 2");
   pane2->addChild<bane::Label>(L"Label 2 of pane 2");
+
+  tab->addChild<bane::Label>(L"Label 1 of pane 2");
 }
 
 void test_misc(bane::App& app) {

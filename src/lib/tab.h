@@ -18,6 +18,8 @@ public:
 
   void doRender() override;
 
+protected:
+  void onAddChild(Widget& widget) override;
 };
 } // namespace bane
 
