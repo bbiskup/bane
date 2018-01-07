@@ -3,7 +3,7 @@
 #include <boost/log/trivial.hpp>
 #include <iostream>
 
-bane::Label::Label(Widget* root, std::string label)
+bane::Label::Label(Widget* root, std::wstring label)
     : Widget{root}, label_{std::move(label)} {}
 
 int bane::Label::preferredWidth() const noexcept {
@@ -12,7 +12,7 @@ int bane::Label::preferredWidth() const noexcept {
 int bane::Label::preferredHeight() const noexcept { return 1; }
 
 /// Set label text
-void bane::Label::setText(std::string text){
+void bane::Label::setText(std::wstring text){
     label_ = std::move(text);
     doRender();
 }

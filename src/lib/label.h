@@ -7,16 +7,16 @@ namespace bane {
 
 class Label : public Widget {
 public:
-  Label(Widget* root, std::string label);
+  Label(Widget* root, std::wstring label);
 
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;
-  void setText(std::string text);
+  void setText(std::wstring text);
 
   void doRender() override;
 
 private:
-  std::string label_;
+  std::wstring label_;
 };
 
 } // namespace bane

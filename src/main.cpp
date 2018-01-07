@@ -32,22 +32,22 @@ int main() {
   pane->resize(20, 30);
   pane->setLayoutMgr<bane::VBoxLayoutMgr>();
   /*
-  pane->addChild<bane::Label>("my_label_1");
-  bane::Label* label2 = pane->addChild<bane::Label>("my_label_2");
+  pane->addChild<bane::Label>(:"my_label_1");
+  bane::Label* label2 = pane->addChild<bane::Label>(L"my_label_2");
   label2->doOnClick([](int x, int y) {
     BOOST_LOG_TRIVIAL(trace) << "Handling click: " << x << ", " << y;
   });
   */
 
   // label2->click(0, 2);
-  // bane::Label label{"my text"};
+  // bane::Label label{L"my text"};
   // label.resize(10, 20);
   // label.render();
 
-  pane->addChild<bane::Label>("first_label");
-  pane->addChild<bane::Label>("second_label");
+  pane->addChild<bane::Label>(L"first_label with umlauts: äöü ÄÖÜß");
+  pane->addChild<bane::Label>(L"second_label");
   pane->addChild<bane::HLine>();
-  bane::Label* label3 = pane->addChild<bane::Label>("third_label");
+  bane::Label* label3 = pane->addChild<bane::Label>(L"third_label");
   label3->resize(10, 3);
 
   /*
@@ -66,11 +66,11 @@ int main() {
   paneH->setLayoutMgr<bane::HBoxLayoutMgr>();
   paneH->addChild<bane::PushButton>("another_button");
   paneH->addChild<bane::VLine>();
-  paneH->addChild<bane::Label>("label_in_paneH");
+  paneH->addChild<bane::Label>(L"label_in_paneH");
   BOOST_LOG_TRIVIAL(trace) << "######## " << paneH->height();
 
   // pane->addChild<bane::PushButton>("my_button");
-  pane->addChild<bane::Label>("my_label");
+  pane->addChild<bane::Label>(L"my_label");
 
   bane::ButtonGroup* bg1{pane->addChild<bane::ButtonGroup>(
       "button_group_1", bane::Orientation::vertical)};
@@ -80,16 +80,15 @@ int main() {
   bg1->addChild<bane::RadioButton>("my_radio_button_2");
   // bg1->addChild<bane::CheckBox>("my_checkbox_3");
 
-  pane->addChild<bane::Label>("fourth_label");
+  pane->addChild<bane::Label>(L"fourth_label");
 
-  pane->addChild<bane::Label>("my_label_x2");
+  pane->addChild<bane::Label>(L"my_label_x2");
   // bg1->children()[0].requestFocus();
   pane->addChild<bane::LineEdit>("My text", 20ul);
   bane::LineEdit* ledx = pane->addChild<bane::LineEdit>("My other text", 30ul,
                                                         "other initial text");
   ledx->requestFocus();
 
-  // pane->addChild<bane::Label>("-------------------------");
   bane::ButtonGroup* bg2{pane->addChild<bane::ButtonGroup>(
       "button_group_2", bane::Orientation::horizontal)};
   bg2->addChild<bane::CheckBox>("my_checkbox_3");
