@@ -16,7 +16,7 @@ namespace bane {
 /// Application
 class App {
 public:
-  explicit App(std::string name, std::unique_ptr<Theme> theme,
+  explicit App(std::wstring name, std::unique_ptr<Theme> theme,
                bool debug = false);
   ~App();
   App(const App&) = delete;
@@ -50,7 +50,7 @@ public:
 
 private:
   std::unique_ptr<TermWindow> termWindow_;
-  std::string name_;
+  std::wstring name_;
   bool debug_;
   std::queue<std::unique_ptr<Event>> queue_;
   std::mutex queueMutex_;

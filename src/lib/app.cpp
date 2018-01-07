@@ -12,7 +12,7 @@
 #include <mutex>
 #include <utility>
 
-bane::App::App(std::string name, std::unique_ptr<Theme> theme, bool debug)
+bane::App::App(std::wstring name, std::unique_ptr<Theme> theme, bool debug)
     : name_{std::move(name)}, debug_{debug} {
   termWindow_.reset(new NCursesTermWindow{std::move(theme)});
   rootPane.setApp(*this);
@@ -22,7 +22,7 @@ bane::App::App(std::string name, std::unique_ptr<Theme> theme, bool debug)
 }
 
 bane::App::~App() {
-  BOOST_LOG_TRIVIAL(trace) << "Terminating application " << name_;
+  BOOST_LOG_TRIVIAL(trace) << "Terminating application " << name_.c_str();
 }
 
 void bane::App::render() { rootPane.render(); }

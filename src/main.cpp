@@ -26,7 +26,7 @@ using namespace std::chrono_literals;
 
 int main() {
   bane::initLogging();
-  bane::App app{"test-app", std::make_unique<bane::SimpleTheme>()};
+  bane::App app{L"test-Äpp", std::make_unique<bane::SimpleTheme>()};
 
   bane::Pane* pane{app.rootPane.addChild<bane::Pane>()};
   pane->resize(20, 30);
