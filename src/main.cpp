@@ -14,6 +14,7 @@
 #include "theme.h"
 #include "v_box_layout_mgr.h"
 #include "v_line.h"
+#include "tab.h"
 
 #include <boost/log/trivial.hpp>
 #include <chrono>
@@ -22,12 +23,38 @@
 #include <memory>
 #include <thread>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
+
 using namespace std::chrono_literals;
+
+namespace {
+void test_tab(bane::App& app);
+void test_misc(bane::App& app);
+}
 
 int main() {
   bane::initLogging();
   bane::App app{L"test-Äpp", std::make_unique<bane::SimpleTheme>()};
 
+  app.run();
+}
+
+namespace {
+void test_tab(bane::App& app){
+  bane::Tab* tab{app.rootPane.addChild<bane::Tab>()};
+  bane::Pane* pane1 = tab->addChild<bane::Pane>();
+  pane1->setLayoutMgr<bane::VBoxLayoutMgr>();
+  pane1->addChild<bane::Label>(L"Label 1 of pane 1");
+  pane1->addChild<bane::Label>(L"Label 2 of pane 1");
+
+  bane::Pane* pane2 = tab->addChild<bane::Pane>();
+  pane2->setLayoutMgr<bane::HBoxLayoutMgr>();
+  pane2->addChild<bane::Label>(L"Label 1 of pane 2");
+  pane2->addChild<bane::Label>(L"Label 2 of pane 2");
+}
+
+void test_misc(bane::App& app) {
   bane::Pane* pane{app.rootPane.addChild<bane::Pane>()};
   pane->resize(20, 30);
   pane->setLayoutMgr<bane::VBoxLayoutMgr>();
@@ -87,8 +114,8 @@ int main() {
   pane->addChild<bane::Label>(L"my_label_x2");
   // bg1->children()[0].requestFocus();
   pane->addChild<bane::LineEdit>(L"My text", 20ul);
-  bane::LineEdit* ledx = pane->addChild<bane::LineEdit>(L"My other text", 30ul,
-                                                        L"initial äöüºª¡");
+  bane::LineEdit* ledx =
+      pane->addChild<bane::LineEdit>(L"My other text", 30ul, L"initial äöüºª¡");
   ledx->requestFocus();
 
   bane::ButtonGroup* bg2{pane->addChild<bane::ButtonGroup>(
@@ -98,6 +125,6 @@ int main() {
 
   bg1->setFocusSuccessor(ledx);
   ledx->setFocusSuccessor(bg2);
-
-  app.run();
 }
+} // namespace
+#pragma clang diagnostic pop
