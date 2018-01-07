@@ -1,7 +1,7 @@
 #include "h_line.h"
 #include "term/term_window.h"
 
-bane::HLine::HLine(Widget* root, char lineChar)
+bane::HLine::HLine(Widget* root, wchar_t lineChar)
     : Widget{root}, lineChar_{lineChar} {}
 
 int bane::HLine::preferredWidth() const noexcept { 
@@ -10,6 +10,6 @@ int bane::HLine::preferredWidth() const noexcept {
 int bane::HLine::preferredHeight() const noexcept { return 1; }
 
 void bane::HLine::doRender() {
-  std::string line(static_cast<std::string::size_type>(width()), lineChar_);
+  std::wstring line(static_cast<std::string::size_type>(width()), lineChar_);
   *termWindow_ << line;
 }

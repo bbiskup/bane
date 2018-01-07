@@ -47,6 +47,7 @@ int main() {
   pane->addChild<bane::Label>(L"first_label with umlauts: äöü ÄÖÜß");
   pane->addChild<bane::Label>(L"second_label");
   pane->addChild<bane::HLine>();
+  pane->addChild<bane::HLine>(L'Å');
   bane::Label* label3 = pane->addChild<bane::Label>(L"third_label");
   label3->resize(10, 3);
 
