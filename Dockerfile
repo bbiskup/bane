@@ -15,11 +15,14 @@ RUN apt-get update -y -q && apt-get install -y -q \
         libboost-log-dev \
         libsdl2-dev \
         libsdl2-image-dev \
+        locales \
+        locales-all \
         software-properties-common \
         unzip \
         valgrind \
         wget \
         libncurses5-dev \
+        libncursesw5-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install recent version of clang

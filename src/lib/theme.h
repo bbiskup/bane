@@ -3,10 +3,7 @@
 
 #include "color_pair.h"
 
-#include <ncurses.h>
-
 namespace bane {
-
 
 /// GUI colors and appearance
 class Theme {
@@ -19,7 +16,7 @@ public:
   /// ColorPair combination for active elements (e.g. buttons)
   /// in unused state
   virtual ColorPair active() const = 0;
-  
+
   /// ColorPair combination for active elements (e.g. buttons)
   /// in used state (e.g. button while pressed)
   virtual ColorPair engaged() const = 0;

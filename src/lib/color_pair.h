@@ -1,7 +1,7 @@
 #ifndef COLOR_PAIR_H
 #define COLOR_PAIR_H
 
-#include "ncurses.h"
+#include "ncurses_wrapper.h"
 
 namespace bane {
 /// Foreground/background color for widgets

@@ -8,7 +8,6 @@
 #include "widget.h"
 
 #include <boost/log/trivial.hpp>
-#include <ncurses.h>
 
 #include <mutex>
 #include <utility>

@@ -1,8 +1,8 @@
 #include "event/mouse_event.h"
 #include "event/event_handler.h"
+#include "ncurses_wrapper.h"
 
 #include <boost/log/trivial.hpp>
-#include <ncurses.h>
 #include <unordered_map>
 
 namespace {

@@ -1,7 +1,10 @@
 #include "ncurses_term_window.h"
+#include "env.h"
 
 #include <boost/log/trivial.hpp>
-#include <ncurses.h>
+#include "ncurses_wrapper.h"
+
+#include <clocale>
 
 // Ncurses 'attrset' and other macros use legacy definition of NULL
 #pragma clang diagnostic push
@@ -14,6 +17,9 @@ constexpr const int nCursesTimeOut{10};
 
 bane::NCursesTermWindow::NCursesTermWindow(std::unique_ptr<Theme> theme)
     : TermWindow{std::move(theme)} {
+  // Prepare unicode output
+  setlocale(LC_CTYPE, bane::locale());
+
   ::initscr();
   clearScreen();
   ::noecho();
@@ -55,8 +61,15 @@ void bane::NCursesTermWindow::drawString(int x, int y,
   mvaddstr(y, x, text.c_str());
 }
 
-bane::TermWindow& bane::NCursesTermWindow::operator<<(const std::string s) {
+bane::TermWindow& bane::NCursesTermWindow::operator<<(const std::string& s) {
   addstr(s.c_str());
+  return *this;
+}
+
+bane::TermWindow& bane::NCursesTermWindow::operator<<(const std::wstring& s) {
+  // throws boost ... conversion error
+  // BOOST_LOG_TRIVIAL(trace) << L"###################### operator<<" << s;
+  addwstr(s.c_str());
   return *this;
 }
 

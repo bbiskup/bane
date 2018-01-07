@@ -1,9 +1,11 @@
 #include "logging.h"
+#include "env.h"
 
 #include <boost/log/core.hpp>
 #include <boost/log/expressions.hpp>
 #include <boost/log/trivial.hpp>
 #include <boost/log/utility/setup/file.hpp>
+#include <boost/locale.hpp>
 #include <cstdlib>
 
 namespace logging = boost::log;
@@ -39,6 +41,8 @@ inline logging::trivial::severity_level log_level_from_env() {
 }
 void bane::initLogging() {
   auto sink = logging::add_file_log(appName + ".log");
+  std::locale loc = boost::locale::generator()(bane::locale());
+  sink->imbue(loc);
   sink->locked_backend()->auto_flush(true);
   logging::trivial::severity_level log_level = log_level_from_env();
   logging::core::get()->set_filter(logging::trivial::severity >= log_level);

@@ -91,7 +91,7 @@ int main() {
 
   // pane->addChild<bane::Label>("-------------------------");
   bane::ButtonGroup* bg2{pane->addChild<bane::ButtonGroup>(
-      "button_group_2", bane::Orientation::vertical)};
+      "button_group_2", bane::Orientation::horizontal)};
   bg2->addChild<bane::CheckBox>("my_checkbox_3");
   bg2->addChild<bane::CheckBox>("my_checkbox_4");
 

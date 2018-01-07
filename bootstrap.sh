@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Create/update build files and build project
 
 docker-compose build

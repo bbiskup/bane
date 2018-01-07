@@ -30,7 +30,8 @@ target_link_libraries(${PROJECT_NAME}
     -lboost_log
     -lboost_log_setup
     -lboost_thread
-    -lncurses
+    -lboost_locale
+    -lncursesw
     -lpthread
 )
 

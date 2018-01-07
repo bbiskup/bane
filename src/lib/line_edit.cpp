@@ -10,7 +10,10 @@
 namespace {
 /// Separator between label and text
 const std::string labelSeparator = ": ";
-const std::string eraseButton = "x";
+//const std::wstring eraseButton{L"\u00d7"}; // multiplication sign
+//const std::wstring eraseButton{L"\u2602"}; // test
+const std::wstring eraseButton{L"×"}; // test
+//const std::string eraseButton = "x";
 } // namespace
 
 bane::LineEdit::LineEdit(Widget* root, std::string label, size_t textFieldWidth,
