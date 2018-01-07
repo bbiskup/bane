@@ -74,11 +74,11 @@ int main() {
 
   bane::ButtonGroup* bg1{pane->addChild<bane::ButtonGroup>(
       "button_group_1", bane::Orientation::vertical)};
-  bg1->addChild<bane::CheckBox>("my_checkbox_1");
-  bg1->addChild<bane::CheckBox>("my_checkbox_2");
-  bg1->addChild<bane::RadioButton>("my_radio_button_1");
-  bg1->addChild<bane::RadioButton>("my_radio_button_2");
-  // bg1->addChild<bane::CheckBox>("my_checkbox_3");
+  bg1->addChild<bane::CheckBox>(L"my_checkbox_1");
+  bg1->addChild<bane::CheckBox>(L"my_checkbox_2");
+  bg1->addChild<bane::RadioButton>(L"my_radio_button_1");
+  bg1->addChild<bane::RadioButton>(L"my_radio_button_2");
+  // bg1->addChild<bane::CheckBox>(L"my_checkbox_3");
 
   pane->addChild<bane::Label>(L"fourth_label");
 
@@ -91,8 +91,8 @@ int main() {
 
   bane::ButtonGroup* bg2{pane->addChild<bane::ButtonGroup>(
       "button_group_2", bane::Orientation::horizontal)};
-  bg2->addChild<bane::CheckBox>("my_checkbox_3");
-  bg2->addChild<bane::CheckBox>("my_checkbox_4");
+  bg2->addChild<bane::CheckBox>(L"my_checkbox_3 i¹²ëý");
+  bg2->addChild<bane::CheckBox>(L"my_checkbox_4");
 
   bg1->setFocusSuccessor(ledx);
   ledx->setFocusSuccessor(bg2);

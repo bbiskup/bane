@@ -6,7 +6,7 @@
 namespace bane {
 class RadioButton : public StatefulButton {
 public:
-  RadioButton(Widget* root, std::string label, bool isSelected = false);
+  RadioButton(Widget* root, std::wstring label, bool isSelected = false);
 
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;
@@ -14,9 +14,6 @@ public:
   void pick() override;
 
   void doRender() override;
-
-private:
-  std::string label_;
 };
 } // namespace bane
 

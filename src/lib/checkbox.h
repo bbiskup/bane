@@ -6,7 +6,7 @@
 namespace bane {
 class CheckBox : public StatefulButton {
 public:
-  CheckBox(Widget* root, std::string label, bool isChecked = false);
+  CheckBox(Widget* root, std::wstring label, bool isChecked = false);
 
   void pick() override;
 
@@ -14,9 +14,6 @@ public:
   int preferredHeight() const noexcept override;
 
   void doRender() override;
-
-private:
-  std::string label_;
 };
 } // namespace bane
 

@@ -8,7 +8,7 @@ class StatefulButton : public Widget {
 
 public:
   using Widget::Widget;
-  StatefulButton(Widget* root, bool state=false);
+  StatefulButton(Widget* root, std::wstring label, bool state=false);
 
   void toggleState();
   void setState(bool state=true);
@@ -20,6 +20,7 @@ public:
   void onBlur() override;
 
 protected:
+  std::wstring label_;
   bool state_{false};
 };
 } // namespace bane

@@ -9,8 +9,8 @@ namespace {
 constexpr const int radioButtonPartWidth{4};
 } // namespace
 
-bane::RadioButton::RadioButton(Widget* root, std::string label, bool isSelected)
-    : StatefulButton{root, isSelected}, label_{std::move(label)} {
+bane::RadioButton::RadioButton(Widget* root, std::wstring label, bool isSelected)
+    : StatefulButton{root, label, isSelected} {
   doOnMouse([this](const MouseEvent& e) {
     BOOST_LOG_TRIVIAL(trace) << "RadioButton: on mouse";
     if (e.clickType == mouse::ClickType::single ||
@@ -37,6 +37,7 @@ void bane::RadioButton::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "RadioButton::doRender " << relX() << " "
                            << relY();
   const std::string selectMark{state_ ? "o" : " "};
-  *termWindow_ << Font::normal << Font::dim << "(" << Font::normal << Font::bold << selectMark 
-       << Font::normal << Font::dim << ")" << Font::normal << " " << label_;
+  *termWindow_ << Font::normal << Font::dim << "(" << Font::normal << Font::bold
+               << selectMark << Font::normal << Font::dim << ")" << Font::normal
+               << " " << label_;
 }
