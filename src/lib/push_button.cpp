@@ -3,7 +3,7 @@
 #include "event/mouse_event.h"
 #include <boost/log/trivial.hpp>
 
-bane::PushButton::PushButton(Widget* root, std::string label)
+bane::PushButton::PushButton(Widget* root, std::wstring label)
     : Widget{root}, label_{std::move(label)} {
   doOnMouse([this](const MouseEvent& e) {
     BOOST_LOG_TRIVIAL(trace) << "PushButton: on mouse";
