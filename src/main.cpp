@@ -84,9 +84,9 @@ int main() {
 
   pane->addChild<bane::Label>(L"my_label_x2");
   // bg1->children()[0].requestFocus();
-  pane->addChild<bane::LineEdit>("My text", 20ul);
-  bane::LineEdit* ledx = pane->addChild<bane::LineEdit>("My other text", 30ul,
-                                                        "other initial text");
+  pane->addChild<bane::LineEdit>(L"My text", 20ul);
+  bane::LineEdit* ledx = pane->addChild<bane::LineEdit>(L"My other text", 30ul,
+                                                        L"initial äöüºª¡");
   ledx->requestFocus();
 
   bane::ButtonGroup* bg2{pane->addChild<bane::ButtonGroup>(

@@ -9,15 +9,15 @@
 
 namespace {
 /// Separator between label and text
-const std::string labelSeparator = ": ";
+const std::wstring labelSeparator = L": ";
 //const std::wstring eraseButton{L"\u00d7"}; // multiplication sign
 //const std::wstring eraseButton{L"\u2602"}; // test
 const std::wstring eraseButton{L"×"}; // test
 //const std::string eraseButton = "x";
 } // namespace
 
-bane::LineEdit::LineEdit(Widget* root, std::string label, size_t textFieldWidth,
-                         std::string text)
+bane::LineEdit::LineEdit(Widget* root, std::wstring label, size_t textFieldWidth,
+                         std::wstring text)
     : Widget{root}, label_{label}, textFieldWidth_{textFieldWidth}, text_{
                                                                         text} {
   doOnMouse([this](const MouseEvent& e) {
@@ -49,9 +49,9 @@ int bane::LineEdit::preferredWidth() const noexcept {
 
 int bane::LineEdit::preferredHeight() const noexcept { return 1; }
 
-void bane::LineEdit::setLabel(std::string label) { label_ = std::move(label); }
+void bane::LineEdit::setLabel(std::wstring label) { label_ = std::move(label); }
 
-void bane::LineEdit::setText(std::string text) { text_ = std::move(text); }
+void bane::LineEdit::setText(std::wstring text) { text_ = std::move(text); }
 
 void bane::LineEdit::setTextFieldWidth(size_t width) {
   textFieldWidth_ = width;
@@ -63,7 +63,7 @@ void bane::LineEdit::doRender() {
   // entire space
   const size_t padLen{
       text_.size() >= textFieldWidth_ ? 0 : textFieldWidth_ - text_.size() + 1};
-  const std::string paddedText{text_ + std::string(padLen, ' ')};
+  const std::wstring paddedText{text_ + std::wstring(padLen, ' ')};
   termWindow_->move(origin());
   *termWindow_ << Font::normal << label_ << labelSeparator << Font::reverse
                << paddedText << Font::dim << eraseButton;
@@ -94,7 +94,7 @@ void bane::LineEdit::positionCursorInWidget(size_t x) {
     positionCursorInText(0);
   } else if (static_cast<int>(x) == width() - 1) {
     // eraser button
-    text_ = "";
+    text_ = L"";
     positionCursorInText(text_.size());
   } else if (x > textOffset + text_.size()) {
     positionCursorInText(text_.size());
