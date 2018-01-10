@@ -27,9 +27,10 @@ RUN apt-get update -y -q && apt-get install -y -q \
 
 # Install recent version of clang
 WORKDIR /
-ENV CLANG_VERSION=5.0.0
-ENV CLANG_PACKAGE=clang+llvm-${CLANG_VERSION}-linux-x86_64-ubuntu16.04
-RUN wget -q http://releases.llvm.org/${CLANG_VERSION}/${CLANG_PACKAGE}.tar.xz
+ENV CLANG_VERSION=5.0.1
+ENV CLANG_PACKAGE=clang+llvm-${CLANG_VERSION}-x86_64-linux-gnu-ubuntu-16.04
+ENV CLANG_URL=http://releases.llvm.org/${CLANG_VERSION}/${CLANG_PACKAGE}.tar.xz
+RUN wget -q ${CLANG_URL}
 RUN xz -d ${CLANG_PACKAGE}.tar.xz && \
     tar xf ${CLANG_PACKAGE}.tar && \
     rm ${CLANG_PACKAGE}.tar
