@@ -14,7 +14,7 @@ bane::ColorPair::ColorPair(short nCursesForeground, short nCursesBackground)
     : nCursesForeground_{nCursesForeground}, nCursesBackground_{
                                                  nCursesBackground} {
   if (nCursesColors.size() == 0) {
-    //initscr();
+    initscr();
     start_color(); // must come before creating windows
   }
   if (std::find(nCursesColors.begin(), nCursesColors.end(),
