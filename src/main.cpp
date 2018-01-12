@@ -14,6 +14,7 @@
 #include "theme.h"
 #include "v_box_layout_mgr.h"
 #include "v_line.h"
+#include "tabs.h"
 #include "tab.h"
 
 #include <boost/log/trivial.hpp>
@@ -23,38 +24,38 @@
 #include <memory>
 #include <thread>
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-function"
 
 using namespace std::chrono_literals;
 
 namespace {
-void test_tab(bane::App& app);
-void test_misc(bane::App& app);
+[[maybe_unused]] void test_tab(bane::App& app);
+[[maybe_unused]] void test_misc(bane::App& app);
 }
 
 int main() {
   bane::initLogging();
   bane::App app{L"test-Äpp", std::make_unique<bane::SimpleTheme>()};
-  test_tab(app);
+  //test_tab(app);
+  test_misc(app);
 
   app.run();
 }
 
 namespace {
 void test_tab(bane::App& app){
-  bane::Tab* tab{app.rootPane.addChild<bane::Tab>()};
-  bane::Pane* pane1 = tab->addChild<bane::Pane>();
+  bane::Tabs* tabs{app.rootPane.addChild<bane::Tabs>()};
+
+  bane::Tab* tab1{tabs->addTab(L"Tab 1")};
+  bane::Pane* pane1 = tab1->addChild<bane::Pane>();
   pane1->setLayoutMgr<bane::VBoxLayoutMgr>();
   pane1->addChild<bane::Label>(L"Label 1 of pane 1");
   pane1->addChild<bane::Label>(L"Label 2 of pane 1");
 
-  bane::Pane* pane2 = tab->addChild<bane::Pane>();
+  bane::Tab* tab2{tabs->addTab(L"Tab 2")};
+  bane::Pane* pane2 = tab2->addChild<bane::Pane>();
   pane2->setLayoutMgr<bane::HBoxLayoutMgr>();
   pane2->addChild<bane::Label>(L"Label 1 of pane 2");
   pane2->addChild<bane::Label>(L"Label 2 of pane 2");
-
-  tab->addChild<bane::Label>(L"Label 1 of pane 2");
 }
 
 void test_misc(bane::App& app) {
@@ -130,4 +131,3 @@ void test_misc(bane::App& app) {
   ledx->setFocusSuccessor(bg2);
 }
 } // namespace
-#pragma clang diagnostic pop

@@ -6,7 +6,7 @@
 namespace bane {
 class RadioButton : public StatefulButton {
 public:
-  RadioButton(Widget* root, std::wstring label, bool isSelected = false);
+  RadioButton(Widget* parent, std::wstring label, bool isSelected = false);
 
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;

@@ -16,9 +16,9 @@ const std::wstring eraseButton{L"×"}; // test
 //const std::string eraseButton = "x";
 } // namespace
 
-bane::LineEdit::LineEdit(Widget* root, std::wstring label, size_t textFieldWidth,
+bane::LineEdit::LineEdit(Widget* parent, std::wstring label, size_t textFieldWidth,
                          std::wstring text)
-    : Widget{root}, label_{label}, textFieldWidth_{textFieldWidth}, text_{
+    : Widget{parent}, label_{label}, textFieldWidth_{textFieldWidth}, text_{
                                                                         text} {
   doOnMouse([this](const MouseEvent& e) {
     BOOST_LOG_TRIVIAL(trace) << "LineEdit: on mouse";

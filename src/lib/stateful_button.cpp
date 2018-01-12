@@ -3,8 +3,8 @@
 
 #include <boost/log/trivial.hpp>
 
-bane::StatefulButton::StatefulButton(Widget* root, std::wstring label, bool state)
-    : Widget{root}, label_{std::move(label)}, state_{state} {}
+bane::StatefulButton::StatefulButton(Widget* parent, std::wstring label, bool state)
+    : Widget{parent}, label_{std::move(label)}, state_{state} {}
 
 void bane::StatefulButton::toggleState() {
   state_ = !state_;

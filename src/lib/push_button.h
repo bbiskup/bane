@@ -9,7 +9,7 @@
 namespace bane {
 class PushButton : public Widget {
 public:
-  PushButton(Widget* root, std::wstring label);
+  PushButton(Widget* parent, std::wstring label);
 
   bool acceptsFocus() const override { return true; }
   bool showCursorWhenFocus() const override { return false; }

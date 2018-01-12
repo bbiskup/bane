@@ -1,8 +1,8 @@
 #include "ncurses_term_window.h"
 #include "env.h"
 
-#include <boost/log/trivial.hpp>
 #include "ncurses_wrapper.h"
+#include <boost/log/trivial.hpp>
 
 #include <clocale>
 
@@ -52,7 +52,11 @@ void bane::NCursesTermWindow::setUpMouse() {
 
 void bane::NCursesTermWindow::showCursor(bool show) { ::curs_set(show); }
 
-void bane::NCursesTermWindow::move(int x, int y) { ::move(y, x); }
+void bane::NCursesTermWindow::move(int x, int y) {
+  BOOST_LOG_TRIVIAL(trace) << "NCursesTermWindow::move this=" << this << " "
+                           << x << " y " << y;
+  ::move(y, x);
+}
 
 void bane::NCursesTermWindow::refresh() { ::refresh(); }
 

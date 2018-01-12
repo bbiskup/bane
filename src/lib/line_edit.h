@@ -9,7 +9,7 @@
 namespace bane {
 class LineEdit : public Widget {
 public:
-  LineEdit(Widget* root, std::wstring label, size_t textFieldWidth = 20,
+  LineEdit(Widget* parent, std::wstring label, size_t textFieldWidth = 20,
            std::wstring text = L"");
 
   int preferredWidth() const noexcept override;

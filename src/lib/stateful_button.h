@@ -8,7 +8,7 @@ class StatefulButton : public Widget {
 
 public:
   using Widget::Widget;
-  StatefulButton(Widget* root, std::wstring label, bool state=false);
+  StatefulButton(Widget* parent, std::wstring label, bool state=false);
 
   void toggleState();
   void setState(bool state=true);

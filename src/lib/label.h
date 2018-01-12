@@ -7,7 +7,7 @@ namespace bane {
 
 class Label : public Widget {
 public:
-  Label(Widget* root, std::wstring label);
+  Label(Widget* parent, std::wstring label);
 
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;

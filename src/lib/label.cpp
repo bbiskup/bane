@@ -3,8 +3,8 @@
 #include <boost/log/trivial.hpp>
 #include <iostream>
 
-bane::Label::Label(Widget* root, std::wstring label)
-    : Widget{root}, label_{std::move(label)} {}
+bane::Label::Label(Widget* parent, std::wstring label)
+    : Widget{parent}, label_{std::move(label)} {}
 
 int bane::Label::preferredWidth() const noexcept {
   return static_cast<int>(label_.size());

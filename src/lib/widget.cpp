@@ -25,9 +25,17 @@ void ensureAcceptsFocus(const bane::Widget* w);
 
 } // namespace
 
-bane::Widget::Widget(Widget* root)
-    : root_{root}, layoutMgr_{new SimpleLayoutMgr{*this}}, instanceNum_{
-                                                               widgetNum++} {}
+bane::Widget::Widget(Widget* parent)
+    : layoutMgr_{new SimpleLayoutMgr{*this}}, parent_{parent},
+      instanceNum_{widgetNum++} {
+  if (parent_) {
+    root_ = parent_->root_;
+    termWindow_ = parent_->termWindow_;
+    app_ = parent_->app_;
+  } else {
+    root_ = parent_;
+  }
+}
 
 bane::Widget::~Widget() { BOOST_LOG_TRIVIAL(trace) << "Widget::~Widget"; }
 
@@ -130,7 +138,7 @@ void bane::Widget::moveTo(const CharPoint& p) {
 }
 
 void bane::Widget::render() {
-  BOOST_LOG_TRIVIAL(trace) << "render";
+  BOOST_LOG_TRIVIAL(trace) << "Widget::render termWindow_" << &termWindow_;
   layoutMgr_->layout();
   termWindow_->updateClickMap(*this);
   paintBackground();

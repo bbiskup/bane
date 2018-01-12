@@ -1,8 +1,8 @@
 #include "h_line.h"
 #include "term/term_window.h"
 
-bane::HLine::HLine(Widget* root, wchar_t lineChar)
-    : Widget{root}, lineChar_{lineChar} {}
+bane::HLine::HLine(Widget* parent, wchar_t lineChar)
+    : Widget{parent}, lineChar_{lineChar} {}
 
 int bane::HLine::preferredWidth() const noexcept { 
     // TODO introduce concept of resize policy (expansion)

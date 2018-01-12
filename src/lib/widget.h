@@ -33,7 +33,7 @@ public:
     expand = -1,
   };
 
-  explicit Widget(Widget* root = nullptr);
+  explicit Widget(Widget* parent = nullptr);
   virtual ~Widget();
 
   std::string id() const;
@@ -84,11 +84,8 @@ public:
   /// \return non-owning pointer to newly created widget
   template <typename WidgetT, typename... Args>
   WidgetT* addChild(Args&&... args) {
-    Widget* newWidget = new WidgetT{root_, args...};
+    Widget* newWidget = new WidgetT{this, args...};
     onAddChild(*newWidget);
-    newWidget->parent_ = this;
-    newWidget->app_ = app_;
-    newWidget->termWindow_ = termWindow_;
     children_.push_back(newWidget);
     render();
     return static_cast<WidgetT*>(newWidget);

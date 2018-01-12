@@ -17,6 +17,10 @@ void bane::TermWindow::updateClickMap(Widget& widget) {
                            << "x" << h << "+" << xOrigin << "+" << yOrigin;
   Widget* widgetAddr{&widget};
 
+  if (w * h == 0) {
+    return;
+  }
+
   // Tolerate out-of-screen updates
   // (A widget may be partially outside the viewport)
   if (w >= width_ || h >= height_) {
@@ -27,7 +31,7 @@ void bane::TermWindow::updateClickMap(Widget& widget) {
   std::vector<Widget*>* clickMap{clickMap_.get()};
 
   for (int x{0}; x < w; ++x) {
-    for (int y{}; y < h; ++y) {
+    for (int y{0}; y < h; ++y) {
       clickMap->at(clickMapIndex(xOrigin + x, yOrigin + y)) = widgetAddr;
     }
   }
