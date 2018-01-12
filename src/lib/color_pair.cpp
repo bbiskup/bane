@@ -14,14 +14,14 @@ bane::ColorPair::ColorPair(short nCursesForeground, short nCursesBackground)
     : nCursesForeground_{nCursesForeground}, nCursesBackground_{
                                                  nCursesBackground} {
   if (nCursesColors.size() == 0) {
-    initscr();
-    start_color(); // must come before creating windows
+    ::initscr();
+    ::start_color(); // must come before creating windows
   }
   if (std::find(nCursesColors.begin(), nCursesColors.end(),
                 std::make_pair(nCursesForeground_, nCursesBackground_)) ==
       nCursesColors.end()) {
     nCursesColorIndex_ = colorPairIndex++;
-    init_pair(nCursesColorIndex_, nCursesForeground_, nCursesBackground_);
+    ::init_pair(nCursesColorIndex_, nCursesForeground_, nCursesBackground_);
     nCursesColors.emplace_back(nCursesForeground_, nCursesBackground_);
     nCursesColorPair_ = COLOR_PAIR(nCursesColorIndex_);
   } else {
