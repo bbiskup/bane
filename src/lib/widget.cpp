@@ -154,7 +154,9 @@ void bane::Widget::render() {
 
   doRender();
   for (auto& child : children_) {
-    child.render();
+    if (child.visible()) {
+      child.render();
+    }
   }
 
   Widget* focusWidget{app_->focusWidget()};

@@ -110,6 +110,9 @@ public:
   boost::ptr_vector<Widget>& children() { return children_; }
   size_t numChildren() const noexcept;
 
+  bool visible() const { return visible_; }
+  void visible(bool visible) { visible_ = visible; }
+
   Widget* nextSibling();
   Widget* previousSibling();
 
@@ -147,6 +150,7 @@ private:
   int height_{};
   boost::ptr_vector<Widget> children_;
   bool blush_{false};
+  bool visible_{true};
 
   mutable OnMouse onMouse_;
   mutable OnKey onKey_;
