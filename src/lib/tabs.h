@@ -19,7 +19,8 @@ public:
 
   void doRender() override;
   Tab* addTab(std::wstring name);
-  int numTabs() { return static_cast<int>(handlesPane_->numChildren());}
+  size_t numTabs() const { return handlesPane_->numChildren();}
+  void selectTab(size_t tabIndex);
 
 protected:
   Widget* handlesPane_;
