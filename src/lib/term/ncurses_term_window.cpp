@@ -53,8 +53,8 @@ void bane::NCursesTermWindow::setUpMouse() {
 void bane::NCursesTermWindow::showCursor(bool show) { ::curs_set(show); }
 
 void bane::NCursesTermWindow::move(int x, int y) {
-  BOOST_LOG_TRIVIAL(trace) << "NCursesTermWindow::move this=" << this << " "
-                           << x << " y " << y;
+  BOOST_LOG_TRIVIAL(trace) << "NCursesTermWindow::move x "
+                           << " " << x << " y " << y;
   ::move(y, x);
 }
 
