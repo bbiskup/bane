@@ -34,7 +34,7 @@ namespace {
 
 int main() {
   bane::initLogging();
-  bane::App app{L"test-Äpp", std::make_unique<bane::SimpleTheme>()};
+  bane::App app{L"test-Äpp", std::make_unique<bane::SimpleTheme>(), true};
   test_tab(app);
   //test_misc(app);
 
@@ -47,13 +47,13 @@ void test_tab(bane::App& app){
 
   bane::Tab* tab1{tabs->addTab(L"Tab 1")};
   bane::Pane* pane1 = tab1->addChild<bane::Pane>();
-  pane1->setLayoutMgr<bane::VBoxLayoutMgr>();
+  pane1->setLayoutMgr<bane::HBoxLayoutMgr>();
   pane1->addChild<bane::Label>(L"Label 1 of pane 1");
   pane1->addChild<bane::Label>(L"Label 2 of pane 1");
 
   bane::Tab* tab2{tabs->addTab(L"Tab 2")};
   bane::Pane* pane2 = tab2->addChild<bane::Pane>();
-  pane2->setLayoutMgr<bane::HBoxLayoutMgr>();
+  pane2->setLayoutMgr<bane::VBoxLayoutMgr>();
   pane2->addChild<bane::Label>(L"Label 1 of pane 2");
   pane2->addChild<bane::Label>(L"Label 2 of pane 2");
 }
