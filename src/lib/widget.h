@@ -84,7 +84,7 @@ public:
   /// \return non-owning pointer to newly created widget
   template <typename WidgetT, typename... Args>
   WidgetT* addChild(Args&&... args) {
-    Widget* newWidget = new WidgetT{this, args...};
+    Widget* newWidget = new WidgetT{this, std::forward<Args>(args)...};
     onAddChild(*newWidget);
     children_.push_back(newWidget);
     render();
