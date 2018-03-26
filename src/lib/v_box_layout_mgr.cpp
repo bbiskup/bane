@@ -11,7 +11,7 @@ void bane::VBoxLayoutMgr::layout() {
     child.moveTo(0, yOffset);
     BOOST_LOG_TRIVIAL(trace)
         << "VBoxLayoutMgr::layout " << parent_.id() << " -- " << child.id() << " "
-        << child.relX()  << ", " << child.relY();
+        << child.relX()  << ", " << child.relY() << " " << child.width() << "x" << child.height();
     yOffset += child.height() + padding;
   }
 }
