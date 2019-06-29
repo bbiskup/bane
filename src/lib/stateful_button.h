@@ -8,10 +8,10 @@ class StatefulButton : public Widget {
 
 public:
   using Widget::Widget;
-  StatefulButton(Widget* parent, std::wstring label, bool state=false);
+  StatefulButton(Widget* parent, std::wstring label, bool state = false);
 
   void toggleState();
-  void setState(bool state=true);
+  void setState(bool state = true);
   virtual void pick() = 0;
 
   bool acceptsFocus() const override { return true; }

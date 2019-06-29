@@ -16,10 +16,9 @@ void bane::SimpleLayoutMgr::layout() {
 }
 
 int bane::SimpleLayoutMgr::preferredWidth() const noexcept {
-  return std::accumulate(parent_.children().begin(), parent_.children().end(), 0,
-                         [](int s, const Widget& widget) {
-                           return s + widget.preferredWidth();
-                         });
+  return std::accumulate(
+      parent_.children().begin(), parent_.children().end(), 0,
+      [](int s, const Widget& widget) { return s + widget.preferredWidth(); });
 }
 
 int bane::SimpleLayoutMgr::preferredHeight() const noexcept {

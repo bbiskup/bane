@@ -10,7 +10,7 @@ namespace bane {
 // Horizontal line (separator)
 class HLine : public Widget {
 public:
-  HLine(Widget* parent, wchar_t lineChar='-');
+  HLine(Widget* parent, wchar_t lineChar = '-');
 
   int preferredWidth() const noexcept override;
   int preferredHeight() const noexcept override;
@@ -21,7 +21,5 @@ private:
   const wchar_t lineChar_;
 };
 } // namespace bane
-
-
 
 #endif /* H_LINE_H */

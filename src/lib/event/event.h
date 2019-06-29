@@ -3,7 +3,6 @@
 
 #include <string>
 
-
 namespace bane {
 
 /// Events may be created in any thread, bust

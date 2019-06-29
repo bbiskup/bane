@@ -1,11 +1,11 @@
 #include "logging.h"
 #include "env.h"
 
+#include <boost/locale.hpp>
 #include <boost/log/core.hpp>
 #include <boost/log/expressions.hpp>
 #include <boost/log/trivial.hpp>
 #include <boost/log/utility/setup/file.hpp>
-#include <boost/locale.hpp>
 #include <cstdlib>
 
 namespace logging = boost::log;

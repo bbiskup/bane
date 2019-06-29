@@ -42,8 +42,8 @@ bane::Tab* bane::Tabs::addTab(std::wstring name) {
 void bane::Tabs::selectTab(size_t tabIndex) {
   size_t nTabs{numTabs()};
   if (tabIndex >= nTabs) {
-    throw std::out_of_range{"Tab index" + std::to_string(tabIndex)
-                                        + " out of range"};
+    throw std::out_of_range{"Tab index" + std::to_string(tabIndex) +
+                            " out of range"};
   }
 
   for (size_t i{0}; i < nTabs; ++i) {

@@ -11,11 +11,11 @@
 #include "logging.h"
 #include "push_button.h"
 #include "radio_button.h"
+#include "tab.h"
+#include "tabs.h"
 #include "theme.h"
 #include "v_box_layout_mgr.h"
 #include "v_line.h"
-#include "tabs.h"
-#include "tab.h"
 
 #include <boost/log/trivial.hpp>
 #include <chrono>
@@ -24,33 +24,32 @@
 #include <memory>
 #include <thread>
 
-
 using namespace std::chrono_literals;
 
 namespace {
 [[maybe_unused]] void test_simple(bane::App& app);
 [[maybe_unused]] void test_tab(bane::App& app);
 [[maybe_unused]] void test_misc(bane::App& app);
-}
+} // namespace
 
 int main() {
   bane::initLogging();
   bane::App app{L"test-Äpp", std::make_unique<bane::SimpleTheme>(), false};
-  //test_tab(app);
+  // test_tab(app);
   test_misc(app);
-  //test_simple(app);
+  // test_simple(app);
 
   app.run();
 }
 
 namespace {
-void test_simple(bane::App& app){
-    app.rootPane.setLayoutMgr<bane::VBoxLayoutMgr>();
-    app.rootPane.addChild<bane::Label>(L"Label 1");
-    app.rootPane.addChild<bane::Pane>();
+void test_simple(bane::App& app) {
+  app.rootPane.setLayoutMgr<bane::VBoxLayoutMgr>();
+  app.rootPane.addChild<bane::Label>(L"Label 1");
+  app.rootPane.addChild<bane::Pane>();
 }
 
-void test_tab(bane::App& app){
+void test_tab(bane::App& app) {
   bane::Tabs* tabs{app.rootPane.addChild<bane::Tabs>()};
 
   bane::Tab* tab1{tabs->addTab(L"Tab 1")};

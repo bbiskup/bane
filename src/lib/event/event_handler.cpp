@@ -43,7 +43,7 @@ void bane::EventHandler::handle(const MouseEvent& e) {
 
     // For now, don't dispatch mouse move events to avoid
     // excessive processing and rendering
-    if (e.clickType != mouse::ClickType::none){
+    if (e.clickType != mouse::ClickType::none) {
       widget->mouse(e);
     }
   } else {

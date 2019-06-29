@@ -20,5 +20,4 @@ protected:
 };
 } // namespace bane
 
-
 #endif /* TAB_H */

@@ -45,7 +45,7 @@ void bane::ButtonGroup::onAddChild(Widget& widget) {
         Widget* prevSib = b->previousSibling();
         if (prevSib) {
           prevSib->requestFocus();
-        }else{
+        } else {
           yieldFocus(FocusYieldHint::start);
         }
       }
@@ -86,9 +86,9 @@ void bane::ButtonGroup::doRender() {
                            << relY();
 }
 
-void bane::ButtonGroup::onFocus(){
-    // delegate focus
-    if (!children().empty()){
-        children()[0].requestFocus();
-    }
+void bane::ButtonGroup::onFocus() {
+  // delegate focus
+  if (!children().empty()) {
+    children()[0].requestFocus();
+  }
 }

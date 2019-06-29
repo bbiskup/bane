@@ -1,11 +1,11 @@
 #ifndef CUSTOM_EVENT_H
 #define CUSTOM_EVENT_H
 
-#include "event/event.h"
 #include "app.h"
+#include "event/event.h"
 
-#include <string>
 #include <functional>
+#include <string>
 
 namespace bane {
 

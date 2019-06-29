@@ -12,7 +12,6 @@ class MouseEvent;
 class KeyEvent;
 class CustomEvent;
 
-
 /// Handler for application event.
 /// Uses double dispatch (visitor pattern)
 ///

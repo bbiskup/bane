@@ -36,13 +36,13 @@ int bane::PushButton::preferredHeight() const noexcept { return 1; }
 void bane::PushButton::doRender() {
   BOOST_LOG_TRIVIAL(trace) << "PushButton::doRender " << relX() << " "
                            << relY();
-  //CharPoint orig{origin()};
+  // CharPoint orig{origin()};
   if (isPressed_) {
     attrset(app_->theme().engaged().nCursesColorPair());
   } else {
     attrset(app_->theme().active().nCursesColorPair());
   }
-  //termWindow_->drawString(orig, label_);
+  // termWindow_->drawString(orig, label_);
   *termWindow_ << Font::normal << label_ << Font::normal;
-  //attrset(app_->theme().normal().nCursesColorPair());
+  // attrset(app_->theme().normal().nCursesColorPair());
 }

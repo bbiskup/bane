@@ -10,8 +10,9 @@ void bane::VBoxLayoutMgr::layout() {
     child.resizeToPreferred();
     child.moveTo(0, yOffset);
     BOOST_LOG_TRIVIAL(trace)
-        << "VBoxLayoutMgr::layout " << parent_.id() << " -- " << child.id() << " "
-        << child.relX()  << ", " << child.relY() << " " << child.width() << "x" << child.height();
+        << "VBoxLayoutMgr::layout " << parent_.id() << " -- " << child.id()
+        << " " << child.relX() << ", " << child.relY() << " " << child.width()
+        << "x" << child.height();
     yOffset += child.height() + padding;
   }
 }
@@ -22,8 +23,7 @@ int bane::VBoxLayoutMgr::preferredWidth() const noexcept {
 
 int bane::VBoxLayoutMgr::preferredHeight() const noexcept {
   // Sum of heights of children
-  return std::accumulate(parent_.children().begin(), parent_.children().end(), 0,
-                         [](int s, const Widget& widget) {
-                           return s + widget.preferredHeight();
-                         });
+  return std::accumulate(
+      parent_.children().begin(), parent_.children().end(), 0,
+      [](int s, const Widget& widget) { return s + widget.preferredHeight(); });
 }

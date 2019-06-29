@@ -10,16 +10,16 @@
 namespace {
 /// Separator between label and text
 const std::wstring labelSeparator = L": ";
-//const std::wstring eraseButton{L"\u00d7"}; // multiplication sign
-//const std::wstring eraseButton{L"\u2602"}; // test
+// const std::wstring eraseButton{L"\u00d7"}; // multiplication sign
+// const std::wstring eraseButton{L"\u2602"}; // test
 const std::wstring eraseButton{L"×"}; // test
-//const std::string eraseButton = "x";
+// const std::string eraseButton = "x";
 } // namespace
 
-bane::LineEdit::LineEdit(Widget* parent, std::wstring label, size_t textFieldWidth,
-                         std::wstring text)
-    : Widget{parent}, label_{label}, textFieldWidth_{textFieldWidth}, text_{
-                                                                        text} {
+bane::LineEdit::LineEdit(Widget* parent, std::wstring label,
+                         size_t textFieldWidth, std::wstring text)
+    : Widget{parent}, label_{label},
+      textFieldWidth_{textFieldWidth}, text_{text} {
   doOnMouse([this](const MouseEvent& e) {
     BOOST_LOG_TRIVIAL(trace) << "LineEdit: on mouse";
     if (e.clickType == mouse::ClickType::single ||

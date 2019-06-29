@@ -1,8 +1,8 @@
 #ifndef TABS_H
 #define TABS_H
 
-#include "widget.h"
 #include "tab.h"
+#include "widget.h"
 
 #include <string>
 
@@ -19,7 +19,7 @@ public:
 
   void doRender() override;
   Tab* addTab(std::wstring name);
-  size_t numTabs() const { return handlesPane_->numChildren();}
+  size_t numTabs() const { return handlesPane_->numChildren(); }
   void selectTab(size_t tabIndex);
 
 protected:

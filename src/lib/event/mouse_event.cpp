@@ -8,14 +8,14 @@
 namespace {
 std::unordered_map<mmask_t,
                    std::pair<bane::mouse::Button, bane::mouse::ClickType>>
-    buttonMap{{BUTTON1_CLICKED,
-               {bane::mouse::Button::left, bane::mouse::ClickType::single}},
-              {BUTTON1_DOUBLE_CLICKED,
-               {bane::mouse::Button::left, bane::mouse::ClickType::double_}},
-              {BUTTON1_RELEASED,
-               {bane::mouse::Button::left, bane::mouse::ClickType::release}},
-              {0x8000000,
-               {bane::mouse::Button::none, bane::mouse::ClickType::none}}};
+    buttonMap{
+        {BUTTON1_CLICKED,
+         {bane::mouse::Button::left, bane::mouse::ClickType::single}},
+        {BUTTON1_DOUBLE_CLICKED,
+         {bane::mouse::Button::left, bane::mouse::ClickType::double_}},
+        {BUTTON1_RELEASED,
+         {bane::mouse::Button::left, bane::mouse::ClickType::release}},
+        {0x8000000, {bane::mouse::Button::none, bane::mouse::ClickType::none}}};
 } // namespace
 
 /// \param c ncurses character

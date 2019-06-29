@@ -9,7 +9,8 @@ namespace {
 constexpr const int radioButtonPartWidth{4};
 } // namespace
 
-bane::RadioButton::RadioButton(Widget* parent, std::wstring label, bool isSelected)
+bane::RadioButton::RadioButton(Widget* parent, std::wstring label,
+                               bool isSelected)
     : StatefulButton{parent, label, isSelected} {
   doOnMouse([this](const MouseEvent& e) {
     BOOST_LOG_TRIVIAL(trace) << "RadioButton: on mouse";

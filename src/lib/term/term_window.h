@@ -1,9 +1,9 @@
 #ifndef TERM_WINDOW_H
 #define TERM_WINDOW_H
 
-#include "widget.h"
-#include "theme.h"
 #include "color_pair.h"
+#include "theme.h"
+#include "widget.h"
 
 #include <memory>
 #include <string>
@@ -12,7 +12,6 @@
 namespace bane {
 
 enum class Font { normal, bold, underline, dim, reverse };
-
 
 using FontStyles = std::vector<Font>;
 using TerminalText = std::string;
@@ -40,7 +39,7 @@ public:
 
   /// Move cursor to given absolute screen position
   virtual void move(const CharPoint& p) { this->move(p.x, p.y); }
- 
+
   /// Move cursor to given absolute screen position
   virtual void move(int x, int y) = 0;
 

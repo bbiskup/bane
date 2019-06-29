@@ -23,8 +23,8 @@ std::unordered_map<int, bane::SpecialKey> specialKeyMap{
 };
 
 namespace key {
-const std::string enter {"^J"};
-const std::string tab {"^I"};
+const std::string enter{"^J"};
+const std::string tab{"^I"};
 } // namespace key
 } // namespace
 

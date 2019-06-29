@@ -11,7 +11,7 @@ constexpr const int checkBoxPartWidth{4};
 } // namespace
 
 bane::CheckBox::CheckBox(Widget* parent, std::wstring label, bool isChecked)
-    : StatefulButton{parent, label, isChecked}{
+    : StatefulButton{parent, label, isChecked} {
   doOnMouse([this](const MouseEvent& e) {
     BOOST_LOG_TRIVIAL(trace) << "CheckBox: on mouse";
 

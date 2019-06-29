@@ -1,10 +1,10 @@
 #ifndef LOGGING_H
 #define LOGGING_H
 
-namespace bane{
+namespace bane {
 
 void initLogging();
 
-}; // namespace c64
+}; // namespace bane
 
 #endif // LOGGING_H
