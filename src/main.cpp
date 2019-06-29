@@ -35,10 +35,10 @@ namespace {
 
 int main() {
   bane::initLogging();
-  bane::App app{L"test-Äpp", std::make_unique<bane::SimpleTheme>(), true};
+  bane::App app{L"test-Äpp", std::make_unique<bane::SimpleTheme>(), false};
   //test_tab(app);
-  //test_misc(app);
-  test_simple(app);
+  test_misc(app);
+  //test_simple(app);
 
   app.run();
 }

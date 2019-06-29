@@ -25,7 +25,7 @@ RUN apt-get update -y -q && apt-get install -y -q \
 
 # Install recent version of clang
 WORKDIR /
-ENV CLANG_VERSION=7.0.1
+ENV CLANG_VERSION=8.0.0
 ENV CLANG_PACKAGE=clang+llvm-${CLANG_VERSION}-x86_64-linux-gnu-ubuntu-14.04
 ENV CLANG_URL=http://releases.llvm.org/${CLANG_VERSION}/${CLANG_PACKAGE}.tar.xz
 RUN echo ${CLANG_URL}
@@ -38,7 +38,7 @@ RUN ln -sf /${CLANG_PACKAGE}/bin/clang++ /usr/bin/clang++
 RUN ln -sf /${CLANG_PACKAGE}/bin/clang++ /usr/bin/c++
 
 # Install Ninja build system
-RUN wget -q https://github.com/ninja-build/ninja/releases/download/v1.7.1/ninja-linux.zip; \
+RUN wget -q https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-linux.zip; \
     unzip ninja-linux.zip; \
     mv ninja /usr/bin; \
     chmod ugo+x /usr/bin/ninja

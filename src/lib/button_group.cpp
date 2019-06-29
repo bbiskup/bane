@@ -21,7 +21,7 @@ bane::ButtonGroup::ButtonGroup(Widget* root, std::wstring label,
   case Orientation::horizontal:
     setLayoutMgr<bane::HBoxLayoutMgr>();
     break;
-  };
+  }
 }
 
 void bane::ButtonGroup::onAddChild(Widget& widget) {

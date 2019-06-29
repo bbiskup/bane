@@ -22,7 +22,7 @@ bane::PushButton::PushButton(Widget* parent, std::wstring label)
       case bane::mouse::ClickType::none:
       case bane::mouse::ClickType::notImplemented:
         break;
-      };
+      }
     }
   });
 }
