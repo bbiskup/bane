@@ -1,5 +1,6 @@
 #include "v_box_layout_mgr.h"
 #include "widget.h"
+#include <algorithm>
 #include <boost/log/trivial.hpp>
 #include <iostream>
 

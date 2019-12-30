@@ -3,6 +3,7 @@
 #include "event/mouse_event.h"
 #include "term/term_window.h"
 
+#include <algorithm>
 #include <boost/log/trivial.hpp>
 
 namespace {
