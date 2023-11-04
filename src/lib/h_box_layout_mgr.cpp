@@ -2,6 +2,7 @@
 #include "widget.h"
 #include <boost/log/trivial.hpp>
 #include <iostream>
+#include <numeric>
 
 void bane::HBoxLayoutMgr::layout() {
   const int padding{1};

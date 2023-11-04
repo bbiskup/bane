@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <boost/log/trivial.hpp>
 #include <iostream>
+#include <numeric>
 
 void bane::VBoxLayoutMgr::layout() {
   const int padding{0};
