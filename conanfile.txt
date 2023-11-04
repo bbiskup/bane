@@ -1,0 +1,10 @@
+[requires]
+boost/1.83.0
+# ncurses/6.4 # does not work with Conan 2?
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+#[layout]
+#cmake_layout
